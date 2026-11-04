@@ -1,0 +1,14 @@
+node_modules
+.next
+.expo
+.turbo
+dist
+build
+coverage
+.local
+pnpm-lock.yaml
+packages/data/src/database.types.ts
+apps/web/next-env.d.ts
+apps/player/expo-env.d.ts
+research_notes
+supabase/.temp

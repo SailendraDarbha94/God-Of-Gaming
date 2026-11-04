@@ -1,0 +1,28 @@
+{
+  "name": "@gog/domain",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Zod schemas, types and pure booking rules shared by the apps. No I/O.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@gog/eslint-config": "workspace:*",
+    "@gog/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

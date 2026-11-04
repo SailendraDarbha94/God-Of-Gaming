@@ -1,0 +1,121 @@
+# The CI gate (docs/spec/07-standards-and-verification.md, "CI"; ADR 0010).
+# Two jobs: `check` runs the JavaScript toolchain, `database` runs the Supabase project.
+# Actions are pinned to their current major tags (checked against GitHub on 2026-11-04).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    name: Lint, typecheck, test, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # The secret scan below reads the commits of this push or pull request, not just HEAD.
+          fetch-depth: 0
+
+      # Fails on anything that looks like a credential in the pushed or pull-request commits
+      # (spec 07: secrets never in code or in git; a Firebase key once sat in app/lib/firebaseConfig.ts).
+      # A user-owned repository needs no GITLEAKS_LICENSE. The example env files hold only blanks
+      # and placeholders, and the tests build their sample JWTs at runtime, so no allowlist is needed.
+      - name: Secret scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # No `version` input: the action reads `packageManager` from the root package.json.
+      - uses: pnpm/action-setup@v6
+
+      # `cache: pnpm` caches the pnpm store, keyed on pnpm-lock.yaml; pnpm must already be on PATH.
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Prettier
+        run: pnpm format:check
+
+      - name: Lint, typecheck and test every package
+        run: pnpm turbo run lint typecheck test
+
+      - name: Build the website against fixtures
+        run: pnpm turbo run build --filter=@gog/web
+        env:
+          GOG_DATA_SOURCE: fixtures
+          NEXT_PUBLIC_SITE_URL: https://example.com
+
+      - name: expo-doctor
+        # Required. It may only fail when the network it depends on is unreachable from the runner.
+        run: |
+          if pnpm --filter @gog/player exec expo-doctor; then
+            exit 0
+          fi
+          if curl --silent --show-error --fail --max-time 15 --output /dev/null https://api.expo.dev/v2/versions/latest &&
+            curl --silent --show-error --fail --max-time 15 --output /dev/null https://registry.npmjs.org/expo/latest; then
+            echo "::error::expo-doctor failed while the network was reachable"
+            exit 1
+          fi
+          echo "::warning::expo-doctor failed while api.expo.dev or registry.npmjs.org was unreachable; not counted as a failure"
+
+  database:
+    name: Migrations, pgTAP, generated types
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      # Pinned, never `latest`: Supabase CLI v3 (2026-11-02) changes the default target and the
+      # `--local`/`--db-url` flags. The same version is named in README.md; upgrade both together.
+      - uses: supabase/setup-cli@v3
+        with:
+          version: 2.116.0
+
+      # Starts Postgres (applying supabase/migrations and supabase/seed.sql on its fresh volume)
+      # plus Kong, PostgREST and GoTrue, which the @gog/data contract tests talk to below. The
+      # services nothing here needs are skipped to keep the job short.
+      - name: Start the local stack, apply migrations and seed
+        run: supabase start -x studio,imgproxy,edge-runtime,logflare,vector,realtime,supavisor,mailpit
+
+      - name: Run the pgTAP tests
+        run: supabase test db
+
+      - name: Generated database types are current
+        run: |
+          supabase gen types typescript --local --schema public > /tmp/database.types.ts
+          diff -u packages/data/src/database.types.ts /tmp/database.types.ts
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # The Supabase repositories through the real PostgREST and GoTrue (spec 07, definition of done
+      # item 2). Without these two variables the suites skip, so this is the only place they run.
+      - name: Contract tests for the Supabase repositories
+        run: |
+          supabase status -o env \
+            --override-name api.url=GOG_TEST_SUPABASE_URL \
+            --override-name auth.anon_key=GOG_TEST_SUPABASE_ANON_KEY |
+            grep -E '^GOG_TEST_SUPABASE_(URL|ANON_KEY)=' > /tmp/supabase.env
+          set -a
+          . /tmp/supabase.env
+          set +a
+          pnpm --filter @gog/data test

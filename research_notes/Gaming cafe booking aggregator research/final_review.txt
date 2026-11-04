@@ -1,0 +1,1093 @@
+===== audit:first-half (42 issues)
+VERDICT: Not ready to hand over yet, though the core holds: the revenue model, floor-spend sums and Playo ratios all recompute, and most fact-check figures are carried correctly. The biggest fixes are competitor locations that confuse company offices with cafe supply (Olympus and Hash, which also feed the Pune case), the unverified claim that Playo shows console slots, a ratings comparison that mixes samples, and Bottom line statements that turn inferences and Google Trends scores into facts. Several labels and links also need tightening.
+[audit:first-half#1] wrong | What is already out there
+  QUOTE: 40+ cafes, Bengaluru
+  PROBLEM: This reads as 40+ cafes in Bengaluru, but Bengaluru is only the company's address. Olympus's home page says 40+ cafes across India, names 19 and gives no cities (https://olympus.codeclutch.io/, opened 3 Nov 2026). The notes agree and add that Play lists New Delhi as its base (research_notes/Gaming cafe booking aggregator research/india_competitors.md lines 24 and 50). The Why Pune table repeats the error by placing Olympus under Bengaluru.
+  FIX: 40+ cafes across India, no cities given; company in Bengaluru
+[audit:first-half#2] wrong | What is already out there
+  QUOTE: 35+ cafes, Mumbai region
+  PROBLEM: Mira Road is Hash's office, not where its cafes are. Its home page gives no cafe locations (https://www.hashforgamers.com/, opened 3 Nov 2026). The notes say the live city list could not be confirmed, and a search snapshot of its Play listing named nine metros including Pune (research_notes/Gaming cafe booking aggregator research/india_competitors.md lines 45 and 119). The Why Pune table also counts Hash 35+ under Mumbai, which props up the Pune case.
+  FIX: 35+ cafes, cities not published; company in Mira Road, Mumbai
+[audit:first-half#3] wrong | Playo teardown
+  QUOTE: it already shows console slots
+  PROBLEM: Fact-check P1 says no slot list or price appeared and no checkout was run, so what is shown is a bookable label, not slots. The same section later says prices and sales are unverified ((scratch)/round2/verify_playo.txt P1).
+  FIX: it already lists console gaming as bookable
+[audit:first-half#4] wrong | Market reality
+  QUOTE: Playo's gaming listings have a median of 2 ratings, against about 48 for badminton venues on the same city pages (first-page samples).
+  PROBLEM: Two different samples are compared. The 2 is the median across 34 listings in six cities (fact-check P2). The 48 covers 24 badminton venues in Bengaluru and Hyderabad only, where the like-for-like gaming median is 3 (means 5.6 and 79). The source warns that rank order and listing age confound this, and 28 of the 34 gaming records date from 2025 on ((scratch)/round2/red_team.json, second objection).
+  FIX: In Bengaluru and Hyderabad, Playo's Play Station listings have a median of 3 ratings, against about 48 for badminton venues. Both samples are 24 first-page listings, and listing age confounds this.
+[audit:first-half#5] wrong | Market reality
+  QUOTE: Franchisors claim 5 to 24 months; our model says 2 to 5 years
+  PROBLEM: Not all franchisors do: LEVELS claims 2 to 4 years, and the notes say most claim 5 to 24 months within a full range of 5 months to 4 years ((scratch)/round1/market_economics.txt claim 13). The linked next-level.gg page supports only Next Level's 20 to 24 months. The model behind 2 to 5 years also excludes owner pay and hardware replacement.
+  FIX: Most franchisors claim 5 to 24 months, one 2 to 4 years; our model says 2 to 5 years
+[audit:first-half#6] wrong | What is already out there
+  QUOTE: supply figures are company claims
+  PROBLEM: Only Console Gaming, Olympus and Hash are company claims. District's 13 and 0 to 6 are our own checks, Playo's 60 is our count of its city tabs, and GoPlaya, HangOn, PlayGG and BookGames are counts of their pages or sitemaps ((scratch)/round2/verify_gaming.txt C1, C8, C13). The Claimed supply column header has the same problem.
+  FIX: Console Gaming, Olympus and Hash supply figures are company claims, and the rest are our own page counts
+[audit:first-half#7] misleading | Bottom line
+  QUOTE: Players want certainty at peak, when owners need no help; owners want customers in empty hours, when players have no reason to book.
+  PROBLEM: Fact-check M12 says that peak seats need no demand is this report's inference: vendor peaks of 70% to 90% still leave 10% to 30% of seats empty, and not all cafes reach them ((scratch)/round2/verify_market.txt M12). The researcher also labels the mismatch as an inference ((scratch)/round1/owner_player_voice.txt claim 3).
+  FIX: Players want certainty at peak, when owners seem to need least help. Owners want customers in empty hours, when players have little reason to book (our inference from vendor figures).
+[audit:first-half#8] misleading | Bottom line
+  QUOTE: Google searches for [gaming cafe near me](https://trends.google.com/trends/explore?geo=IN&date=today%2012-m&q=gaming%20cafe%20near%20me) in India have roughly doubled in a year
+  PROBLEM: Google Trends gives a relative score, not a search count, and these values were read by eye from a chart. The rise compares November to February with August to October, so a single 12-month window cannot separate season from growth (research_notes/Gaming cafe booking aggregator research/browser_checks.md, Google Trends section).
+  FIX: Google Trends interest in [gaming cafe near me](https://trends.google.com/trends/explore?geo=IN&date=today%2012-m&q=gaming%20cafe%20near%20me) in India roughly doubled in 12 months, though seasonality cannot be ruled out
+[audit:first-half#9] misleading | Market reality
+  QUOTE: Google searches for [gaming cafe near me](https://trends.google.com/trends/explore?geo=IN&date=today%2012-m&q=gaming%20cafe%20near%20me) in India have roughly doubled in 12 months. They average about 80% of
+  PROBLEM: Same problem as the Bottom line: a relative Trends score read by eye from one 12-month chart, comparing different seasons (research_notes/Gaming cafe booking aggregator research/browser_checks.md). The 80% (49 against 60) and the 60,000 proxy recompute correctly and are labelled as rough.
+  FIX: Google Trends interest in [gaming cafe near me](https://trends.google.com/trends/explore?geo=IN&date=today%2012-m&q=gaming%20cafe%20near%20me) in India roughly doubled in 12 months, read from the chart; seasonality cannot be ruled out. It averages about 80% of
+[audit:first-half#10] misleading | Market reality
+  QUOTE: Total floor spend is perhaps ₹240 Cr to ₹360 Cr a year, on 2,000 cafes at ₹1 lakh to ₹1.5 lakh a month (our estimate).
+  PROBLEM: Fact-check M8 says ₹1.5 lakh looks high as an all-cafe average and that ₹360 Cr needs about 3,000 cafes, so this range cannot rest on 2,000 cafes. Seller listings in the same table show ₹25,000 to ₹80,000 a month. Redone: 2,000 x ₹1 lakh x 12 is ₹240 Cr, and 3,000 x ₹1 lakh x 12 is ₹360 Cr ((scratch)/round2/verify_market.txt M8).
+  FIX: Total floor spend is perhaps ₹240 Cr a year, on 2,000 cafes at about ₹1 lakh a month (our estimate). ₹360 Cr would need about 3,000 cafes.
+[audit:first-half#11] misleading | Market reality
+  QUOTE: lists 6, all in Pune.
+  PROBLEM: Fact-check M9's wording includes two bigger, unverified claims that the draft leaves out: Rapid Rounds with 15+ locations and no list, and Play 360 with 2 owned plus 18 franchised on an undated portal. Without them, readers will take 12 as the largest known. M9 also says all counts are self-reported ((scratch)/round2/verify_market.txt M9).
+  FIX: lists 6, all in Pune. Rapid Rounds claims 15+ locations with no list and Play 360 claims 20 on an undated portal. Neither is verified, and all counts are self-reported.
+[audit:first-half#12] misleading | Market reality
+  QUOTE: On District, [Play Arena](https://www.district.in/events/play-arena-bengaluru-2025-buy-tickets) shows 23.7k+ booked, while none of the seven PC or console lounges opened shows a booked count.
+  PROBLEM: Play Arena is the top of a range: 6 of 11 arcades and attractions opened show counts, from 1.1k+ to 23.7k+, and 5 show none. The seven include TIA, which fact-check C1 calls a family entertainment centre selling prepaid game cards. Only Play Arena and Console Hub are in the browser checks; the rest is the red team's reading, which also says the counter threshold is inferred ((scratch)/round2/red_team.json, second objection; (scratch)/round2/verify_gaming.txt C1).
+  FIX: On District, 6 of 11 arcades and attractions opened show booked counts, up to 23.7k+ at [Play Arena](https://www.district.in/events/play-arena-bengaluru-2025-buy-tickets). None of seven gaming listings opened shows one: six lounges plus TIA, a family entertainment centre.
+[audit:first-half#13] misleading | What is already out there
+  QUOTE: and none of the three publishes an aggregator partner programme
+  PROBLEM: Fact-check B8 says this is a negative it cannot prove, based only on pages read at these three vendors. Gizmo's partners page returned 404, and ggLeap's Add-on Marketplace and iCafeCloud's three Indian Local Partners are possible leads ((scratch)/round2/verify_marketplace.txt B8).
+  FIX: and we found no published aggregator partner programme from the three, which is not proof none exists
+[audit:first-half#14] misleading | Playo teardown
+  QUOTE: Fees barely register: of 500 Playo reviews, one complains about the convenience fee and one about a cancellation charge.
+  PROBLEM: Fact-check P11 warns that rare fee complaints do not show the fee is accepted, and that the feed is iOS only, written reviews only and unrepresentative ((scratch)/round2/verify_playo.txt P11). This matters because the plan leans on player fees, and a Play review already objects to Console Gaming's fee on every booking ((scratch)/round2/verify_gaming.txt C4).
+  FIX: Fees barely register on iOS: of 500 Playo reviews, one complains about the convenience fee and one about a cancellation charge. That does not show fees are accepted.
+[audit:first-half#15] misleading | What is already out there
+  QUOTE: What it actually does
+  PROBLEM: No app was installed or used. These cells come from store text and company pages, and in-app behaviour of Olympus, Hash, Console Gaming, GoPlaya, GameSpotter and HangOn was not checked. GameSpotter's live board is labelled an example ((scratch)/round2/verify_gaming.txt C7 and Not checked).
+  FIX: What its pages say it does
+[audit:first-half#16] misleading | What is already out there
+  QUOTE: District's lounge listings are live and on sale, but several warn of waits at the venue.
+  PROBLEM: Fact-check C1 confirms 13 listings on sale, but finds no sign of live machine availability, placeholder stock on future days, and at least six other lounge listings that have ended. Calling lounge listings live, without that, overstates it ((scratch)/round2/verify_gaming.txt C1).
+  FIX: The 13 confirmed District lounges are on sale, but several warn of waits at the venue and none shows free machines. At least six other lounge listings have ended.
+[audit:first-half#17] misleading | Market reality
+  QUOTE: Players do report weekend-evening queues and opaque prices, from ₹40 to ₹700 an hour in one thread.
+  PROBLEM: The queue evidence comes mostly from an affiliate guide and two vendors, not players. The researcher says the specifics rest mainly on one low-quality site, that it is probable rather than proven, and that no measured wait or turn-away data exists ((scratch)/round1/owner_player_voice.txt claim 9; research_notes/Gaming cafe booking aggregator research/owner_player_voice.md lines 182 to 187 and 218). The price range does come from a player thread.
+  FIX: An affiliate guide and vendors report weekend-evening queues, unmeasured, and players report opaque prices, from ₹40 to ₹700 an hour in one thread.
+[audit:first-half#18] misleading | Bottom line
+  QUOTE: owners complain about rent and empty seats rather than booking
+  PROBLEM: This rests on about 16 unverified YouTube comments and vendor blogs, with no interviews and Reddit unread. Stated flatly at the top, it reads as a finding about owners in general ((scratch)/round1/owner_player_voice.txt claims 1 and 2).
+  FIX: the few owners we could read complain about rent and empty seats rather than booking
+[audit:first-half#19] misleading | Bottom line
+  QUOTE: India has perhaps 2,000 to 4,000 cafes, and about ₹1.26 Cr a year of revenue is what success looks like.
+  PROBLEM: Both numbers are our estimates, and the report promises to label those. The range also covers only cafes with 10+ Google reviews, scaled from one city on a judgement call ((scratch)/round2/verify_market.txt M2 and M7).
+  FIX: India has perhaps 2,000 to 4,000 cafes with 10+ reviews, and about ₹1.26 Cr of yearly revenue is what success looks like (our estimates).
+[audit:first-half#20] misleading | Bottom line
+  QUOTE: District's esports pages list only 0 to 6 venues in the seven cities checked.
+  PROBLEM: The counts are right, but the browser checks warn that other cafes can sit under other categories (research_notes/Gaming cafe booking aggregator research/browser_checks.md). Ahmedabad's esports page shows 0 while Console Hub and AUG there are on sale under game zones (research_notes/Gaming cafe booking aggregator research/verify_competitors.md lines 66 and 82). As proof of the gap, this understates District's supply.
+  FIX: District's esports pages list only 0 to 6 venues in the seven cities checked, though some lounges sit under other categories.
+[audit:first-half#21] misleading | What is already out there
+  QUOTE: shows 4,505 clubs in its directory and 500K+ Google Play downloads
+  PROBLEM: Fact-check C12 says 4,505 is a directory total, not customers. The same verdict gives the more relevant figures: 2,400+ clubs support booking (company-sourced) and 2,000+ clubs in 26 countries on its software page. Leaving them out overstates the precedent ((scratch)/round2/verify_gaming.txt C12).
+  FIX: shows 4,505 clubs in its directory (company-sourced: 2,400+ take bookings) and 500K+ Google Play downloads
+[audit:first-half#22] misleading | Playo teardown
+  QUOTE: Funding totals run from $0.5M to $1.92M, the only valuation is $9.41M from August 2021,
+  PROBLEM: Fact-check P7 says the $0.5M figures count only the August 2021 round, so it is not a real low end; Clay shows $1.5M and Tracxn $1.92M over three rounds. P7 also says the valuation comes from a single aggregator ((scratch)/round2/verify_playo.txt P7). The notes separately record a Caplight $40M estimate tied to an unconfirmed round, so only needs the word supported ((scratch)/round1/playo_business.txt claim 24).
+  FIX: Funding totals run from $1.5M to $1.92M; Inc42's $0.5M counts only the August 2021 round. The only supported valuation is Inc42's $9.41M from August 2021,
+[audit:first-half#23] misleading | What is already out there
+  QUOTE: About 60 Play Station listings, about half gaming-led
+  PROBLEM: About half comes from the 34 listings actually read (17 of 34, fact-check P1), not all 60. The fact-checker also warns that results look radius-based, so city counts should not be summed blindly, and that counts may overstate working consoles ((scratch)/round2/verify_playo.txt P1 and new findings).
+  FIX: About 60 Play Station listings on city pages that may overlap; about half of the 34 read are gaming-led
+[audit:first-half#24] misleading | What is already out there
+  QUOTE: 15% per booking, the only published rate
+  PROBLEM: Fact-check C10 supports only the only positive commission found. It calls this a stated term from a pre-launch product and says it does not rule out unpublished rates. The same column shows published ₹0 rates for Console Gaming and GameSpotter ((scratch)/round2/verify_gaming.txt C10).
+  FIX: 15% per booking, the only positive rate found; pre-launch, so untested
+[audit:first-half#25] misleading | Market reality
+  QUOTE: [CafeNex](https://cafenex.com/blog/gaming-cafe-profit-margin-india), asserted; seller listings imply 22% to 35%
+  PROBLEM: Fact-check M5 says vendors disagree: IZI's illustrative plan runs higher at 40% to 50%, which this row omits. The 22% to 35% is our calculation on unverified listings and assumed rates, and the row does not say so ((scratch)/round2/verify_market.txt M5).
+  FIX: [CafeNex](https://cafenex.com/blog/gaming-cafe-profit-margin-india), asserted; IZI's illustrative plan says 40% to 50%; seller listings imply 22% to 35% on our assumed rates
+[audit:first-half#26] misleading | Market reality
+  QUOTE: ₹1 lakh to ₹2 lakh a month; small cafes below ₹1 lakh
+  PROBLEM: Fact-check M6 calls ₹1 lakh to ₹2 lakh a synthesis. Bamigos gives ₹1.15 lakh to ₹2.05 lakh, and Clutchr's lines sum to ₹0.85 lakh to ₹1.35 lakh for 6 PS5 bays on our arithmetic. The below ₹1 lakh part comes from a Pune seller listing, not the vendor pages cited ((scratch)/round2/verify_market.txt M6).
+  FIX: About ₹1 lakh to ₹2 lakh a month (our synthesis); small listed cafes appear to run below ₹1 lakh
+[audit:first-half#27] misleading | Market reality
+  QUOTE: The only counts with a disclosed method are two October 2026 Google Maps screens by an affiliate site:
+  PROBLEM: Fact-check M1 says to treat these as unaudited order-of-magnitude floors: nobody visited, the 103 cannot be checked because only 59 are named, and the site contradicts itself elsewhere. The draft names the affiliate site but none of these limits ((scratch)/round2/verify_market.txt M1).
+  FIX: The only counts with a disclosed method are two October 2026 Google Maps screens by an affiliate site, unaudited rough floors with no visits:
+[audit:first-half#28] unsupported | Playo teardown
+  QUOTE: web booking works
+  PROBLEM: Nobody completed a booking. The researcher says yes only in code and by reports, some reviewers call the web version poor, and the fact-checker saw no slots or prices on the venue and booking URLs. The code evidence also sits in the /_next/ files the report says it does not rely on (research_notes/Gaming cafe booking aggregator research/playo_product.md lines 381 to 385; (scratch)/round2/verify_playo.txt P1 and Not checked).
+  FIX: web booking is offered, though reviews are mixed and checkout was not tested
+[audit:first-half#29] unsupported | Bottom line
+  QUOTE: This is a solid small business to run lean, not a venture bet.
+  PROBLEM: No cost side supports solid. Fact-check M7 calls ₹1.26 Cr a success case and lists ramp, churn, closures, no-shows, leakage, gateway costs and cafe signing as missing ((scratch)/round2/verify_market.txt M7). The operator strategy's own field and support estimate of ₹1,500 per cafe a month is ₹72 lakh at 400 cafes, or 57% of that revenue ((scratch)/round2/strategy_operator.json, monetisation).
+  FIX: At best this is a small business to run lean, not a venture bet.
+[audit:first-half#30] unsupported | What is already out there
+  QUOTE: District and Playo have the players but sell generic tickets
+  PROBLEM: Tickets describe District only. For Playo, fact-check P1 says a completed sale is not proven ((scratch)/round2/verify_playo.txt P1), and the researcher could not establish how it models or prices a PlayStation station ((scratch)/round1/_summaries_and_gaps.txt, Playo product gaps).
+  FIX: District and Playo have the players but offer generic listings
+[audit:first-half#31] unsupported | What is already out there
+  QUOTE: Where this has worked, the floor owner built it.
+  PROBLEM: Scale is shown, but success at booking is not. LANGAME's revenue and booking volume are unknown and its figures are company-sourced ((scratch)/round1/marketplace_playbook.txt claim 1). A 2026 Korean guide does not mention reservations, and Kaikatsu's app rates 2.2 ((scratch)/round1/software_and_global.txt claims 15 and 19). No market publishes a pre-booked share.
+  FIX: Where booking apps have reached scale, the floor owner built them.
+[audit:first-half#32] unsupported | Bottom line
+  QUOTE: , and rival websites are weak.
+  PROBLEM: The evidence is Console Gaming's 8-URL sitemap and GoPlaya's client-rendered home page. The researcher says no ranking data was available, so this describes pages, not traffic ((scratch)/round1/marketplace_playbook.txt claim 26). Hash has a 48-URL sitemap and added SEO pages on 30 October 2026 (research_notes/Gaming cafe booking aggregator research/india_competitors.md line 47).
+  FIX: . Rival websites look thin on page checks, though rankings were not checked.
+[audit:first-half#33] unsupported | Market reality
+  QUOTE: and coins often locked to one branch
+  PROBLEM: The only example of branch-locked coins in the notes is one cafe brand, Intencity, so often has no support (research_notes/Gaming cafe booking aggregator research/owner_player_voice.md line 249; (scratch)/round1/marketplace_playbook.txt claim 7).
+  FIX: and, at Intencity, coins locked to one branch
+[audit:first-half#34] unsupported | Market reality
+  QUOTE: about 16 first-hand operators raised revenue, rent, power and game costs instead
+  PROBLEM: The notes count about 16 comments that read as first-hand operators, not 16 confirmed people, and mark the owners' figures as unverified comments (research_notes/Gaming cafe booking aggregator research/owner_player_voice.md lines 44 and 46).
+  FIX: about 16 comments that read as first-hand operators, all unverified, raised revenue, rent, power and game costs instead
+[audit:first-half#35] unsupported | Market reality
+  QUOTE: the often-quoted [15,000](https://whatifbelief.com/gaming-culture/gaming-culture-in-india-from-mobile-revolution-to-2-6b-gaming-paradise/) has no source
+  PROBLEM: Fact-check M2 found 15,000 on one undated page only, Whatifbelief, and not on the Gamingnear page first cited beside it, so nothing shows it is often quoted ((scratch)/round2/verify_market.txt M2).
+  FIX: the [15,000](https://whatifbelief.com/gaming-culture/gaming-culture-in-india-from-mobile-revolution-to-2-6b-gaming-paradise/) on one undated site has no source
+[audit:first-half#36] unsupported | Playo teardown
+  QUOTE: Each venue sets its rules; refund in 5 to 7 working days; fee kept ([policy](https://playo.co/cancellation-refund))
+  PROBLEM: Fact-check P3 says the linked policy page does not mention the convenience fee. The Freshdesk cancellation article does ((scratch)/round2/verify_playo.txt P3).
+  FIX: Each venue sets its rules; refund in 5 to 7 working days ([policy](https://playo.co/cancellation-refund)); fee kept ([help](https://playo.freshdesk.com/support/solutions/articles/1070000107643-what-is-the-cancellation-policy-for-my-booking-and-what-are-the-cancellation-charges-applicable-))
+[audit:first-half#37] unsupported | Playo teardown
+  QUOTE: [version 5](https://apps.apple.com/in/app/playo-sports-community-app/id1018786950?see-all=version-history) drew 38 one-star reviews in February and March 2026
+  PROBLEM: The linked version history shows no review counts and starts at 5.0.2, so it has no 5.0.0 entry. The 38 comes from Apple's India review feed, which the sentence should name because Android reviews were not checked ((scratch)/round2/verify_playo.txt P12).
+  FIX: [version 5](https://itunes.apple.com/in/rss/customerreviews/page=1/id=1018786950/sortby=mostrecent/json) drew 38 one-star reviews on Apple's India feed in February and March 2026
+[audit:first-half#38] unsupported | What is already out there
+  QUOTE: [Clutchr](https://www.clutchr.in/gaming-cafe-billing-software) ₹999 at 0% commission
+  PROBLEM: The linked page lists ₹999 but never mentions commission (https://www.clutchr.in/gaming-cafe-billing-software, opened 3 Nov 2026). Fact-check C11 found 0% on /vs/playo and the turf page ((scratch)/round2/verify_gaming.txt C11).
+  FIX: [Clutchr](https://www.clutchr.in/gaming-cafe-billing-software) ₹999 with [0% commission](https://clutchr.in/vs/playo)
+[audit:first-half#39] unsupported | Bottom line
+  QUOTE: Nobody in India has both player reach and control of the cafe floor.
+  PROBLEM: This states a negative from limited searching as fact. The shared search budget ran out and the competitor list is likely incomplete ((scratch)/round1/_summaries_and_gaps.txt, India competitor gaps), and fact-check C13 had already found one missed entrant ((scratch)/round2/verify_gaming.txt C13).
+  FIX: We found nobody in India with both player reach and control of the cafe floor.
+[audit:first-half#40] unsupported | Playo teardown
+  QUOTE: Only about half of the 34 visible listings are gaming-led
+  PROBLEM: Fact-check P1 marks the 17 of 34 split as our reading of names and About text, and the draft drops that label ((scratch)/round2/verify_playo.txt P1).
+  FIX: On our reading of names and About text, only about half of the 34 visible listings are gaming-led
+[audit:first-half#41] missing | Market reality
+  QUOTE: 
+  PROBLEM: Add after the revenue table. Fact-check M7 says the ₹350 order value looks high, since listings imply ₹100 to ₹267 a visit, and it lists costs the model leaves out. Redone: 400 x 2 x 365 x ₹250 x 10% is ₹73 lakh, plus ₹24 lakh software is ₹97 lakh; at 1 booking a day it is ₹60.5 lakh. The table's own arithmetic is right ((scratch)/round2/verify_market.txt M7).
+  FIX: The ₹350 order value looks high: at ₹250 the base case falls to ₹97 lakh, and with 1 booking a day to ₹60.5 lakh. It also leaves out churn, closures, no-shows, leakage, gateway fees and the cost of signing cafes.
+[audit:first-half#42] missing | Market reality
+  QUOTE: 
+  PROBLEM: Add after the sentence on 1,900 to 3,800 cafes. Fact-check M2 gives this second tier alongside that range and says 2,000 fits it better than all cafes. Leaving it out makes the market an aggregator can readily find and reach look larger ((scratch)/round2/verify_market.txt M2).
+  FIX: About 1,100 to 2,200 of those look digitally confirmable, on the same scaling (our estimate).
+===== audit:second-half (64 issues)
+VERDICT: Not ready to hand over yet, though most numbers and links in these sections hold and most arithmetic redoes correctly. The most urgent fixes are the money summary (₹31,000 x 400 is ₹1.24 Cr, the line is not all owner-paid, and ₹3 Cr to ₹5 Cr rests on passes the report does not propose), the DPDP penalty cap that conflicts with its own fact-check and linked page, and the Sources section's overstated claims about notes, filings and retries. After that, restore the dropped labels (vendor, our reading, stress case, company-claimed), because "This report uses the corrected wording" and "Our own estimates are labelled" are not yet true.
+[audit:second-half#1] wrong | Go-to-market
+  QUOTE: Adding player fees reaches perhaps ₹3 Cr to ₹5 Cr a year at 50,000 weekly active players, likely 4 to 5 years out.
+  PROBLEM: This cannot be reproduced from the report's lines, and it double-counts. ₹3 Cr to ₹5 Cr is the separate total in round2/strategy_player.json: Seat Lock ₹75 lakh net, nights ₹70 lakh, first-visit ₹45 to 90 lakh, Drop ₹43 lakh, Squad Pass ₹30 to 48 lakh, brand ₹50 lakh to ₹1 Cr, Off-Peak Pass ₹54 lakh, which sums to ₹3.67 to 4.8 Cr. Adding Seat Lock to ₹1.26 Cr gives only about ₹2 Cr, and the owner model already holds a peak seat fee. ₹84 to 102 lakh comes from passes missing from the Money table, and the Off-Peak Pass needs a written legal view. 50,000 is 25% of the estimated 200,000 regular-equivalents, or 38% on the ₹240 Cr floor spend that verdict M8 prefers (my arithmetic).
+  FIX: A separate player-led model reaches perhaps ₹3 Cr to ₹5 Cr a year at 50,000 weekly active players, likely 4 to 5 years out. That total includes a Squad Pass, an Off-Peak Pass and a deals margin not in the table above. 50,000 is 25% to 38% of our estimated regular-equivalent players in India.
+[audit:second-half#2] wrong | Go-to-market
+  QUOTE: Owner-side lines come to about ₹31,000 per cafe a year, or ₹1.26 Cr at 400 cafes.
+  PROBLEM: Both the arithmetic and the label are off. ₹31,000 x 400 is ₹1.24 Cr. ₹1.26 Cr is ₹31,500 x 400 from the different commission-plus-software model (round1/market_economics.txt [1]). The ₹31,000 is also not all owner-paid: round2/strategy_operator.json builds about ₹2,600 a month from first-visit ₹550, group ₹600, a player-paid peak fee ₹580, hour packs ₹300, Pro ₹240 and brand ₹300. The same file says the owner pays about ₹1,700 a month, which is about ₹20,400 a year or ₹82 lakh at 400 cafes (my arithmetic).
+  FIX: The owner-led model's lines come to about ₹31,000 per cafe a year, or about ₹1.24 Cr at 400 cafes, including player-paid peak fees.
+[audit:second-half#3] wrong | Risks and rules
+  QUOTE: [penalties](https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/nov/doc20251117695301.pdf) reach ₹200 Cr
+  PROBLEM: This conflicts with verdict L3 in round2/verify_indian.txt and with the linked PIB note. ₹200 Cr is the cap for children's obligations and breach notification; the top cap is ₹250 Cr for security safeguards.
+  FIX: [penalties](https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/nov/doc20251117695301.pdf) reach ₹200 Cr for children's-data breaches and ₹250 Cr for security failures
+[audit:second-half#4] wrong | Go-to-market
+  QUOTE: Pune has the only disclosed cafe count, eight multi-outlet brands holding about 23 of the 59 confirmed outlets, thin platform coverage and no rival based there.
+  PROBLEM: Verdict M1 in round2/verify_market.txt says there are two disclosed counts, Pune and Gurugram, and the table above shows Gurugram 6. 'No rival based there' is a negative from a competitor list the notes call likely incomplete (round1/_summaries_and_gaps.txt). india_competitors.md line 45 also records an older Hash Play listing naming Pune. The brand sum is right: 6+3+3+3+2+2+2+2 = 23.
+  FIX: Pune has one of only two disclosed cafe counts, eight multi-outlet brands holding about 23 of 59 confirmed outlets, and thin platform coverage. We found no rival based there, though an older Hash store listing named Pune.
+[audit:second-half#5] wrong | Go-to-market
+  QUOTE: Needs no contract and tests whether players pay for certainty
+  PROBLEM: This conflicts with the report itself. The Rules table requires a written contract with each cafe (E-Commerce Rules 2020 rule 6(4), new findings in round2/verify_indian.txt). The report's Seat Lock also draws on 'seats the owner pledges' and pays the cafe ₹10, both from strategy_operator.json. 'No contract' comes from strategy_player.json's different version, where the cafe has signed nothing.
+  FIX: Needs no payment split and tests whether players pay for certainty, though pledged seats and the 2020 Rules still call for a written agreement
+[audit:second-half#6] wrong | Go-to-market
+  QUOTE: as rivals sit at ₹0 to ₹999
+  PROBLEM: Verdict C11 in round2/verify_gaming.txt shows Clutchr also at ₹2,499 and ₹3,999, Playzor at ₹1,999 and ₹4,999, and CafeSynk at ₹600 per PC a month. ₹0 to ₹999 covers entry plans only. strategy_operator.json itself cites a ₹499 to ₹1,499 market range.
+  FIX: as rivals' entry plans sit at ₹0 to ₹999
+[audit:second-half#7] wrong | Sources
+  QUOTE: every claim and URL is in the research notes in this repo, under `research_notes/Gaming cafe booking aggregator research/`.
+  PROBLEM: This is false as written. By string match, 14 of the draft's 156 URLs are absent from that folder, including the Groupon, Paytm Soundbox, both eGazette and RBI draft links. Seat Lock, Daylight Priority, the ₹14,999 pack and the red-team case have zero hits there; they exist only in scratchpad round2 JSON files. git status also shows research_notes/ as untracked, so it is not yet in the repo. Alternatively, copy those files into the folder and commit it, and this sentence becomes closer to true.
+  FIX: first-round evidence, stack notes and fact-check notes are in `research_notes/Gaming cafe booking aggregator research/`, not yet committed. Product ideas, strategy drafts and the red team are not stored there.
+[audit:second-half#8] wrong | Sources
+  QUOTE: Company figures are unaudited, and no filing was read directly.
+  PROBLEM: This is too broad. Verdict B9 in round2/verify_marketplace.txt read Urban Company's RHP directly, and B1 read Swiggy's and Eternal's shareholder letters, the source of this report's 8.7% and 9.3%. What was not read is the MCA filings of Playo and its rivals (P6 in verify_playo.txt; gaps in _summaries_and_gaps.txt).
+  FIX: Private-company figures are unaudited, and no MCA filing was read directly.
+[audit:second-half#9] wrong | Sources
+  QUOTE: A few researchers also went beyond their brief with temporary scratch files, a cap on page size and one retry after a refusal; none of it affects the findings.
+  PROBLEM: This understates what the evidence discloses. verify_gaming.txt: a LANGAME fetch after a 403, a BookMyShow sitemap after 403s, and SMERGERS reads inside its 15-second crawl delay. _summaries_and_gaps.txt: an extra Grapevine fetch and a Play fetch with a browser user agent. browser_checks.md: Google Trends loaded after a 429. verify_indian.txt: a status probe that skipped TLS verification. verify_marketplace.txt: byte-range reads past a 3 MB cap, with a request to flag it if the cap was per document. The Trends scores and the 8.7% and 9.3% ratios came from such reads, so 'none of it' is too strong.
+  FIX: Some agents also went beyond their brief: scratch files, byte-range page reads, a browser user agent, a crawl-delay breach and a TLS-skipping probe. Retries after refusals hit LANGAME, BookMyShow, Grapevine and Google Trends. The Trends scores and the Swiggy and Eternal ratios came from such reads; we saw no sign they are wrong.
+[audit:second-half#10] misleading | Risks and rules
+  QUOTE: paid-entry prize events on unregistered titles are risky, and aiding them is non-bailable
+  PROBLEM: This reads as settled law. Verdict L2 in round2/verify_indian.txt says s.5 and s.7 cover aiding and paying for online money games, and whether a paid-entry event is one is open. Rule 9 weighs fees and prizes apart from stakes, so this is a risk for counsel to assess, not a settled ban.
+  FIX: paid-entry prize events on unregistered titles are risky but not a settled ban (our reading), and aiding online money games is non-bailable
+[audit:second-half#11] missing | Risks and rules
+  QUOTE: 
+  PROBLEM: The Online Gaming Act row links SC Observer but never says the Act is under challenge. Verdict L2 and its new findings in round2/verify_indian.txt: T.C.(C) 133/2025 is pending, the Court agreed to a final hearing on 5 Aug 2026, and no stay was reported. Rule 2(1)(h) defines a provider to include anyone who organises or makes available online games, s.16 allows entry and search of premises without warrant, and no source addresses LAN cafes. Add this text to the row's middle column.
+  FIX: A Supreme Court challenge is pending: on 5 August 2026 the Court agreed to a final hearing, and no stay was reported. The Rules' provider definition is untested against venues, and officers may enter premises without a warrant. No source addresses LAN cafes.
+[audit:second-half#12] misleading | Product ideas
+  QUOTE: On [Hash's own model](https://www.hashforgamers.com/blog/is-gaming-cafe-profitable-india), 10% of all revenue is about ₹11,500 a month against about ₹9,600 profit at 30% occupancy.
+  PROBLEM: Verdict M11 in round2/verify_market.txt calls this a stress case, because only app bookings would pay. On 15% of revenue via the app the fee is ₹1,725, and the same 10% is 27% of profit at 45% occupancy. Hash's stated inputs give ₹1.06 lakh, not ₹1.15 lakh, and it is unitemised vendor marketing. The draft keeps the alarming line and drops all of this.
+  FIX: On [Hash's own model](https://www.hashforgamers.com/blog/is-gaming-cafe-profitable-india), unitemised vendor marketing, 10% of all revenue is about ₹11,500 a month against about ₹9,600 profit at 30% occupancy. That is a stress case: on 15% of revenue through the app, the fee is ₹1,725.
+[audit:second-half#13] unsupported | Go-to-market
+  QUOTE: Console Gaming 34, Hash 35+, GoPlaya about 26 pages
+  PROBLEM: This places company-claimed national totals in the Mumbai row as if they were local supply, with no label. Hash's site names no cities (checked at hashforgamers.com on 3 Nov 2026), and india_competitors.md line 45 records an older Play listing naming nine cities, including Pune and Hyderabad. For Console, only 8 featured venues were seen in the Mumbai region (round1/india_competitors.txt [3]). This matters because the row supports the choice of Pune.
+  FIX: Console Gaming (claims 34), Hash (based here; claims 35+, cities unnamed), GoPlaya about 26 pages
+[audit:second-half#14] misleading | Where the Playo model transfers
+  QUOTE: it adds little at peak, when the floor is already nearly full
+  PROBLEM: Verdict M12 in round2/verify_market.txt says this is the report's inference: vendor peaks of 70% to 90% still leave 10% to 30% of seats empty, and CafeNex treats 80%+ as an expansion signal, so not all cafes reach it. All peak figures are vendor assertions.
+  FIX: it adds little at peak, when vendors say floors run 70% to 90% full (our inference)
+[audit:second-half#15] misleading | Where the Playo model transfers
+  QUOTE: ₹100 to ₹120 an hour per player
+  PROBLEM: The row compares a per-game figure with a per-player-hour list price, and ₹17 to ₹35 cannot be derived from it. That range is 10% of ₹170 to ₹350. ₹170 sits in a Console mock-up that may be illustrative (round1/india_competitors.txt [3]), and ₹350 is the model's assumed base order (market_economics.txt [1]), nearly equal to Playo's ₹378. M3 calls ₹100 to ₹120 list prices, and M4 says realised rates are an assumption. The 'our estimate' label is missing.
+  FIX: ₹100 to ₹120 list an hour per player; about ₹170 to ₹350 a booking (our estimate)
+[audit:second-half#16] misleading | Go-to-market
+  QUOTE: Owners pay only when someone turns up, the pattern at [Treatwell](https://www.treatwell.co.uk/partners/pricing/), [Mindbody](https://www.mindbodyonline.com/business/pricing) and [Booksy](https://biz.booksy.com/en-us/pricing)
+  PROBLEM: None of the three linked pages says the fee depends on attendance (opened 3 Nov 2026). Treatwell says 35% 'on their first booking', Mindbody 'first purchase', and Booksy ties it to a first visit and clients who 'book you for the first time'. Verdict B2 in round2/verify_marketplace.txt adds that all are beauty and wellness and all three also charge for software.
+  FIX: Owners pay only when someone turns up. One-time new-client fees are the pattern at [Treatwell](https://www.treatwell.co.uk/partners/pricing/), [Mindbody](https://www.mindbodyonline.com/business/pricing) and [Booksy](https://biz.booksy.com/en-us/pricing), in beauty and wellness, beside paid software
+[audit:second-half#17] misleading | Product ideas
+  QUOTE: [Treatwell](https://www.treatwell.co.uk/partners/pricing/) charges only on a new client's first booking
+  PROBLEM: 'Charges only' is too strong. Verdict B2 in round2/verify_marketplace.txt lists plans of £9.99 to £59 a month and 2.5% + VAT on online prepayments, and warns that copying the commission alone leaves out part of the revenue model.
+  FIX: [Treatwell](https://www.treatwell.co.uk/partners/pricing/) takes commission only on a new client's first booking, alongside paid plans
+[audit:second-half#18] misleading | Go-to-market
+  QUOTE: The squad link is the growth loop, because each plan reaches three or four friends.
+  PROBLEM: This states an untested design as fact. The report's own base case assumes 1.7 players a booking (market_economics.txt [1]; red_team.json), and strategy_player.json says no Indian data on solo versus group share was found and lists group size as an assumption to test.
+  FIX: The squad link could be the growth loop, because each plan reaches the squad's friends. This is untested, and our base case assumes 1.7 players a booking.
+[audit:second-half#19] misleading | Product ideas
+  QUOTE: [better rigs](https://refill24x7.com/offers) already earn 30% to 57% more at two Pune cafes
+  PROBLEM: These are list-price gaps, not earnings. round1/marketplace_playbook.txt [13] says they are single-venue prices, not a market survey, and no booking uplift was measured. The arithmetic holds: ₹550/₹350 is 57% and ₹130/₹100 is 30%.
+  FIX: [better rigs](https://refill24x7.com/offers) already list 30% to 57% higher at two Pune cafes, with no uplift measured
+[audit:second-half#20] misleading | Product ideas
+  QUOTE: Playo reviewers ask for working invites
+  PROBLEM: The notes are more specific, and they cut against this idea. playo_sentiment.md line 132 and playo_product.md line 394 say reviewers want invite links that open the app and complain that links open the browser. Squad Night is a browser link with no install, so this is not support for it as worded.
+  FIX: Playo reviewers ask for invite links that open the app, not the browser
+[audit:second-half#21] misleading | Product ideas
+  QUOTE: Bookings not honoured are 8%, about 27% and about 33% of low-star reviews on Playo, Hudle and KheloMore
+  PROBLEM: This drops the labels. round1/playo_sentiment.txt [1] and [2]: iOS hand counts, small rival samples (about ±15 points), showing what reviewers complain about, not how often bookings fail. Playo is 6% of all 285 low-star reviews and 8% only after excluding incident clusters (n=181). red_team.json and strategy_player.json use 6%; strategy_operator.json uses 8%.
+  FIX: In iOS hand counts, bookings not honoured are 6% to 8%, about 27% and about 33% of low-star reviews on Playo, Hudle and KheloMore
+[audit:second-half#22] misleading | Product ideas
+  QUOTE: [Meituan merchants refund double](https://www.itiger.com/hant/news/1115132277) on failed deposits
+  PROBLEM: round1/software_and_global.txt [18] covers New Year's Eve restaurant deposits in Feb 2026 only, and says this is restaurants, not gaming cafes. The draft makes it sound like a general Meituan rule.
+  FIX: [Meituan restaurants refund double](https://www.itiger.com/hant/news/1115132277) on failed New Year's Eve deposits
+[audit:second-half#23] misleading | Risks and rules
+  QUOTE: Rajkot's venue held only a police ticket-sale permission; papers do not prove safety
+  PROBLEM: Verdict L9 in round2/verify_indian.txt corrects this logic. TRP is an example of a licence of the wrong class, not of papers failing. The fire NOC half rests on a Gujarat Samachar report about Ahmedabad, and the conclusion is labelled our inference. The draft uses a venue lacking the right papers as proof that papers fail, with no label.
+  FIX: Rajkot's venue held only a police ticket-sale permission, the wrong licence class; Ahmedabad units reportedly held a fire NOC without working systems. Papers do not prove safety (our inference)
+[audit:second-half#24] misleading | Risks and rules
+  QUOTE: After the Rajkot fire, [Gujarat shut gaming zones statewide](https://www.freepressjournal.in/amp/india/rajkot-gamezone-fire-gujarat-government-orders-statewide-closure-of-gaming-zones), and small cafes live close to the edge.
+  PROBLEM: This is offered as proof of fragile cafe supply but drops the date and scope. Verdict L9 says Gujarat ordered zones shut in May 2024. round1/market_economics.txt [18] says these were mostly larger game zones and it is unclear whether LAN cafes were covered. regulation.txt [15] says it is unknown whether a small PC cafe counts as a gaming zone.
+  FIX: After the May 2024 Rajkot fire, [Gujarat ordered gaming zones shut statewide](https://www.freepressjournal.in/amp/india/rajkot-gamezone-fire-gujarat-government-orders-statewide-closure-of-gaming-zones), though it is unclear whether PC cafes were covered. Small cafes live close to the edge.
+[audit:second-half#25] misleading | Risks and rules
+  QUOTE: A balance across independent cafes needs authorisation and ₹5 Cr net worth
+  PROBLEM: Verdict L5 in round2/verify_indian.txt says it 'looks like' a licensed instrument, with ₹5 Cr at application and ₹15 Cr by the end of the third financial year after authorisation. The draft states a reading as a rule and gives half of the requirement.
+  FIX: A balance across independent cafes looks like it needs authorisation, with ₹5 Cr net worth at application and ₹15 Cr by the third year
+[audit:second-half#26] misleading | Product ideas
+  QUOTE: needing ₹5 Cr net worth
+  PROBLEM: This has the same omission against verdict L5 in round2/verify_indian.txt: the bar rises to ₹15 Cr by the end of the third financial year after authorisation.
+  FIX: needing ₹5 Cr net worth at application and ₹15 Cr by the third year
+[audit:second-half#27] misleading | Risks and rules
+  QUOTE: [Delhi dropped the police licence](https://www.etvbharat.com/en/!state/delhi-7-businesses-no-longer-need-police-license-2025-lg-issued-notification-enn25063006899) in June 2025
+  PROBLEM: Verdict L8 in round2/verify_indian.txt adds that licensing moves to local bodies, and regulation.txt [9] names MCD, NDMC and the Cantonment Board. As written, a founder could read Delhi as needing no licence.
+  FIX: [Delhi dropped the police licence](https://www.etvbharat.com/en/!state/delhi-7-businesses-no-longer-need-police-license-2025-lg-issued-notification-enn25063006899) in June 2025, moving licensing to local bodies
+[audit:second-half#28] misleading | Risks and rules
+  QUOTE: [Valve's PC Cafe Program](https://partner.steamgames.com/pccafe) is the only formal route found
+  PROBLEM: Verdict L10 in round2/verify_indian.txt adds that the programme covers only titles whose publishers opted in and that India is not named. Without this it reads as a usable route for Indian cafes.
+  FIX: [Valve's PC Cafe Program](https://partner.steamgames.com/pccafe) is the only formal route found, covering only publisher-opted titles, with India not named
+[audit:second-half#29] misleading | Risks and rules
+  QUOTE: no order names a convenience fee
+  PROBLEM: This turns a limited negative into an absolute. Verdict L12 in round2/verify_indian.txt says no opened order names one, and its not-checked list says CCPA's own Zepto and FirstCry orders were not opened. regulation.txt [5] says 'no opened source'.
+  FIX: no source we opened names a convenience fee case
+[audit:second-half#30] misleading | Sources
+  QUOTE: nothing in this report relies on those files
+  PROBLEM: playo_product.md lines 381 to 384 answer 'Does web booking work?' with 'Yes in code and by reports', citing /_next/ files, and the teardown says 'web booking works'. Page FAQ text and reviewers also support it, and no checkout was run, but 'nothing' is too strong.
+  FIX: only the line that web booking works leans partly on them, alongside page text and reviews
+[audit:second-half#31] misleading | Sources
+  QUOTE: Nine researchers gathered the evidence, then five independent fact-checkers tested 64 key claims
+  PROBLEM: The counts are right: 22 + 42 = 64 verdict lines in round2/verify_*.txt, and nine round-one strands. But these are AI agents in one workflow sharing one search budget (_summaries_and_gaps.txt), and the draft never says so. 'Independent' overstates the separation.
+  FIX: Nine AI research agents gathered the evidence, then five separate AI fact-checking agents tested 64 key claims
+[audit:second-half#32] misleading | Risks and rules
+  QUOTE: from an independent red team
+  PROBLEM: round2/red_team.json is an AI agent in the same workflow. It builds on the same round-one notes and says it leans on numbers fact-checked separately. It re-read some pages, but 'independent' overstates this.
+  FIX: from a separate AI red-team agent
+[audit:second-half#33] misleading | Risks and rules
+  QUOTE: District owns demand, Olympus and Hash control the PC where installed, software is near free, and venues list everywhere.
+  PROBLEM: round1/_summaries_and_gaps.txt says how many venues multi-home could not be established, and india_competitors.txt [16] names only a few. 'Owns demand' also sits badly with this report's own 0 to 6 esports listings per city and no booked counter on the lounges opened (browser_checks.md; red_team.json). india_competitors.txt [1] supports 'far more reach'.
+  FIX: District has far more reach, Olympus and Hash control the PC where installed, software is near free, and some venues list on several channels.
+[audit:second-half#34] misleading | Go-to-market
+  QUOTE: rival sites are weak:
+  PROBLEM: round1/marketplace_playbook.txt [26] says this describes pages, not traffic, because ranking data was not available, and Semrush returned 404 for these sites ([9]). Hash has 48 URLs and a recent SEO push (india_competitors.md), and District and Playo are also rivals with large sites.
+  FIX: specialist rivals' pages look thin, though their rankings were not checked:
+[audit:second-half#35] misleading | Go-to-market
+  QUOTE: [60% of Playo's visits](https://www.semrush.com/website/playo.co/overview/)
+  PROBLEM: This Semrush estimate covers playo.co website traffic only: about 327.71K visits in Sept 2026, 60.3% organic (round1/marketplace_playbook.txt [22]). It says nothing about app use, against a claimed 1.1M monthly actives, yet the report uses it to argue for a web front door.
+  FIX: [60% of playo.co's web visits](https://www.semrush.com/website/playo.co/overview/)
+[audit:second-half#36] misleading | Go-to-market
+  QUOTE: GoPlaya, 6 pages, app dormant
+  PROBLEM: Verdict C8 in round2/verify_gaming.txt says only that the Play listing was last updated on 18 Nov 2025, and the cafe sitemap has Sep 2026 lastmod dates. round1/india_competitors.txt [8] says it looks dormant but is not confirmed dead.
+  FIX: GoPlaya, 6 pages, app not updated since November 2025
+[audit:second-half#37] misleading | Go-to-market
+  QUOTE: HangOn, 3 venues
+  PROBLEM: This drops the correction in verdict C13 in round2/verify_gaming.txt: one of the three is a test entry. The report's competitor table already says so.
+  FIX: HangOn, 3 venues, one a test entry
+[audit:second-half#38] misleading | Go-to-market
+  QUOTE: [4](https://www.district.in/activities/esports-in-chennai)
+  PROBLEM: Chennai looks well covered, but of its four listings (browser_checks.md) only XGT Cafe is among the 13 lounges confirmed in verdict C1. TIA is a family entertainment centre selling arcade cards, and Racecraft Simulation looks like sim racing by name. The Delhi row gets this caveat and Chennai does not.
+  FIX: [4](https://www.district.in/activities/esports-in-chennai), one a confirmed lounge (XGT Cafe)
+[audit:second-half#39] misleading | Go-to-market
+  QUOTE: [Franchises](https://next-level.gg/franchise) charge ₹2 lakh to ₹6 lakh in fees
+  PROBLEM: The figure belongs to one brand: Next Level lists ₹2, ₹4 and ₹6 lakh (next-level.gg/franchise, opened 3 Nov 2026). market_economics.md's chain table lists Joystick with a ₹15 lakh fee, so the plural range is wrong.
+  FIX: [Next Level](https://next-level.gg/franchise) charges ₹2 lakh to ₹6 lakh in franchise fees
+[audit:second-half#40] misleading | Risks and rules
+  QUOTE: | Test | Stop if | How to measure |
+  PROBLEM: The header is stronger than round2/red_team.json on several rows. The GTA VI miss is 'strong evidence against a consumer app', the honoured miss is 'change course', owners is 'stop or change the supply model', and turn-aways is 'drop the peak-certainty thesis'.
+  FIX: | Test | Stop or change course if | How to measure |
+[audit:second-half#41] misleading | Risks and rules
+  QUOTE: Parties turned away at peak
+  PROBLEM: round2/red_team.json measures parties 'turned away or quoted more than 30 minutes'. The narrower wording makes the under-3 threshold easier to miss and changes the test.
+  FIX: Parties turned away or quoted over 30 minutes at peak
+[audit:second-half#42] misleading | Risks and rules
+  QUOTE: in a larger market with bigger tickets
+  PROBLEM: Verdict M7 in round2/verify_market.txt finds the base case about equal to Playo per booking (₹35 against ₹28 to ₹39 a game), and ₹378 a game barely exceeds the model's ₹350 base order. 'Bigger tickets' holds only against the ₹170 low end or a vendor's ₹1,200 turf slot.
+  FIX: in a larger market, at about ₹378 a game
+[audit:second-half#43] misleading | Go-to-market
+  QUOTE: blended across commission, ads, fees and tickets.
+  PROBLEM: The arithmetic holds (304/3,259 is 9.33% and 131/1,508 is 8.69%), but verdict B1 in round2/verify_marketplace.txt marks these as our calculation. It also gives about 10.3% for Swiggy on adjusted revenue and warns that the bases differ, so they should not be compared directly.
+  FIX: blended across commission, ads, fees and tickets (our arithmetic). Swiggy is about 10.3% on adjusted revenue, and the two bases differ.
+[audit:second-half#44] misleading | Where the Playo model transfers
+  QUOTE: Find-a-game matches were about 3% of Playo's pickleball games on company figures
+  PROBLEM: 45,000/1.39M is 3.2%, but round1/playo_business.txt [23] adds 'if units are comparable'. playo_business.md line 221 also shows fast growth: 2,400 in 2024, 26,000 in 2025 and 45,000 by August 2026. Dropping the growth makes the point look stronger.
+  FIX: Find-a-game matches were about 3% of Playo's pickleball games (our arithmetic on company figures, if units compare) but are growing fast
+[audit:second-half#45] misleading | Risks and rules
+  QUOTE: Do not pool cafe money in your own account
+  PROBLEM: round1/regulation.txt [19] says pooling 'looks unwise' and that this is the researcher's inference. Verdict L4 says the Direction does not state this outright and counsel should confirm where the line falls.
+  FIX: Pooling cafe money in your own account looks unwise (our inference; counsel should confirm)
+[audit:second-half#46] unsupported | Where the Playo model transfers
+  QUOTE: Playo's most copied feature is the wrong one to copy first
+  PROBLEM: Nothing in the notes or round-two files says this feature is Playo's most copied; a search for 'most copied' returns nothing. The rest of the sentence is about stranger matching, so name that instead.
+  FIX: Playo's stranger matching is the wrong feature to copy first
+[audit:second-half#47] unsupported | Product ideas
+  QUOTE: [Group rate cards](https://www.gamebiller.com/blog/how-to-price-gaming-cafe-sessions-in-india) are common
+  PROBLEM: The linked post gives no share of shops and only describes rate cards 'with group pricing' (opened 3 Nov 2026). strategy_operator.json reads the same vendor as saying many cafes price consoles per station regardless of players.
+  FIX: [Group rate cards](https://www.gamebiller.com/blog/how-to-price-gaming-cafe-sessions-in-india) exist at some cafes
+[audit:second-half#48] unsupported | Product ideas
+  QUOTE: Numbers rank ideas by expected value
+  PROBLEM: No expected value was calculated. round2/strategy_player.json and strategy_operator.json only rate impact and effort as high, medium or low, and the chart note says placement is our judgement.
+  FIX: Numbers rank ideas by our judgement of expected value, which was not calculated
+[audit:second-half#49] unsupported | Go-to-market
+  QUOTE: no evidence shows creators drive offline bookings
+  PROBLEM: This is a negative from a weak search. round1/marketplace_playbook.txt [27] says only that none was found, and its gaps in _summaries_and_gaps.txt say zero searches ran, which weakens every negative in that strand.
+  FIX: we found no evidence that creators drive offline bookings, on limited search
+[audit:second-half#50] unsupported | Where the Playo model transfers
+  QUOTE: scarce mainly on weekend evenings
+  PROBLEM: round1/owner_player_voice.txt [9] says the specifics rest mainly on one low-quality site and no measured wait or turn-away data was found. The table labels the Customers row 'not measured' but not this one.
+  FIX: scarce mainly on weekend evenings (one affiliate site and vendors, not measured)
+[audit:second-half#51] unsupported | Where the Playo model transfers
+  QUOTE: They bring friends, and online games have matchmaking
+  PROBLEM: This is stated as fact on thin evidence. round1/owner_player_voice.txt [11] rests on a small comment sample, the 72% NVIDIA figure is stale, and red_team.json marks the matchmaking point as its own reasoning. strategy_player.json says no Indian solo or group data exists.
+  FIX: They bring friends (small comment sample), and online games have matchmaking (our reasoning)
+[audit:second-half#52] unsupported | Where the Playo model transfers
+  QUOTE: A turf needs a booking and its players often need people, while a cafe needs neither for most of the week.
+  PROBLEM: round2/red_team.json labels this a researcher's inference, no booking or turn-away data exists, and owner_player_voice.txt [13] says discovery and rotation do exist, so the case is narrower rather than zero.
+  FIX: On our reading, a turf needs a booking and its players often need people, while a cafe needs neither for most of the week.
+[audit:second-half#53] unsupported | Product ideas
+  QUOTE: They are the feature most exposed under the [Online Gaming Act](https://taxguru.in/corporate-law/promotion-regulation-online-gaming-act-2025.html)
+  PROBLEM: This drops 'our reading'. round1/regulation.txt [2] calls the application to tournaments the researcher's inference, and verdict L2 says no source confirms it.
+  FIX: On our reading, they are the feature most exposed under the [Online Gaming Act](https://taxguru.in/corporate-law/promotion-regulation-online-gaming-act-2025.html)
+[audit:second-half#54] unsupported | Risks and rules
+  QUOTE: Console's claimed 33% repeat rate
+  PROBLEM: The arithmetic holds: 1/(1-0.33) is 1.49 bookings, or ₹25 to ₹52. But round1/owner_player_voice.txt [14] and red_team.json say the claim has no denominator, and that caveat should travel with it.
+  FIX: Console's claimed 33% repeat rate (no denominator)
+[audit:second-half#55] unsupported | Where the Playo model transfers
+  QUOTE: [Vendors claim](https://clutchr.in/blog/turf-business-profitability-guide) 70%+ of volume is repeat teams
+  PROBLEM: This is one vendor, not several: Clutchr, 'without data' (round1/playo_business.txt [23]), and it sells flat-fee software against marketplaces.
+  FIX: [One vendor claims](https://clutchr.in/blog/turf-business-profitability-guide), without data, that 70%+ of volume is repeat teams
+[audit:second-half#56] misleading | Go-to-market
+  QUOTE: An [OpenTable alumnus's rule of thumb](https://www.lennysnewsletter.com/p/how-to-kickstart-and-scale-a-marketplace) is 50 to 100 concentrated restaurants in a city
+  PROBLEM: Verdict B12 in round2/verify_marketplace.txt says this is a 2019 practitioner source drawn from successful marketplaces, and the threshold is for restaurants, not gaming cafes. The draft then applies it directly to Pune.
+  FIX: A 2019 [OpenTable alumnus's rule of thumb](https://www.lennysnewsletter.com/p/how-to-kickstart-and-scale-a-marketplace), for restaurants, is 50 to 100 concentrated venues in a city
+[audit:second-half#57] missing | Risks and rules
+  QUOTE: Book one counsel session on fees, adults-only design, tournaments and the name
+  PROBLEM: round2/strategy_player.json asks for written advice on Maharashtra's entertainment duty, citing a Bombay High Court ruling of 7 Aug 2025 on ticket convenience fees (not fact-checked), and on whether tokens are prepaid instruments. strategy_operator.json asks about passes. The launch is in Pune with a fee, pass and token, and this list drops all of these.
+  FIX: Book one counsel session on fees, Maharashtra's entertainment duty, passes and tokens under RBI's rules, adults-only design, tournaments and the name
+[audit:second-half#58] missing | Risks and rules
+  QUOTE: 48-hour grievance acknowledgement, one-figure total price, no pre-ticked consent, and a written contract with each cafe
+  PROBLEM: The new findings in round2/verify_indian.txt list rule 4(8) as binding today: no cancellation charge on consumers unless the entity bears similar charges when it cancels. That bears directly on keeping a Seat Lock fee, and this row leaves it out.
+  FIX: 48-hour grievance acknowledgement, no cancellation charge unless you bear similar charges, one-figure total price, no pre-ticked consent, and a written contract with each cafe
+[audit:second-half#59] missing | Risks and rules
+  QUOTE: need a lawyer's view
+  PROBLEM: Verdict C14 in round2/verify_gaming.txt ends 'No trademark search was done', and regulation.txt [27] says registers were not checked. The row's detail could suggest a search happened.
+  FIX: need a lawyer's view, as no trademark search was run
+[audit:second-half#60] unclear | Risks and rules
+  QUOTE: A platform collecting payment owes 0.5% TCS
+  PROBLEM: 'Owes' reads like a cost to the platform. Verdict L7 in round2/verify_indian.txt says it must collect TCS, and regulation.txt [18] says it applies to registered suppliers' net taxable supplies.
+  FIX: A platform collecting payment must collect 0.5% TCS on the cafe's sales
+[audit:second-half#61] unclear | Risks and rules
+  QUOTE: Median under 5 a week across 12 venues
+  PROBLEM: The same row and the This week list call 14 lounges (8 + 6). round2/red_team.json says 'at least 12'.
+  FIX: Median under 5 a week across at least 12 venues
+[audit:second-half#62] unclear | Product ideas
+  QUOTE: per-brand hour packs, a rate-card clinic as a sales tool, a ₹14,999 launch pack for new cafes, metered plugs
+  PROBLEM: This conflicts with the report's own plan. The Winning cafes paragraph uses a rate-card rewrite on the first visit, and the Money table turns on the ₹14,999 pack in month 3 or 4, as strategy_operator.json does. Neither is 'later'.
+  FIX: per-brand hour packs, metered plugs
+[audit:second-half#63] unclear | Where the Playo model transfers
+  QUOTE: Console and game terms bar commercial use without consent
+  PROBLEM: Verdict L10 in round2/verify_indian.txt calls consent wording imprecise. Microsoft limits use to personal and non-commercial with no consent route stated, and Steam's bar applies unless expressly permitted. The Rules table already says 'restrict'.
+  FIX: Console and game terms restrict commercial use
+[audit:second-half#64] unclear | Stack implications
+  QUOTE: [MSG91](https://msg91.com/in/pricing/sms) lists ₹0.16 to ₹0.25 per SMS
+  PROBLEM: round2/stack.json says ₹0.25 at 5,000 messages falling to ₹0.16 at 9.6 lakh, plus 18% GST, as a vendor claim. A launch-stage founder pays the top of this range plus tax, and the lower figure needs volume.
+  FIX: [MSG91](https://msg91.com/in/pricing/sms) lists ₹0.25 falling to ₹0.16 per SMS at high volume, plus 18% GST (vendor)
+===== read:founder (98 issues)
+VERDICT: Not ready to hand over yet. The section order works and the pushback is honest, but as the founder I could not picture what I would build or sell in the next 16 days. Fix the bottom line first (undefined squad-first, no reason for a staff app before a player app, ₹1.26 Cr taken from the model it tells me to drop), then the conflicting accounts of Seat Lock and the GTA VI test, then shorthand such as floor, depth, TCS, DLT and KYC.
+[read:founder#1] unclear | Bottom line
+  QUOTE: Build a squad-first product in one city that earns from guaranteed peak seats and new customers, and test it by hand in Pune during the GTA VI launch on 19 November before writing the app.
+  PROBLEM: As the founder, this is the sentence I act on, and I can't. Squad-first is never defined, by hand is never explained, and Pune reads as settled although the draft later admits the city depends on where I can work and that it does not know my city (Why Pune first; What we do not know about you).
+  FIX: Build a product for groups of friends ("squads") in one city, earning from guaranteed peak seats and new customers. Before writing the app, test it by hand on WhatsApp and payment links during the GTA VI launch on 19 November. We suggest Pune, unless you cannot work there.
+[read:founder#2] missing | Bottom line
+  QUOTE: Make the first React Native app a counter tool for cafe staff, and ship the player app once repeat players exist.
+  PROBLEM: This is the biggest pushback on my plan, since I asked for a player booking app, and it is the only one of the three changes with no reason. The reason exists but is scattered: walk-in entry keeps the calendar true (Playo table) and walk-ins move inventory by the minute (The case against).
+  FIX: Make the first React Native app a counter tool for cafe staff. The website already serves first-time players, and seat counts stay true only if staff log walk-ins. Ship the player app once repeat players exist.
+[read:founder#3] misleading | Bottom line
+  QUOTE: India has perhaps 2,000 to 4,000 cafes, and about ₹1.26 Cr a year of revenue is what success looks like. This is a solid small business to run lean, not a venture bet.
+  PROBLEM: ₹1.26 Cr comes from the commission and software table, the model change 3 tells me to drop. The line leaves out that it needs 400 cafes and is a year 3 to 5 figure ((scratch)/round1/market_economics.txt, claim 1), and it hides the ₹3 Cr to ₹5 Cr case that appears only in the money section. Solid is not shown: the draft gives no cost or margin, and its own case against says the prize may be too small.
+  FIX: India has perhaps 2,000 to 4,000 cafes. Success looks like about ₹1.26 Cr a year at 400 cafes, in year 3 to 5. A large player base might lift that to ₹3 Cr to ₹5 Cr. This could be a small business to run lean, not a venture bet.
+[read:founder#4] misleading | Go-to-market, website and money
+  QUOTE: Owner-side lines come to about ₹31,000 per cafe a year, or ₹1.26 Cr at 400 cafes. Adding player fees reaches perhaps ₹3 Cr to ₹5 Cr a year at 50,000 weekly active players, likely 4 to 5 years out.
+  PROBLEM: Three problems. ₹31,000 x 400 is ₹1.24 Cr, and landing on exactly the commission table's ₹1.26 Cr looks like a copy error unless the match is explained. Owner-side is inaccurate: the source's ₹2,600 a month includes about ₹580 of player-paid peak seat fee, and owners pay about ₹1,700 ((scratch)/round2/strategy_operator.json, monetisation). Adding is also wrong: ₹3 Cr to ₹5 Cr is a separate model with a Squad Pass and Off-Peak Pass that appear nowhere in the money table, so I cannot reproduce it, and its 50,000 players is 25% of its own 200,000 regulars ((scratch)/round2/strategy_player.json, monetisation). No cost is given anywhere, though the operator model assumes about ₹1,500 per cafe a month.
+  FIX: Cafe fees plus a small peak seat fee come to about ₹31,000 per cafe a year, or about ₹1.25 Cr at 400 cafes. That nearly matches the commission base case without charging on regulars. Field and support might cost about ₹1,500 per cafe a month (our assumption). A separate player-led model reaches perhaps ₹3 Cr to ₹5 Cr a year at 50,000 weekly active players, likely 4 to 5 years out. That is a quarter of our estimate of regular players nationally, and it counts paid passes not listed above.
+[read:founder#5] misleading | Product ideas, ranked
+  QUOTE: Numbers rank ideas by expected value, and the map shows the order of work: the top-left moves need little code and build the trust and supply that everything else depends on.
+  PROBLEM: Expected value implies a calculation and there is none; the chart's own caption calls placement judgement. The first action in the report (GTA VI, Launch Seats) ranks 11th of 12 and the first React Native build (Counter app) ranks 7th, with no explanation, so I doubt either the ranking or the plan. Top-left moves means nothing unless the chart renders.
+  FIX: Numbers are our judgement of what is worth most, not the build order. Launch Seats ranks 11th but runs first, because its date is fixed and it tests demand cheaply. The Counter app ranks 7th but is the first React Native build, because first player bookings run on the website.
+[read:founder#6] missing | Bottom line
+  QUOTE: 
+  PROBLEM: Nowhere does the report describe the product from a player's side. The flow is split across ideas 1, 2 and 3, a website bullet and a Payments row, so I could not picture what is being sold, or that the seat is still paid at the counter. Add this straight after the opening paragraph.
+  FIX: **What a player sees.** One friend drops a link in the squad's WhatsApp group. Friends tap in with no install and see the price per head. At peak the squad can pay ₹19 to ₹49 for guaranteed seats together. They show a QR on arrival and pay for the seat at the counter.
+[read:founder#7] missing | Bottom line
+  QUOTE: 
+  PROBLEM: Three changes to your plan lists only what changes, so it reads as a rejection. Most of my plan survives, but I learn that only in the Stack section, about 70% of the way down. There is also no single order of work in the text: the ranked ideas, money table and this-week list each imply a different one. Add this after the three changes, and check it against the roadmap chart, which I could not see.
+  FIX: **What stays from your plan.** The aggregator idea, the monorepo, React Native, Next.js, Supabase for starters and NestJS later all hold. **The order of work.** Run hand tests for about 60 days, then build the website and counter app, then the player app once repeat players exist.
+[read:founder#8] unclear | Product ideas, ranked
+  QUOTE: An optional ₹19 to ₹49 per squad on Friday to Sunday evenings, drawn from seats the owner pledges; unsold seats return 3 hours before; ₹10 goes to the cafe
+  PROBLEM: The name Seat Lock is never defined. This cell gives price and mechanics but not what the player gets, and it never says the seat is still paid at the counter, which appears only in the stack's Payments row. I first read it as a booking fee on a prepaid seat.
+  FIX: An optional ₹19 to ₹49 fee per squad that guarantees seats together on Friday to Sunday evenings. The seat itself is paid at the counter. Seats come from a batch the owner pledges, unsold ones return 3 hours before, and ₹10 goes to the cafe
+[read:founder#9] unsupported | Product ideas, ranked
+  QUOTE: [Grace and hold settings](https://www.icafecloud.com/wiki-booking-settings.htm) exist in cafe software; willingness to pay is untested
+  PROBLEM: This is where I stop believing the plan. The report says owners need no help at peak, then asks them to hold peak seats for ₹10, and this cell tests only the player side. The case against puts a 15-minute hold on a ₹100 seat at ₹25 of lost peak time ((scratch)/round2/red_team.json, fifth objection), and the player strategy says paying ₹10 is itself untested ((scratch)/round2/strategy_player.json, assumptions_to_test).
+  FIX: [Grace and hold settings](https://www.icafecloud.com/wiki-booking-settings.htm) exist in cafe software. Neither player willingness to pay nor owner willingness to hold peak seats for ₹10 is tested. A 15-minute hold on a ₹100 seat costs about ₹25
+[read:founder#10] misleading | Go-to-market, website and money
+  QUOTE: Needs no contract and tests whether players pay for certainty
+  PROBLEM: Idea 2 draws seats from ones the owner pledges and pays the cafe ₹10, and idea 3 promises cash if the seat fails. I would not believe a guarantee with no agreement behind it. The source's claim is narrower: no payment split or merchant onboarding, because the cafe only answers a WhatsApp message ((scratch)/round2/strategy_player.json, wedge).
+  FIX: Needs no signed contract or payment split, only a WhatsApp confirmation from the cafe, and tests whether players pay for certainty
+[read:founder#11] unclear | Risks, rules and next steps
+  QUOTE: Sign 10 cafes for a GTA VI pre-sale, and re-check the date after Take-Two's results on 9 November
+  PROBLEM: I cannot tell what I am selling on 19 November. Idea 11 and the test table say pre-sold sessions through links that settle to the cafe; the money table says Seat Lock in week 1 with seats paid at the counter. The wording below allows both, so the author should confirm. Take-Two also needs a word of explanation.
+  FIX: Sign 10 cafes for a GTA VI pre-sale. Sell pre-paid PS5 sessions that settle to the cafe, or a Seat Lock with the seat paid at the counter. Re-check the date after publisher Take-Two's results on 9 November
+[read:founder#12] misleading | Product ideas, ranked
+  QUOTE: The date is confirmed; the size of any spike is unknown
+  PROBLEM: The first thing the report tells me to sell is PS5 sessions for GTA VI, yet its rules table says PSN terms restrict commercial use. No game art does not fix that. This row should carry the risk: the regulation notes say no enforcement was found but the dedicated search could not run ((scratch)/round1/_summaries_and_gaps.txt, regulation gaps).
+  FIX: The date is confirmed; the size of any spike is unknown. PSN terms restrict commercial use. No enforcement turned up, but that search failed
+[read:founder#13] missing | Risks, rules and next steps
+  QUOTE: Book one counsel session on fees, adults-only design, tournaments and the name
+  PROBLEM: The agenda leaves out the one legal question the first test depends on: console terms for the GTA VI pre-sale.
+  FIX: Book one counsel session on fees, adults-only design, tournaments, console terms for the GTA VI pre-sale, and the name
+[read:founder#14] misleading | Risks, rules and next steps
+  QUOTE: Under 140 across 10 cafes in the 14 days from 19 November
+  PROBLEM: This fails if I cannot sign 10 cafes in 16 days, which says nothing about player demand, and the owner test in the same table treats 5 of 20 in 30 days as the pass mark. The source handled this: if fewer cafes sign, hold the bar of 1 per cafe per day ((scratch)/round2/red_team.json, kill_criteria). The draft dropped it.
+  FIX: Under 1 per cafe per day in the 14 days from 19 November, or 140 across 10 cafes
+[read:founder#15] missing | Risks, rules and next steps
+  QUOTE: 
+  PROBLEM: The money table says Seat Lock starts in week 1 and tests whether players pay for certainty, and first-visit fees start in month 1, yet neither has a row in Tests that decide this. Both strategy files set thresholds ((scratch)/round2/strategy_player.json, launch_plan; (scratch)/round2/strategy_operator.json, wedge). Add these two rows to the table.
+  FIX: | Paid Seat Locks around the GTA VI launch | Under 50: drop paid certainty and keep the Cafe Report and group desk | Sell at ₹19, ₹39 and ₹49, varying the price by week |
+| First-visit passes redeemed | Under 60 across 3 cafes in 14 days: lead with the group desk instead | Count scans at the counter |
+[read:founder#16] unclear | Risks, rules and next steps
+  QUOTE: Thresholds are judgement calls tied to the base case.
+  PROBLEM: The column says Stop if, but stop what? In the source the consequence differs by row: stop the marketplace plan, change the supply model, drop the peak thesis or tighten venue rules ((scratch)/round2/red_team.json, kill_criteria). Read flat, a miss on turn-aways looks as final as a miss on bookings.
+  FIX: Thresholds are judgement calls tied to the base case. What stop means differs by row. The lounge-call, paid-booking and repeat-booking rows stop the marketplace plan. The owner row changes how you sign cafes, and the turn-away row drops peak seats. The GTA VI row counts strongly against a player app. The honoured row means stricter venue rules or tighter control of seats.
+[read:founder#17] misleading | Risks, rules and next steps
+  QUOTE: Under 33%; at 33% to 50%, charge on first bookings only
+  PROBLEM: Charging on first bookings only is already the plan (change 3 and the money table), so this branch changes nothing. It is left over from a test written against per-booking commission ((scratch)/round2/red_team.json, kill_criteria).
+  FIX: Under 33%
+[read:founder#18] misleading | Risks, rules and next steps
+  QUOTE: Under 30% by day 60: stop charging cafes
+  PROBLEM: Same leftover. Under the recommended pricing a cafe pays nothing on a booker who is not new, so owners no longer pay for their own customers, which was the source's reason for this rule. A low share now means the first-visit fee earns little.
+  FIX: Under 30% by day 60: cafe fees will earn little, so lean on player fees and groups
+[read:founder#19] unclear | Risks, rules and next steps
+  QUOTE: Median under 5 a week across 12 venues; 14 or more reopens the question
+  PROBLEM: Reopens which question? The source says the demand objection ((scratch)/round2/red_team.json, kill_criteria). Also, 8 Playo plus 6 District lounges is 14, so 12 venues looks like a sum error unless it says at least 12 must answer, and the second 14 is a different number.
+  FIX: Median under 5 a week across at least 12 venues. At 14 or more a week, booking demand is stronger than this report assumes
+[read:founder#20] unclear | Bottom line
+  QUOTE: The first test is cheap and has a deadline: calling lounges already on Playo and District will show within days whether platform bookings are real.
+  PROBLEM: Calling lounges has no deadline; the deadline belongs to the GTA VI pre-sale. The headline sentence also names GTA VI as the test, so I have two first tests and the wrong one carries the clock.
+  FIX: Two tests come first. Calling lounges already on Playo and District takes about two days and shows whether platform bookings are real. The GTA VI pre-sale has the deadline: 19 November is 16 days away.
+[read:founder#21] misleading | Bottom line
+  QUOTE: A plain "Playo for gaming cafes" already exists and has not taken off, so do not build that.
+  PROBLEM: This would be my first objection: the specialists are young. Olympus launched in late 2024, Console Gaming in January 2025 and the others later ((scratch)/round1/india_competitors.txt), while Playo took a decade. Low downloads are a fair warning, but the claim should show how young these apps are.
+  FIX: A plain "Playo for gaming cafes" already exists. The apps trying it have stayed small since the first launched in late 2024, so do not build just that.
+[read:founder#22] wrong | Go-to-market, website and money
+  QUOTE: Pune has the only disclosed cafe count, eight multi-outlet brands
+  PROBLEM: The draft contradicts itself: Market reality gives two disclosed counts, and the table directly above this sentence lists Gurugram 6. See also (scratch)/round2/verify_market.txt, M1.
+  FIX: Pune has the largest disclosed cafe count, eight multi-outlet brands
+[read:founder#23] misleading | Product ideas, ranked
+  QUOTE: no listing without consent
+  PROBLEM: Idea 4 publishes an audit of every one of 103 cafes, and the website builds one page per audited cafe. A promise of no listing without consent cannot stand beside that, and an owner would call it out. The sources resolve it: no bookable or payable page without a signature, with information pages open to 24-hour fixes or takedown ((scratch)/round2/strategy_operator.json, not_to_build; (scratch)/round2/strategy_player.json, The Cafe Report).
+  FIX: no bookable page without consent
+[read:founder#24] missing | Product ideas, ranked
+  QUOTE: and a dated rate-card photo
+  PROBLEM: Pairs with the charter fix: idea 4 should say how an unsigned cafe gets an error fixed or a page removed. Same sources as the charter item.
+  FIX: and a dated rate-card photo. Owners get 24-hour fixes or takedown
+[read:founder#25] misleading | Product ideas, ranked
+  QUOTE: On [Hash's own model](https://www.hashforgamers.com/blog/is-gaming-cafe-profitable-india), 10% of all revenue is about ₹11,500 a month against about ₹9,600 profit at 30% occupancy.
+  PROBLEM: I would push back here: no aggregator takes 10% of all revenue, only of app bookings. The fact-check calls this a stress case and gives the fairer figure, ₹1,725 if 15% of revenue comes through the app ((scratch)/round2/verify_market.txt, M11). Without that the comparison looks rigged, and I am left to work out that the fee exceeds the profit.
+  FIX: On [Hash's own model](https://www.hashforgamers.com/blog/is-gaming-cafe-profitable-india), a stress case of 10% on all revenue is about ₹11,500 a month, above the ₹9,600 profit at 30% occupancy. If only 15% of revenue came through the app, the fee would be about ₹1,725.
+[read:founder#26] misleading | Risks, rules and next steps
+  QUOTE: **The case against, from an independent red team.**
+  PROBLEM: Independent overstates it: this is one AI agent in the same run, and its file calls itself deliberately one-sided ((scratch)/round2/red_team.json, blind_spots). Its target was Playo for gaming cafes as commonly pitched, not the plan in this report, so I cannot tell which objections still apply. The customer-value bullet, for example, is about a commission I have already been told to drop.
+  FIX: **The case against, from a separate AI agent told to argue against a plain booking aggregator.** This plan answers the commission points, but the small prize and weak booking demand still apply.
+[read:founder#27] misleading | Sources and how this was checked
+  QUOTE: Nine researchers gathered the evidence, then five independent fact-checkers tested 64 key claims: 22 held as stated, 42 needed correcting, and none was flatly contradicted.
+  PROBLEM: I, or anyone I forward this to, will assume nine people were hired. These were AI agents in one run, whose notes refer to a search budget shared across all agents ((scratch)/round1/_summaries_and_gaps.txt). Change One researcher and A few researchers in the method notes to match. The counts themselves are right: 22 and 42 of 64.
+  FIX: Nine AI research agents gathered the evidence. Five separate AI fact-checking agents then tested 64 key claims: 22 held as stated, 42 needed correcting, and none was flatly contradicted.
+[read:founder#28] misleading | Product ideas, ranked
+  QUOTE: the player pays by UPI and walks in within 7 days; a ₹30 fee applies only when scanned
+  PROBLEM: The rules table says do not pool cafe money and the stack warns Route may be closed to a new company, so how can a player pay by UPI in month 1? The operator strategy has the answer and the draft dropped it: the player pays the cafe's own UPI and the ₹30 is invoiced, so the platform holds no money ((scratch)/round2/strategy_operator.json, launch_plan). The cell also never says who pays the ₹30.
+  FIX: the player pays the cafe's own UPI and walks in within 7 days; the cafe owes ₹30 only when the pass is scanned
+[read:founder#29] unclear | Go-to-market, website and money
+  QUOTE: Use phone OTP and UPI on the web, send the QR on WhatsApp, and offer the app after the first visit through a small banner, since [Google discourages full-screen overlays](https://developers.google.com/search/docs/appearance/avoid-intrusive-interstitials).
+  PROBLEM: The stack table says launch with seats paid at the counter. This bullet reads as if seats are paid by UPI on the web, so the two sections seem to disagree.
+  FIX: Use phone OTP and UPI on the web for fees and passes, and send the QR on WhatsApp. Seats stay paid at the counter until split payments are approved. Offer the app after the first visit through a small banner, since [Google discourages full-screen overlays](https://developers.google.com/search/docs/appearance/avoid-intrusive-interstitials).
+[read:founder#30] unsupported | Stack implications
+  QUOTE: on station and time range rejects overlaps from every writer, walk-ins included
+  PROBLEM: As a technical reader I stop here. The main argument for Postgres needs every booking and walk-in to have a station and an end time, yet the report says sessions are open-ended with time added at the desk, and that version one shows counts by category. Nothing reconciles these: the stack notes never mention open-ended sessions and say the constraint sketch was not run ((scratch)/round2/stack.json, not_checked).
+  FIX: on station and time range rejects overlaps from every writer, walk-ins included. This needs every session assigned to a station with an end time, even if players see only counts. Open-ended sessions need a rule that is not yet worked out
+[read:founder#31] unclear | Playo teardown
+  QUOTE: Copy the short flow; a station replaces the court, and a game or spec tier replaces the sport
+  PROBLEM: This says players pick a station. What not to build says no station-level seat maps in version one and to show counts by category, so I cannot tell whether a player chooses a machine. Reworded to match the later advice; the author should confirm.
+  FIX: Copy the short flow; a category such as PS5 or 240Hz PC replaces the court, and staff assign the station at the counter
+[read:founder#32] unsupported | Where the Playo model transfers and where it breaks
+  QUOTE: This is also why Playo's most copied feature is the wrong one to copy first.
+  PROBLEM: The feature is never named, and no file in the notes or either research round says it is the most copied. The evidence that follows is about stranger matching.
+  FIX: This is also why finding strangers to play with, the obvious Playo feature to clone, is the wrong one to copy first.
+[read:founder#33] misleading | Product ideas, ranked
+  QUOTE: [better rigs](https://refill24x7.com/offers) already earn 30% to 57% more at two Pune cafes
+  PROBLEM: Earn reads as revenue. The figures are list-price premiums at single venues: a 57% dearer day pass at Refill24x7 and a 30% dearer rate at Intencity, with no booking effect measured ((scratch)/round1/marketplace_playbook.txt).
+  FIX: [better rigs](https://refill24x7.com/offers) already cost players 30% to 57% more at two Pune cafes
+[read:founder#34] misleading | Playo teardown
+  QUOTE: Fees barely register: of 500 Playo reviews, one complains about the convenience fee and one about a cancellation charge.
+  PROBLEM: I read this as permission to charge players, the plan's first money line. The fact-check warns against that: rare fee complaints do not show the fee is accepted ((scratch)/round2/verify_playo.txt, P11). One Console Gaming review also objects to a per-booking fee ((scratch)/round2/verify_gaming.txt, C4).
+  FIX: Fees rarely come up: of 500 Playo reviews, one complains about the convenience fee and one about a cancellation charge. That does not prove players accept them, and one Console Gaming review objects to a per-booking fee.
+[read:founder#35] misleading | Bottom line
+  QUOTE: in India have roughly doubled in a year, and rival websites are weak.
+  PROBLEM: Rival is too broad. Playo and District are the rivals named earlier in this list, and Playo has server-rendered pages with about 60% of visits from organic search. The evidence in the website section covers two specialists only: Console Gaming and GoPlaya. Make the same change to rival sites are weak there.
+  FIX: in India have roughly doubled in a year, and the specialist apps' websites are weak, unlike Playo's.
+[read:founder#36] misleading | Product ideas, ranked
+  QUOTE: a rate-card clinic as a sales tool, a ₹14,999 launch pack for new cafes, 
+  PROBLEM: Both are filed under later, yet Winning cafes uses a rate-card rewrite on the first visit and the money table starts the launch pack in month 3 or 4. Cut them from this list.
+  FIX: 
+[read:founder#37] missing | Where the Playo model transfers and where it breaks
+  QUOTE: Many students and minors (not measured) | Start adults-only
+  PROBLEM: The report's most expensive choice gets two words. If many customers are minors, adults-only cuts demand: the red team calls teens and students the core customer per guides, though no share is measured. The player strategy has a rule for this and the draft dropped it ((scratch)/round2/strategy_player.json, assumptions_to_test).
+  FIX: Many students and minors (not measured) | Start adults-only and tally ages at the counter. If under-18s exceed about 35% of spend, add parent-booked accounts sooner
+[read:founder#38] missing | Product ideas, ranked
+  QUOTE: Seat not ready within 15 minutes: fee back plus ₹100 by UPI, and a named human on duty at weekend peak
+  PROBLEM: My first question: how does a ₹19 to ₹49 fee, less ₹10 to the cafe, pay for a ₹100 refund? The arithmetic exists in the player strategy and was left out ((scratch)/round2/strategy_player.json, Seat Lock evidence).
+  FIX: Seat not ready within 15 minutes: fee back plus ₹100 by UPI, and a named human on duty at weekend peak. On a ₹39 lock, payouts cost about ₹4 a lock at 3% failure and ₹14 at 10% (our arithmetic)
+[read:founder#39] unclear | Bottom line
+  QUOTE: Drop commission on every booking: charge players for guaranteed peak seats, charge cafes only for new customers, and take 0% on their regulars.
+  PROBLEM: I never proposed a commission; it comes with copying Playo. I also want the reason in one clause here, rather than waiting for the transfer section.
+  FIX: Do not copy Playo's commission on every booking, which would earn about ₹17 to ₹35 a booking and tax a cafe's own regulars. Charge players for guaranteed peak seats, charge cafes only for new customers, and take 0% on their regulars.
+[read:founder#40] unclear | Playo teardown
+  QUOTE: Only about half of the 34 visible listings are gaming-led; the rest are snooker halls and sports venues with a console add-on.
+  PROBLEM: I would stop and add this up. The bottom line says about 60, the cities here sum to 44, and now there are 34. All three are right but nothing explains them: 60 covers 15 city pages, 34 is what loads without Show More, and results overlap between nearby cities ((scratch)/round2/verify_playo.txt, P1 and new findings).
+  FIX: Across all 15 city pages with listings the total is about 60, though results overlap between nearby cities. Of the 34 that load without clicking Show More, only about half are gaming-led. The rest are snooker halls and sports venues with a console add-on.
+[read:founder#41] unclear | What is already out there
+  QUOTE: Bands understate the gaps: Console Gaming's page data carries an undocumented 44,281 installs.
+  PROBLEM: Which gaps? It could mean Console Gaming is further behind Playo, when the point is that a band label is a minimum. This is also my only answer to how 19K+ monthly actives fit a 10K+ band, so it needs to be clear ((scratch)/round2/verify_gaming.txt, C3).
+  FIX: Bands are minimums, not counts: data on Console Gaming's store page, which Google neither displays nor documents, shows 44,281 installs.
+[read:founder#42] unclear | Market reality
+  QUOTE: Scaling Pune by census share gives about 1,900 to 3,800 cafes with 10+ reviews, resting on one city and a judgement call; the often-quoted
+  PROBLEM: This is the source of the headline 2,000 to 4,000, and I cannot follow or test it. The method and the judgement call are hidden: Pune is about 1.3% of urban India, and the estimate assumes it has 2 to 4 times its share ((scratch)/round2/verify_market.txt, M2).
+  FIX: Pune holds about 1.3% of India's urban population (2011 census). If it has 2 to 4 times its share of cafes, which is our judgement, India has about 1,900 to 3,800 with 10+ reviews. This rests on one city. The often-quoted
+[read:founder#43] unclear | Where the Playo model transfers and where it breaks
+  QUOTE: Expect ₹17 to ₹35 a booking at 10%, so stop relying on commission
+  PROBLEM: The neighbouring cell says ₹100 to ₹120 an hour, so I cannot get to ₹17 to ₹35. It comes from a ₹170 to ₹350 order ((scratch)/round2/red_team.json, verdict), and the number is reused in the risks section.
+  FIX: Expect ₹17 to ₹35 a booking at 10% on a ₹170 to ₹350 order, so stop relying on commission
+[read:founder#44] unclear | Bottom line
+  QUOTE: Nobody in India has both player reach and control of the cafe floor.
+  PROBLEM: Floor is used for several things in this report: the room, live machine data, the counter app and total spend. The first use must say what it means. Here it means software that knows and sets which machines are in use, as Olympus and Hash do.
+  FIX: Nobody in India has both many players and live control of a cafe's machines, meaning software that knows which are free.
+[read:founder#45] unclear | What is already out there
+  QUOTE: **Where this has worked, the floor owner built it.**
+  PROBLEM: Cryptic; it reads like the cafe's landlord. The paragraph means the billing software vendor (LANGAME, PICAPlay) or the chain itself (Kaikatsu).
+  FIX: **Where this has worked, the cafes' software vendor or the chain itself built it.**
+[read:founder#46] unclear | Playo teardown
+  QUOTE: Table stakes; give the floor tool away
+  PROBLEM: Floor tool is undefined, and the same product is called counter tool in the bottom line and Counter app in the ideas table. Use one name.
+  FIX: Table stakes; give the counter app away
+[read:founder#47] unclear | Market reality
+  QUOTE: Total floor spend is perhaps ₹240 Cr to ₹360 Cr a year, on 2,000 cafes at ₹1 lakh to ₹1.5 lakh a month (our estimate).
+  PROBLEM: Floor spend is shorthand for what customers pay cafes in total.
+  FIX: Customers perhaps spend ₹240 Cr to ₹360 Cr a year in total at cafes. That assumes 2,000 cafes at ₹1 lakh to ₹1.5 lakh a month (our estimate).
+[read:founder#48] unclear | Product ideas, ranked
+  QUOTE: They need live floor data, and no measured uplift was found. Show counts by category until you control the floor.
+  PROBLEM: Floor twice in two sentences, plus uplift, and no hint of how I would ever control the floor.
+  FIX: They need live data on every machine, and no source measured any rise in bookings. Show counts by category, such as PCs free, until the counter app or cafe software supplies that data.
+[read:founder#49] unclear | What is already out there
+  QUOTE: India has plenty of attempts and no winner: demand sits with platforms that treat gaming as a side shelf, and depth sits with small specialists and software vendors.
+  PROBLEM: Depth has no plain meaning here; it means cafe-specific features such as station control and walk-in handling. Demand is shorthand for players, and the sentence is too long.
+  FIX: India has plenty of attempts and no winner. The players sit with platforms that treat gaming as a side shelf. Cafe-specific features sit with small specialists and software vendors.
+[read:founder#50] unclear | What is already out there
+  QUOTE: the specialists know the floor but have few players. LANGAME shows that corner can be filled, by a company that owns the club software.
+  PROBLEM: That corner refers to a chart I cannot see in this draft, and LANGAME has not been introduced. The text should make sense without the chart.
+  FIX: the specialists know how cafes run but have few players. LANGAME, a Russian booking app, shows one company can have both, because it also sells the software clubs run on.
+[read:founder#51] unclear | Stack implications
+  QUOTE: A DLT-registered Indian SMS vendor through Supabase's [Send SMS hook](https://supabase.com/docs/guides/auth/auth-hooks/send-sms-hook)
+  PROBLEM: DLT is undefined, and it is not only a vendor feature: the business registers too, and the ₹5,000 in the next cell is mine to pay ((scratch)/round2/stack.json, OTP option).
+  FIX: An Indian SMS vendor through Supabase's [Send SMS hook](https://supabase.com/docs/guides/auth/auth-hooks/send-sms-hook), plus your own registration on DLT, India's required registry for business SMS senders
+[read:founder#52] unclear | Stack implications
+  QUOTE: Switching gateways means redoing every cafe's KYC, so keep your own ledger in integer paise.
+  PROBLEM: KYC is undefined, and without it I miss why switching is expensive ((scratch)/round2/stack.json, hard_to_reverse_decisions).
+  FIX: Switching gateways means redoing every cafe's KYC, the identity and bank checks a gateway runs before paying out. So keep your own ledger in integer paise.
+[read:founder#53] unclear | Risks, rules and next steps
+  QUOTE: A platform collecting payment owes 0.5% TCS and must register regardless of turnover; seat time looks like 18%
+  PROBLEM: TCS is undefined, and seat time looks like 18% does not say 18% of what ((scratch)/round2/verify_indian.txt, L7).
+  FIX: A platform collecting payment must collect 0.5% tax at source (TCS) on sales and register for GST at any turnover. GST on seat time looks like 18%
+[read:founder#54] unclear | Risks, rules and next steps
+  QUOTE: CCPA fined Zepto ₹7 lakh over charges added at checkout
+  PROBLEM: A technical reader will take CCPA for California's privacy law.
+  FIX: India's Central Consumer Protection Authority (CCPA) fined Zepto ₹7 lakh over charges added at checkout
+[read:founder#55] unclear | Risks, rules and next steps
+  QUOTE: [DPDP Rules](https://dpdprules.org/timeline), from about 13 May 2027
+  PROBLEM: The acronym is never spelled out, and this rule is behind the adults-only call.
+  FIX: [Digital Personal Data Protection (DPDP) Rules](https://dpdprules.org/timeline), from about 13 May 2027
+[read:founder#56] unclear | Stack implications
+  QUOTE: Apply to [Razorpay Route](https://razorpay.com/docs/payments/route/) and [Cashfree Easy Split](https://www.cashfree.com/docs/payments/split/faq) in week 1
+  PROBLEM: A week-1 task, and the draft never says what these products do. I need that to understand why the turnover test matters.
+  FIX: Apply in week 1 to [Razorpay Route](https://razorpay.com/docs/payments/route/) and [Cashfree Easy Split](https://www.cashfree.com/docs/payments/split/faq), gateway products that split each payment and send the cafe its share directly
+[read:founder#57] unclear | Playo teardown
+  QUOTE: A booking-first app should plan for the Hudle and KheloMore pattern, and staff refunds and support from day one.
+  PROBLEM: Hudle and KheloMore are not introduced anywhere, and pattern points at a chart I cannot see. The meaning is that on these rivals, refund and support complaints lead rather than bugs ((scratch)/round2/verify_playo.txt, P11; research_notes/Gaming cafe booking aggregator research/playo_sentiment.md).
+  FIX: Hudle and KheloMore, two sports-booking rivals, draw more low-star complaints about refunds and support than about bugs. A booking-first app should expect the same, so staff refunds and support from day one.
+[read:founder#58] unclear | Playo teardown
+  QUOTE: Hosting, Pay & Join, Playo-run GameTime, chat, groups, five-level peer ratings
+  PROBLEM: A list of feature names with no explanation. The next table says to copy GameTime without saying what it is (research_notes/Gaming cafe booking aggregator research/playo_product.md, GameTime section).
+  FIX: Player-hosted games, Pay & Join (paying confirms your spot), GameTime (Playo books the venue and sells single spots), chat, groups, five-level peer ratings
+[read:founder#59] unclear | Playo teardown
+  QUOTE: Copy GameTime as hosted squad nights in quiet hours
+  PROBLEM: Squad Night already means something else in idea 1, a planning link aimed at peak, and quiet hours are weekday mornings and afternoons, so nights contradicts itself. No ranked idea does this, so I cannot tell if it is part of the plan.
+  FIX: Later, try staff-hosted open sessions that fill quiet hours
+[read:founder#60] unclear | Playo teardown
+  QUOTE: per [Inc42](https://inc42.com/company/playo/financials/), an aggregator; the filings themselves were not seen.
+  PROBLEM: In a report about booking aggregators, aggregator here means something else, and I misread it. The fact-check's point is that the figures come through this site, not from filings seen directly ((scratch)/round2/verify_playo.txt, P6).
+  FIX: per [Inc42](https://inc42.com/company/playo/financials/), a company-data site. We did not see the filings themselves.
+[read:founder#61] unclear | Risks, rules and next steps
+  QUOTE: [godofgaming.com](https://rdap.verisign.com/com/v1/domain/godofgaming.com) is registered, new .in names containing gaming look blocked by the registry, a [US shop](https://godofgamingshop.com/pages/about-us) uses it, and Sony's God of War plus the religious-feelings bar need a lawyer's view
+  PROBLEM: The report never says which name. My request did not mention one; God of Gaming comes from this repo. Religious-feelings bar is cryptic: it means the trademark bar on marks likely to hurt religious feelings ((scratch)/round2/red_team.json, name objection).
+  FIX: God of Gaming, this repo's name, is not clear to use. [godofgaming.com](https://rdap.verisign.com/com/v1/domain/godofgaming.com) is registered, new .in names containing gaming look blocked by the registry, and a [US shop](https://godofgamingshop.com/pages/about-us) trades under it. Sony's God of War and the trademark bar on marks that hurt religious feelings need a lawyer's view
+[read:founder#62] unclear | Product ideas, ranked
+  QUOTE: Parental consent rules start in May 2027, and a [Kalyan police raid](https://www.freepressjournal.in/mumbai/kalyan-police-raid-illegal-joystick-jungle-game-zone-arrest-three-and-rescue-minors-skipping-classes) and a [political assault](https://www.theweek.in/wire-updates/national/2025/07/30/bom4-mh-mns-assault.html) show the local risk.
+  PROBLEM: A political assault is alarming and says nothing about what happened. The sources describe a local party leader slapping a gaming zone employee over students in uniform, and a raid that found minors skipping classes ((scratch)/round2/strategy_operator.json, School-Hours and Licence Kit; (scratch)/round2/verify_indian.txt, L8).
+  FIX: Parental consent rules start in May 2027. Two Kalyan incidents show the local risk. A [police raid](https://www.freepressjournal.in/mumbai/kalyan-police-raid-illegal-joystick-jungle-game-zone-arrest-three-and-rescue-minors-skipping-classes) found minors skipping classes, and a party leader [slapped a gaming zone employee](https://www.theweek.in/wire-updates/national/2025/07/30/bom4-mh-mns-assault.html) over students in uniform.
+[read:founder#63] unclear | What is already out there
+  QUOTE: **One to watch.** An unnamed Mumbai cafe app is [listed for sale](https://www.smergers.com/business/profitable-video-games-store-for-sale-in-mumbai-india/r5dff/) at ₹50 Cr, claiming 15,000+ downloads and 14+ locations. These are seller claims, but no venture round for a cafe booking aggregator turned up either.
+  PROBLEM: One to watch does not say why, and but ... either does not follow. An unnamed listing is not something I can watch. The useful finding is that nobody has raised venture money. Keep the listing unnamed: the fact-check warns against tying it to a rival without asking first ((scratch)/round2/verify_gaming.txt, new findings).
+  FIX: **Funding.** No venture round for a cafe booking aggregator turned up. An unnamed Mumbai cafe app is [listed for sale](https://www.smergers.com/business/profitable-video-games-store-for-sale-in-mumbai-india/r5dff/) at ₹50 Cr, claiming 15,000+ downloads and 14+ locations, but these are unverified seller claims.
+[read:founder#64] unclear | Product ideas, ranked
+  QUOTE: The strongest ideas fix the timing mismatch and the trust gap, and most can ship by hand first.
+  PROBLEM: Trust gap appears here for the first time and is never defined; timing mismatch was described earlier but not named.
+  FIX: The strongest ideas fix two problems. Players want peak seats while owners want empty hours filled. And players cannot tell what a cafe has or whether a booking will hold. Most ideas can ship by hand first.
+[read:founder#65] unclear | Product ideas, ranked
+  QUOTE: a [cited analysis](https://en.wikipedia.org/wiki/Groupon) found only about 20% of Groupon buyers returned at full price
+  PROBLEM: It sits in the Evidence column as if it supports the idea, but it is a warning that deal buyers rarely come back. Cited analysis also hides that the link is Wikipedia.
+  FIX: as a caution, an [analysis cited on Wikipedia](https://en.wikipedia.org/wiki/Groupon) found only about 20% of Groupon buyers returned at full price
+[read:founder#66] unclear | Go-to-market, website and money
+  QUOTE: Owners pay only when someone turns up, the pattern at [Treatwell](https://www.treatwell.co.uk/partners/pricing/), [Mindbody](https://www.mindbodyonline.com/business/pricing) and [Booksy](https://biz.booksy.com/en-us/pricing)
+  PROBLEM: These names are unexplained, and the comparison omits what the fact-check flagged: they are beauty and wellness platforms that also charge for software ((scratch)/round2/verify_marketplace.txt, B2 and new findings).
+  FIX: Owners pay only when someone turns up, the pattern at beauty and wellness platforms [Treatwell](https://www.treatwell.co.uk/partners/pricing/), [Mindbody](https://www.mindbodyonline.com/business/pricing) and [Booksy](https://biz.booksy.com/en-us/pricing), which also charge for software
+[read:founder#67] unclear | Product ideas, ranked
+  QUOTE: An 11 PM WhatsApp note on sessions, expected against declared cash, discounts, deleted sessions and rupees by channel, including ours
+  PROBLEM: It lists what is in the note but not why an owner wants it. The operator thesis gives the reason: proof of where takings went ((scratch)/round2/strategy_operator.json, thesis).
+  FIX: An 11 PM WhatsApp note showing the owner where the day's takings went. It covers sessions, expected against declared cash, discounts, deleted sessions and rupees by channel, including ours
+[read:founder#68] unclear | Product ideas, ranked
+  QUOTE: Price in weeks; an honour record takes longer
+  PROBLEM: Honour record, and honour rate in the website section, are never defined.
+  FIX: The price in weeks; a public record of bookings honoured takes longer
+[read:founder#69] unclear | Go-to-market, website and money
+  QUOTE: installed games in plain text and honour rate.
+  PROBLEM: The same undefined term, on the page a player actually sees.
+  FIX: installed games in plain text and the share of paid bookings it honoured.
+[read:founder#70] unclear | What is already out there
+  QUOTE: **Cafe software is a second front, priced near zero.**
+  PROBLEM: A newcomer does not know what this software does, and the report never says.
+  FIX: **Cafe billing software, which runs timers and payments at the counter, is a second front, priced near zero.**
+[read:founder#71] unclear | Go-to-market, website and money
+  QUOTE: Do not depend on Reserve with Google: [Appointments](https://developers.google.com/actions-center) offers only Redirect and Offers, and its [merchant table](https://developers.google.com/actions-center/verticals/appointments/redirect/policies/platform-policies) lists no recreation category, though Google says the table is not exhaustive.
+  PROBLEM: It reads like Google's product docs. Redirect and Offers mean nothing to me; the point is simply not to wait for this.
+  FIX: Do not plan on Reserve with Google. Its [appointments product](https://developers.google.com/actions-center) now mainly sends users to your own site, and its [merchant table](https://developers.google.com/actions-center/verticals/appointments/redirect/policies/platform-policies) lists no recreation category. Google says that table is not exhaustive, so a later application is possible.
+[read:founder#72] unclear | Go-to-market, website and money
+  QUOTE: and the [Play Install Referrer](https://developer.android.com/google/play/installreferrer) on Android, because [Firebase Dynamic Links](https://firebase.google.com/support/dynamic-links-faq) were set to shut down in August 2025. On iOS, resume by phone number after sign-in.
+  PROBLEM: Were set to shut down reads oddly 14 months after the date, and resume by phone number is cryptic ((scratch)/round2/verify_marketplace.txt, B4). I also said build detail comes later, so consider moving this bullet to the stack table.
+  FIX: and the [Play Install Referrer](https://developer.android.com/google/play/installreferrer) on Android. Google scheduled [Firebase Dynamic Links](https://firebase.google.com/support/dynamic-links-faq) to shut down from August 2025. iOS has no install referrer, so pick up the plan by phone number after sign-in (untested).
+[read:founder#73] unclear | Stack implications
+  QUOTE: docs do not mention it; about 10,000 pages cost about $40 a month at 200,000 views (estimate)
+  PROBLEM: It has no clear referent, and 10,000 pages looks wrong beside Pages only where real inventory exists and 103 Pune cafes. The figure is a cost ceiling, so say so.
+  FIX: docs do not mention incremental regeneration. Even about 10,000 pages at 200,000 views would cost only about $40 a month (estimate)
+[read:founder#74] unclear | Stack implications
+  QUOTE: needs a fixed slot grid and the rule in every writer
+  PROBLEM: The rule has not been named in this row. Firebase was one of my options, so the reason to reject it should be plain.
+  FIX: needs a fixed time grid, and the no-overlap rule must live in all code that writes bookings
+[read:founder#75] unclear | Stack implications
+  QUOTE: Start on Supabase Postgres in Mumbai with no separate server, and add NestJS only when a named trigger fires.
+  PROBLEM: I proposed this stack, so open by saying it holds. Named trigger is unexplained until several paragraphs later.
+  FIX: Your stack broadly holds. Start on Supabase Postgres in Mumbai with no separate server, and add NestJS only when you hit a trigger listed below.
+[read:founder#76] unclear | Risks, rules and next steps
+  QUOTE: a 30-day prior price and helpline convergence
+  PROBLEM: Government wording that means nothing to me ((scratch)/round2/verify_indian.txt, L1).
+  FIX: a prior price set at the lowest of the past 30 days, and a link to the National Consumer Helpline
+[read:founder#77] unclear | Risks, rules and next steps
+  QUOTE: If the first gate fails on player demand but owners still pay for groups or quiet-hour customers, lead with those and stay small.
+  PROBLEM: First gate is defined only in the roadmap chart, which I could not see.
+  FIX: If the first tests fail on player demand but owners still pay for groups or quiet-hour customers, lead with those and stay small.
+[read:founder#78] unclear | Risks, rules and next steps
+  QUOTE: **This week.**
+  PROBLEM: The one list with a 16-day clock sits after a 13-row legal table, about 95% of the way down. Move it to straight after the bottom line. It is also seven jobs, including 20 visits and 10 signed cafes, for someone who may be working alone, so say what to drop.
+  FIX: **This week, in priority order.** Only the GTA VI pre-sale has a hard date, so drop from the bottom if time runs short.
+[read:founder#79] style | Risks, rules and next steps
+  QUOTE: - [ ] Run a Google Places count for two more cities, using the Pune rules
+  PROBLEM: Cut from this week. It does not affect the Pune test or the GTA VI date, and the Pune rules is unexplained. If kept for later, say the same filters as the Pune count.
+  FIX: 
+[read:founder#80] unclear | Risks, rules and next steps
+  QUOTE: **What we do not know about you.** Your runway, team, city and local relationships could change this advice. Owning a cafe, a creator audience or a campus network would ease the cold start considerably.
+  PROBLEM: The whole plan, Pune especially, depends on this, and it is the last thing before the sources. Move it to directly under the bottom line. Cold start is also jargon.
+  FIX: **What we do not know about you.** Your runway, team, city and local relationships could change this advice. Owning a cafe, a creator audience or a campus network would make the first cafes and players much easier to win.
+[read:founder#81] unclear | Risks, rules and next steps
+  QUOTE: **Rules that shape the product.** This is issue-spotting from public sources, not legal advice; our readings need counsel.
+  PROBLEM: Thirteen rows with no triage is where I would stop reading. I need to know which touch the hand-run sales in the next 16 days. The What to do column already implies the split, so say it.
+  FIX: **Rules that shape the product.** This is issue-spotting from public sources, not legal advice; our readings need counsel. We read six rows as touching the first hand-run sales: 2020 E-Commerce Rules, drip pricing, payment aggregator rules, GST, game licences and the name. The rest shape the first release.
+[read:founder#82] missing | Bottom line
+  QUOTE: 
+  PROBLEM: The draft mixes words for the same things: cafe, lounge, venue, centre and club; station, seat, machine and PC; quiet, empty and dead hours. A newcomer cannot tell whether they differ. One line near the top saves many inline glosses. TCS, DLT, KYC, floor, depth and Seat Lock have their own fixes in this list; ISR and corridor do not appear in this draft, so need nothing.
+  FIX: **Terms used here.** A squad is a group of friends who play together. A lounge or centre is a gaming cafe. A station is one PC or console seat. Peak means Friday to Sunday evenings. Quiet or dead hours are weekday mornings and afternoons.
+[read:founder#83] unclear | Bottom line
+  QUOTE: [District](https://www.district.in/activities/esports-in-delhi-ncr) sells tickets at 13 or more PC and console lounges, [Playo](https://playo.co/venues/hyderabad/sports/play_station) shows about 60 Play Station listings, and at least eight specialists exist.
+  PROBLEM: The first mention of District gives no hint that it is Zomato's going-out app; the table says so much later. The fix also splits an overlong sentence.
+  FIX: [District](https://www.district.in/activities/esports-in-delhi-ncr), Zomato's going-out app, sells tickets at 13 or more PC and console lounges. [Playo](https://playo.co/venues/hyderabad/sports/play_station) shows about 60 Play Station listings, and at least eight specialists exist.
+[read:founder#84] style | Playo teardown
+  QUOTE: Techmash Solutions of Bengaluru was incorporated in July 2014 and shipped its iOS app in July 2015; CEO Gauravjeet Singh is one of five co-founders
+  PROBLEM: Techmash is never linked to Playo, and the iOS date and co-founder count do nothing for my decision. Cut to who runs it.
+  FIX: Playo's company is Techmash Solutions of Bengaluru, incorporated in July 2014, with Gauravjeet Singh as CEO
+[read:founder#85] style | Market reality
+  QUOTE: This is a small market with rising interest: perhaps 2,000 to 4,000 cafes, and about ₹1.26 Cr a year of aggregator revenue is what success looks like.
+  PROBLEM: Word for word from the bottom line, so it reads as filler. Use the opening to say what this section adds.
+  FIX: This is a small market with rising interest, thin cafe margins and no hard count of cafes or bookings.
+[read:founder#86] style | Go-to-market, website and money
+  QUOTE:  Skip FAQ markup: Google [retired those rich results](https://developers.google.com/search/updates) in May 2026.
+  PROBLEM: Cut. It tells me not to do something I had not planned, before any page exists.
+  FIX: 
+[read:founder#87] style | Sources and how this was checked
+  QUOTE: A few researchers also went beyond their brief with temporary scratch files, a cap on page size and one retry after a refusal; none of it affects the findings.
+  PROBLEM: Honest, but a cap on page size means nothing to me. Keep the disclosure short and plain.
+  FIX: A few agents also broke small working rules, such as saving temporary files and retrying one refused page. None of it affects the findings.
+[read:founder#88] style | Go-to-market, website and money
+  QUOTE: , and describe safety papers as documents on file on a date.
+  PROBLEM: Documents on file on a date is cryptic until the reader reaches the Fire safety row much later.
+  FIX: . Describe safety papers only as "documents on file as of" a date, never as safe.
+[read:founder#89] style | Go-to-market, website and money
+  QUOTE: and [GameBiller](https://www.gamebiller.com/blog/marketing-a-new-gaming-cafe-locally) advises against the former.
+  PROBLEM: The former should mean city-wide paid social, but the nearest earlier item is creators, so it reads the wrong way.
+  FIX: and [GameBiller](https://www.gamebiller.com/blog/marketing-a-new-gaming-cafe-locally) advises against paid social.
+[read:founder#90] style | Risks, rules and next steps
+  QUOTE: **Nothing holds the truth.**
+  PROBLEM: Cryptic heading; the bullet is about seat availability.
+  FIX: **No system knows which seats are free.**
+[read:founder#91] style | Playo teardown
+  QUOTE: The worst failure is compound:
+  PROBLEM: Stiff. The point is three failures in a row.
+  FIX: The worst failure is a chain of three:
+[read:founder#92] style | Playo teardown
+  QUOTE: , and one four-year user says plain booking could go direct after the first visit.
+  PROBLEM: Go direct is shorthand, and this is the key retention point. The source says that after the first booking, court booking could go straight to the court manager (research_notes/Gaming cafe booking aggregator research/playo_sentiment.md). The fix also splits an overlong sentence.
+  FIX: . One four-year user says that after the first booking, court booking could go straight to the court manager.
+[read:founder#93] style | What is already out there
+  QUOTE: No independent LAN aggregator at scale turned up, on thin searching.
+  PROBLEM: LAN aggregator is jargon, and on thin searching is stiff.
+  FIX: No independent gaming-cafe aggregator at scale turned up, though our search outside India was thin.
+[read:founder#94] style | Market reality
+  QUOTE: seller listings, unverified, exit-skewed
+  PROBLEM: Shorthand I had to decode.
+  FIX: seller listings, unverified, and skewed towards cafes being sold
+[read:founder#95] style | Market reality
+  QUOTE: two October 2026 Google Maps screens by an affiliate site
+  PROBLEM: Screens is jargon, and the source is named only behind the link, though Why Pune first later refers back to one affiliate site ((scratch)/round2/verify_market.txt, M1).
+  FIX: two October 2026 Google Maps surveys by Gaming Nation, an affiliate site
+[read:founder#96] style | Market reality
+  QUOTE: On District, [Play Arena](https://www.district.in/events/play-arena-bengaluru-2025-buy-tickets) shows 23.7k+ booked
+  PROBLEM: The contrast only works if I know Play Arena is an attraction, not a gaming cafe ((scratch)/round2/red_team.json, second objection).
+  FIX: On District, the Bengaluru attraction [Play Arena](https://www.district.in/events/play-arena-bengaluru-2025-buy-tickets) shows 23.7k+ booked
+[read:founder#97] style | Playo teardown
+  QUOTE: hand-coded spot-check by one reader
+  PROBLEM: Hand-coded by one reader implies a person. The coder was an AI agent ((scratch)/round2/verify_playo.txt, P11).
+  FIX: spot-check coded by one AI agent
+[read:founder#98] missing | Whole report
+  QUOTE: 
+  PROBLEM: All six charts appear in this draft as placeholders reading embedded content, so I could not judge them. Check they render in the published version. Several sentences only make sense with a chart: that corner, the Hudle and KheloMore pattern, top-left moves and first gate. The edits in this list make those stand alone.
+  FIX: 
+===== read:logic (65 issues)
+VERDICT: Not ready to hand over. The direction (small, one city, hand-run first, no per-booking commission) follows from the evidence, but the decision tests still measure the commission plan the report rejects, the ₹3 Cr to ₹5 Cr total double-counts and leans on lines outside the plan, and first-weeks steps conflict with the report's own rules on contracts, consent, adults-only and who holds money. The roadmap's gates sit in an embedded graphic that this draft shows only as a placeholder, so I could not check the tests against them.
+[read:logic#1] misleading | Risks, rules and next steps
+  QUOTE: **Tests that decide this.** Thresholds are judgement calls tied to the base case.
+  PROBLEM: The base case is 10% commission plus paid software, the model this report tells the founder to drop. The stop lines are lifted from the red team's kill criteria, written against that model ((scratch)/round2/red_team.json). So the table decides the plan the report rejects. The window is also unusual: GTA VI, the holidays and possibly exam season, which GameBiller calls the sharpest revenue drop (research_notes/Gaming cafe booking aggregator research/market_economics.md, line 109).
+  FIX: **Tests that decide this.** Thresholds are judgement calls, and most were set against the commission base case. The window spans GTA VI and the year-end holidays and may catch exam season, so read near misses with care.
+[read:logic#2] missing | Risks, rules and next steps
+  QUOTE: 
+  PROBLEM: Add these rows after the last row of the tests table. The table has no row for the headline bet (squad link), the first revenue line (Seat Lock), the Month 1 line (first-visit pass), the fallback (group desk), adults-only or the counter app. The GTA VI row counts prepaid sessions that settle to the cafe, so it cannot show whether players pay for a Seat Lock, which the money table calls the point. Stop lines already exist in (scratch)/round2/strategy_player.json (under 50 locks; under-18s at 35% of spend), (scratch)/round2/strategy_operator.json (60 redeemed visits across 3 cafes in 14 days; 2 of 3 owners paying; 10 of 15 cafes on the app; 70% of sessions logged) and (scratch)/round2/red_team.json (15 events or ₹75,000). The squad line is my judgement.
+  FIX: | Squad links | Under half of 100 plans reach 3 In replies and a confirmed table | Hand-run links, timed against a phone call |
+| Paid Seat Locks in launch month | Under 50 in total, sold at ₹19, ₹39 and ₹49 | Count by squad and price at cafes that pledged seats |
+| First-visit passes redeemed | Under 60 across 3 cafes in 14 days, or under 2 of 3 owners paying | Counter scans, then invoices paid without chasing |
+| Group desk sales | Under 15 events or ₹75,000 in 60 days | One person selling to colleges and offices |
+| Under-18 share of floor spend | Over about 35%: plan parent-booked accounts sooner | Age-band tally at 5 counters, plus a floor survey of 300 players |
+| Counter app use, once built | Under 10 of 15 cafes open it on 25+ days a month, or under 70% of sessions logged | Spot counts at 5 cafes |
+[read:logic#3] wrong | Go-to-market, website and money
+  QUOTE: Owner-side lines come to about ₹31,000 per cafe a year, or ₹1.26 Cr at 400 cafes. Adding player fees reaches perhaps ₹3 Cr to ₹5 Cr a year at 50,000 weekly active players, likely 4 to 5 years out.
+  PROBLEM: ₹31,000 is the operator model's ₹2,600 a month: first-visit ₹550, group ₹600, player-paid peak seat ₹580, hour-pack fee ₹300, Pro ₹240, brand ₹300 ((scratch)/round2/strategy_operator.json, monetisation). So it is not owner-side: that model says owners pay about ₹1,700, and hour packs sit under Worth trying later. Adding player fees then counts the peak seat twice. ₹31,000 x 400 is also ₹1.24 Cr. The ₹3 Cr to ₹5 Cr is not that sum either. It is a separate total in (scratch)/round2/strategy_player.json: Seat Lock ₹75 lakh, nights ₹70 lakh, first-visit ₹45 to ₹90 lakh, Drop ₹43 lakh, Squad Pass ₹30 to ₹48 lakh, brand ₹50 lakh to ₹1 Cr, Off-Peak Pass ₹54 lakh. Squad Pass and Off-Peak Pass appear nowhere in this report, the Drop is later, and the money table says never plan on brand money. Lines actually in the table, without brand money, come to about ₹1.8 Cr to ₹2.6 Cr (my arithmetic). 50,000 players is 25% of an estimated 200,000 regulars built on ₹360 Cr of floor spend, a figure the fact-checker marks high, with minors still in that base.
+  FIX: Per-cafe lines, including player-paid peak seats, hour packs and brand money, come to about ₹31,000 a year, or about ₹1.25 Cr at 400 cafes. That is close to the commission base case. The lines in this table, without brand money, could reach about ₹1.8 Cr to ₹2.6 Cr at 50,000 weekly active players. That is a quarter or more of our rough national count of regulars, likely 4 to 5 years out.
+[read:logic#4] wrong | Risks, rules and next steps
+  QUOTE: First bookers who book again within 30 days | Under 33%; at 33% to 50%, charge on first bookings only
+  PROBLEM: The plan already charges on first visits only and 0% on repeats (change 3, money table), so the middle band changes nothing and the row implies per-booking commission above 50%, which the report rejects. The line comes from the red team's commission-era criteria ((scratch)/round2/red_team.json). Repeat bookings through the platform earn little under this tariff, and the charter gives the cafe the customer list, so a direct return is a win here but a fail in this row. 33% is Console's claim with no denominator. Idea 5 cites about 20% for daily-deal buyers, and the operator strategy sets its gate at 25% ((scratch)/round2/strategy_operator.json).
+  FIX: First bookers who return to that cafe within 30 days, by any channel | Under 25%, just above the roughly 20% daily-deal return rate in idea 5
+[read:logic#5] wrong | Risks, rules and next steps
+  QUOTE: Under 30% by day 60: stop charging cafes | Phone-number match at 5 cafes, plus a counter question
+  PROBLEM: Under this tariff cafes pay only for new customers, so a low new share cannot mean they are paying for their own regulars, which was the red team's reason when the plan was commission ((scratch)/round2/red_team.json, kill_criteria). What a low share does show is that the ₹30 line will not earn. The measure also dropped the red team's with consent, though the charter says the customer list stays with the cafe.
+  FIX: Under 30% by day 60: first-visit fees will not pay, so lead with groups and Seat Lock | With consent, phone-number match at 5 cafes, plus a counter question
+[read:logic#6] misleading | Bottom line
+  QUOTE: India has perhaps 2,000 to 4,000 cafes, and about ₹1.26 Cr a year of revenue is what success looks like.
+  PROBLEM: ₹1.26 Cr is 400 cafes x 2 bookings x ₹350 x 10% commission (₹1.02 Cr) plus half of cafes paying ₹999 a month for software (₹24 lakh) ((scratch)/round2/verify_market.txt, M7). Change 3 drops that commission and the Playo table gives the floor tool away, so the headline prices a model the report rejects. The money section then reaches a similar sum by other lines, then a different total, so the reader cannot tell what success means. 400 cafes is also ten times the largest claimed specialist network (Olympus 40+).
+  FIX: India has perhaps 2,000 to 4,000 cafes. Success looks like about ₹1.26 Cr a year at 400 cafes, ten times any booking specialist's claimed network, on commission or on our lines.
+[read:logic#7] unsupported | Bottom line
+  QUOTE: Nobody in India has both player reach and control of the cafe floor.
+  PROBLEM: The plan starts with neither. It shows counts by category until you control the floor, and a counter app is not a PC lock. The report's own precedent section says where this worked the floor owner built it, and that no independent aggregator at scale turned up. The red team names an independent aggregator with no floor control as what would disprove its objection ((scratch)/round2/red_team.json, objection 4). So the recommendation is the one pattern with no precedent, and the report never says so.
+  FIX: Nobody in India has both player reach and control of the cafe floor. This plan starts with neither, and abroad the floor owners built it, so treat it as a bet.
+[read:logic#8] misleading | Stack implications
+  QUOTE: Route needs turnover above ₹40 lakh, which may block a new company, so launch with seats paid at the counter
+  PROBLEM: Several lines do not fit seats paid at the counter: Launch Seats are pre-sold, the GTA VI test uses payment links, the dead-hour pass is paid by UPI up front, and the charter promises next-morning settlement. No line says whose account takes the money, though the report calls this expensive to reverse. At first also has no end date: ₹40 lakh is about 130 cafes at ₹31,000, more than Pune's 59 to 103 ((scratch)/round2/verify_indian.txt, L6 and new findings). Whether the test counts fees or bookings is unknown, and Razorpay's fallback of settling to your own account and paying vendors by hand is what the RBI row warns against ((scratch)/round2/stack.json, facts and not_checked).
+  FIX: Route needs turnover above ₹40 lakh, about 130 cafes at ₹31,000 each if only your fees count, so it may stay shut beyond Pune. Until a gateway confirms in writing, seats are paid at the counter or by the cafe's own UPI link, and you invoice your fee.
+[read:logic#9] wrong | Go-to-market, website and money
+  QUOTE: Week 1, by hand | Needs no contract and tests whether players pay for certainty
+  PROBLEM: The rules table says a written contract with each cafe must be ready before the first cafe goes live (2020 Rules r.6(4), (scratch)/round2/verify_indian.txt, new findings), and idea 2 draws on seats the owner pledges and pays the cafe ₹10. No contract is left over from the player strategy, where the cafe pledged nothing and signed nothing ((scratch)/round2/strategy_player.json, wedge). Week 1 also cannot work: contract, tax view and pledged seats come first, and the launch is 16 days away.
+  FIX: GTA VI launch week, by hand | Tests whether players pay for certainty, and needs a one-page written contract with each cafe
+[read:logic#10] missing | Risks, rules and next steps
+  QUOTE: - [ ] Book one counsel session on fees, adults-only design, tournaments and the name
+  PROBLEM: The first paid test sells PS5 hours for a named game. PSN terms bar commercial use and charging for use without consent ((scratch)/round2/verify_indian.txt, L10). No game art handles marks, not that clause, and no reply can arrive by 19 November, yet the rules table's write to Sony step and the game-licence question are missing from this week. Also missing: GST registration and a CA's view before the first fee (L7), the written contract and grievance contact due before the first cafe goes live, RBI treatment of platform-sold passes and tokens (L5), and Maharashtra's entertainment duty on online convenience fees above ₹10 a ticket, which (scratch)/round2/strategy_player.json flags for written advice (unverified). Seat Lock can exceed ₹10, and Pune is in Maharashtra.
+  FIX: - [ ] Book one counsel session on Seat Lock fees and Maharashtra's entertainment duty, PS5 terms, passes under RBI rules, adults-only design, tournaments and the name
+- [ ] Get a CA's written view on GST registration before taking the first fee
+- [ ] Write to Sony and Microsoft about commercial use, and tell cafes the pre-sale runs without an answer
+- [ ] Prepare the one-page cafe contract and a grievance contact before the first cafe goes live
+[read:logic#11] wrong | Risks, rules and next steps
+  QUOTE: The biggest risk is that players and owners do not want this enough, and cheap tests can settle that within 60 days.
+  PROBLEM: Owners get 30 days to sign, paid bookings are read on days 31 to 60 at 10 to 15 cafes, and about 200 first bookers need 30 days of follow-up, so all must book in the first 30 days, while cafes are still signing. Counted from today, day 60 is 2 January 2027. Results realistically land about 1 February. Settle also overclaims: the thresholds are judgement calls on 10 to 15 cafes, and no test settles the red team's first point, prize size.
+  FIX: The biggest risk is that players and owners do not want this enough. Cheap tests can give an early answer in about 90 days, by early February 2027. Test days below count from the first pilot booking.
+[read:logic#12] unsupported | Risks, rules and next steps
+  QUOTE: Median under 5 a week across 12 venues; 14 or more reopens the question | Phone or visit 8 Playo and 6 District lounges; about two days
+  PROBLEM: The report says Playo does not promote gaming and District sells generic tickets with no station choice. Low counts there cannot separate weak demand from weak promotion, and they test plain slot booking, which the report already rejects. So stop does not follow for the squad product. Also: the cell says 12 venues but the method calls 14 (the red team says at least 12, (scratch)/round2/red_team.json); 5 to 13 has no instruction; half of Playo's listings are not gaming-led and its ratings are venue-wide, so sports bookings would inflate the count ((scratch)/round2/verify_playo.txt, P1 and P2); and owners have little reason to report accurately by phone.
+  FIX: Median under 5 a week across at least 12 of the 14 venues: drop plain slot booking, not the squad test. 5 to 13 is inconclusive, and 14 or more reopens the question | Phone or visit 8 gaming-led Playo and 6 District lounges, count gaming bookings only, and ask to see the dashboard; about two days
+[read:logic#13] wrong | Risks, rules and next steps
+  QUOTE: Under 5 of 20 cafes with 8+ stations in 30 days
+  PROBLEM: A pass at 5 leaves too few cafes for the next row (10 to 15 cafes) and for the GTA VI test (10). The plan also starts with multi-outlet brands, so one owner's signature could count as six cafes: about nine owners reach 41% of confirmed Pune cafes (research_notes/Gaming cafe booking aggregator research/market_economics.md, line 69).
+  FIX: Under 5 of 20 separate owners with 8+ stations in 30 days. Keep selling until 10 outlets are live, as the next tests need them
+[read:logic#14] wrong | Product ideas, ranked
+  QUOTE: Visit every cafe, play an hour, and publish the GPU, refresh rate, installed games, per-head price and a dated rate-card photo
+  PROBLEM: Idea 6 promises no listing without consent, and the website section says pages only where real inventory exists. Publishing every audited cafe breaks both. The operator strategy bars bookable pages for unsigned cafes and allows only field-verified pages with 24-hour takedown ((scratch)/round2/strategy_operator.json, not_to_build), and this draft keeps neither carve-out.
+  FIX: Visit every cafe and play an hour. With the owner's written consent, publish the GPU, refresh rate, installed games, per-head price and a dated rate-card photo
+[read:logic#15] wrong | Product ideas, ranked
+  QUOTE: One page: ₹0 on regulars and own channels, next-morning settlement, no listing without consent, and the customer list stays theirs
+  PROBLEM: Next-morning settlement means you hold or split cafe money, yet the report says Route may be shut and RBI rules bar pooling, so the promise cannot be kept at launch. The tariff also turns on who is new, and the draft never defines it. Treatwell uses 365 days ((scratch)/round2/verify_marketplace.txt, B2), and the operator strategy lets the owner void a fee within 48 hours ((scratch)/round2/strategy_operator.json, Regulars-Free Tariff). Without this, every ₹30 can become a dispute at cafes with no customer list.
+  FIX: One page: ₹0 on regulars and own channels. New means no visit in 365 days, and owners can void a fee within 48 hours. Cafe money goes straight to the cafe, no listing without consent, and the customer list stays theirs
+[read:logic#16] wrong | Bottom line
+  QUOTE: charge cafes only for new customers, and take 0% on their regulars
+  PROBLEM: The money table charges cafes 10% on groups, ₹14,999 for a launch pack and ₹799 a month for Owner Pro. Groups are the largest line in the operator model at ₹600 of ₹2,600 a month ((scratch)/round2/strategy_operator.json, monetisation), so only is wrong. Standing college slots in idea 9 are also regulars, which the tariff says pay 0%.
+  FIX: charge cafes ₹30 for each new customer and 10% on groups you bring, and take 0% on their regulars
+[read:logic#17] wrong | Product ideas, ranked
+  QUOTE: **Under-18 accounts or school-hour deals.**
+  PROBLEM: Idea 12 rewards weekday 11 AM to 5 PM play and idea 5 sells the owner's empty hours, which the occupancy row puts on weekdays. Those are school hours, so as written this line rules out two ranked ideas. The real risk is under-18s, not the clock.
+  FIX: **Under-18 accounts, or any deal open to under-18s in school hours.**
+[read:logic#18] missing | Product ideas, ranked
+  QUOTE: a ₹30 fee applies only when scanned
+  PROBLEM: Idea 5 has no age rule, though empty hours are school hours and the report says adults-only. The operator version required 18+ ID at the counter for school-hour passes ((scratch)/round2/strategy_operator.json, First-Visit Dead-Hour Pass); the merge dropped it. The player strategy also warns that a guide says school students fill weekday afternoons, which could leave the adult pool thin ((scratch)/round2/strategy_player.json, Daylight Priority). That risk is unnamed.
+  FIX: a ₹30 fee applies only when scanned; school-hour passes need 18+ ID at the counter, which may thin this demand
+[read:logic#19] missing | Where the Playo model transfers and where it breaks
+  QUOTE: Many students and minors (not measured) | Start adults-only
+  PROBLEM: Nothing says how adults-only works. The squad link, phone OTP and WhatsApp pre-sale collect no age, and one law firm says simple age screens are not enough ((scratch)/round1/regulation.txt, claim 7). Market sizes are not cut for it, though guides describe teens and students as the main customers ((scratch)/round1/market_economics.txt, claim 21).
+  FIX: Many students and minors (not measured) | Start adults-only, with a neutral 18+ screen and ID at the counter for school-hour passes. Ask counsel if that is enough
+[read:logic#20] wrong | Product ideas, ranked
+  QUOTE: One form and one WhatsApp number for birthdays, office nights and college teams, with quotes in 15 minutes and 10% on success
+  PROBLEM: Birthday bookings often mean minors, and the operator's page explicitly serves parents ((scratch)/round2/strategy_operator.json, website), which conflicts with start adults-only. The row also does not say who pays the 10%, and a standing college slot would pay it every week against a 0% promise on regulars.
+  FIX: One form and one WhatsApp number for adult birthdays, office nights and college teams, with quotes in 15 minutes. The cafe pays 10% on success, once per new group
+[read:logic#21] misleading | Product ideas, ranked
+  QUOTE: 10% of all revenue is about ₹11,500 a month against about ₹9,600 profit at 30% occupancy.
+  PROBLEM: Commission on every booking is not commission on all revenue. The fact-checker's corrected wording calls this a stress case: only app bookings would pay, and at 15% of revenue through the app it is ₹1,725 ((scratch)/round2/verify_market.txt, M11). Hash's own inputs also do not reproduce its revenue. The report's own model shows ₹71,000 EBITDA at 30% occupancy (research_notes/Gaming cafe booking aggregator research/market_economics.md, line 274), which is what gives its 2 to 5 year payback; Hash's ₹9,600 implies about 21 years. The draft uses both without saying so.
+  FIX: 10% of all revenue would be about ₹11,500 a month against about ₹9,600 profit at 30% occupancy. That is a stress case: at 15% of revenue through the app it is ₹1,725, and our own model shows far more profit. The real objection is paying for walk-ins who switch, while 0% rivals cap the rate.
+[read:logic#22] misleading | Go-to-market, website and money
+  QUOTE: Owners pay only when someone turns up, the pattern at [Treatwell](https://www.treatwell.co.uk/partners/pricing/), [Mindbody](https://www.mindbodyonline.com/business/pricing) and [Booksy](https://biz.booksy.com/en-us/pricing)
+  PROBLEM: All three charge software subscriptions as well ((scratch)/round2/verify_marketplace.txt, B2 and new findings), so owners there do pay when nobody turns up. This report gives its floor tool away, so these precedents do not show a fee-only model working. Their first-visit rates are also 20% to 35%.
+  FIX: Owners pay this fee only when someone turns up, as at [Treatwell](https://www.treatwell.co.uk/partners/pricing/), [Mindbody](https://www.mindbodyonline.com/business/pricing) and [Booksy](https://biz.booksy.com/en-us/pricing), though all three also charge for software
+[read:logic#23] wrong | Product ideas, ranked
+  QUOTE: [Treatwell](https://www.treatwell.co.uk/partners/pricing/) charges only on a new client's first booking
+  PROBLEM: Treatwell also sells plans at £9.99 to £59 a month and takes 2.5% + VAT on online prepayments ((scratch)/round2/verify_marketplace.txt, B2), so charges only is wrong. The 35% rate is also left out.
+  FIX: [Treatwell](https://www.treatwell.co.uk/partners/pricing/) takes 35% commission only on a new client's first marketplace booking, alongside paid software plans
+[read:logic#24] wrong | Stack implications
+  QUOTE: A Postgres [exclusion constraint](https://www.postgresql.org/docs/current/rangetypes.html) on station and time range rejects overlaps from every writer, walk-ins included
+  PROBLEM: The constraint needs a named station and a planned end on every row; the notes say a NULL end would block that station forever (research_notes/Gaming cafe booking aggregator research/stack_options.md, line 88). But this report sells by category in version one, rules out station maps, and calls sessions open-ended with time added at the desk. It also protects only what staff log. The table states the benefit without these conditions.
+  FIX: A Postgres [exclusion constraint](https://www.postgresql.org/docs/current/rangetypes.html) on station and time range rejects overlaps once each row names a station and a planned end. Version one sells by category with open-ended walk-ins, so assign a station at confirmation and give each walk-in a planned end
+[read:logic#25] wrong | Playo teardown
+  QUOTE: Copy the short flow; a station replaces the court, and a game or spec tier replaces the sport
+  PROBLEM: What not to build says no station-level seat maps in version one and show counts by category until you control the floor. A court-style pick of station contradicts that.
+  FIX: Copy the short flow; a station type replaces the court, and a game or spec tier replaces the sport
+[read:logic#26] missing | Product ideas, ranked
+  QUOTE: An optional ₹19 to ₹49 per squad on Friday to Sunday evenings, drawn from seats the owner pledges; unsold seats return 3 hours before; ₹10 goes to the cafe
+  PROBLEM: GTA VI launches on Thursday 19 November, outside the stated Friday to Sunday window; the player strategy included launch days ((scratch)/round2/strategy_player.json, Seat Lock). No rule covers a squad no-show, though both strategies let the cafe keep some or all of the fee. The red team prices a 15-minute grace at ₹25 a seat ((scratch)/round2/red_team.json, objection 5), so ₹10 per squad does not cover holding four seats, and whether owners pledge at that price is untested.
+  FIX: An optional ₹19 to ₹49 per squad on Friday to Sunday evenings and launch days, drawn from seats the owner pledges. Unsold seats return 3 hours before. ₹10 goes to the cafe, which keeps most of the fee if the squad does not show
+[read:logic#27] missing | Go-to-market, website and money
+  QUOTE: ₹19 to ₹49 per squad, paid by the player, ₹10 to the cafe
+  PROBLEM: At ₹19: about ₹16.10 after an assumed 18% GST, ₹6.10 after the cafe's ₹10, and about ₹5.95 of payouts at the report's own 5% failure stop line (5% of ₹119). That leaves about nothing before a gateway or the named human on duty. ₹39 leaves about ₹16. My arithmetic, using the GST assumption in (scratch)/round2/strategy_player.json.
+  FIX: ₹19 to ₹49 per squad, paid by the player, ₹10 to the cafe; ₹19 nets about nothing after GST and payouts at 5% failure
+[read:logic#28] misleading | Bottom line
+  QUOTE: Players want certainty at peak, when owners need no help; owners want customers in empty hours, when players have no reason to book.
+  PROBLEM: The fact-checker's corrected wording says that peak seats need no demand is this report's inference, and vendor peaks of 70% to 90% still leave 10% to 30% of seats empty ((scratch)/round2/verify_market.txt, M12). The draft states it as fact here and later says the floor is already nearly full. No owner says this, and the peak product depends on it.
+  FIX: Players seem to want certainty at peak, when owners need less help; owners want customers in empty hours, when players rarely book. This is our inference from vendor figures: peaks of 70% to 90% still leave seats empty.
+[read:logic#29] misleading | Market reality
+  QUOTE: Players do report weekend-evening queues and opaque prices, from ₹40 to ₹700 an hour in one thread.
+  PROBLEM: The queue specifics rest mainly on one low-quality, affiliate-funded site; Hash and Clutchr are vendors, and there is one viewer comment plus a 2009 thread ((scratch)/round1/owner_player_voice.txt, claim 9). Ideas 1 to 3 rest on peak scarcity, so the reader should see how thin this is.
+  FIX: One affiliate guide, two vendors and a few players report weekend-evening queues, with no measured data. Prices are opaque, from ₹40 to ₹700 an hour in one thread.
+[read:logic#30] misleading | Market reality
+  QUOTE: Playo's gaming listings have a median of 2 ratings, against about 48 for badminton venues on the same city pages (first-page samples).
+  PROBLEM: The two figures come from different samples. The 2 covers 34 listings across six cities ((scratch)/round2/verify_playo.txt, P2). The 48 covers 24 badminton venues in Bengaluru and Hyderabad only, where the same-city gaming median was 3 ((scratch)/round2/red_team.json, objection 2). The red team also warns that listing age confounds this, and 28 of the 34 records date from January 2025 or later.
+  FIX: In Bengaluru and Hyderabad, Playo's gaming listings show a median of 3 ratings against about 48 for badminton venues (first-page samples). Most gaming listings date from 2025 or later, so listing age explains part of that gap.
+[read:logic#31] misleading | Bottom line
+  QUOTE: in India have roughly doubled in a year, and rival websites are weak.
+  PROBLEM: This compares about 40 to 55 in November to February with about 75 to 100 in August to October, read by eye from one 12-month chart (research_notes/Gaming cafe booking aggregator research/browser_checks.md). There is no same-season comparison, so it cannot separate trend from season or pre-launch GTA VI interest.
+  FIX: in India roughly doubled across the past 12 months on one chart. That cannot separate trend from season or GTA VI excitement. Rival websites look weak.
+[read:logic#32] unsupported | Go-to-market, website and money
+  QUOTE: An estimated [60% of Playo's visits](https://www.semrush.com/website/playo.co/overview/) come from Google organic search, and rival sites are weak: [Console Gaming's sitemap](https://www.consolegaming.in/sitemap.xml) has 8 URLs and [GoPlaya's home page](https://www.goplaya.in/) renders client-side.
+  PROBLEM: Only two rivals' pages are cited, and rankings were never checked ((scratch)/round1/marketplace_playbook.txt, claim 26). Hash has 48 URLs and added SEO pages on 30 Oct 2026, and a guide names Google Maps as the default finder ((scratch)/round1/india_competitors.txt, claims 4 and 15). For a near-me query the likely rivals are Maps and directories, not these apps. The first change to the founder's plan rests on this.
+  FIX: An estimated [60% of Playo's visits](https://www.semrush.com/website/playo.co/overview/) come from Google organic search. Rival apps' sites look weak: [Console Gaming's sitemap](https://www.consolegaming.in/sitemap.xml) has 8 URLs and [GoPlaya's home page](https://www.goplaya.in/) renders client-side. Rankings were not checked. For near-me searches the real rivals are Google Maps, Justdial and guides such as Gaming Nation, so read the results page first.
+[read:logic#33] missing | What is already out there
+  QUOTE: [GameBiller](https://www.gamebiller.com/) charges ₹499 a month with a free tier and a seat-request page,
+  PROBLEM: The fact-checker says GameBiller's player side exists and its entry should move ((scratch)/round2/verify_gaming.txt, C9 and new findings). It takes seat requests by phone number with no install and no commission, so it already offers much of change 1. The draft files it under software, leaves it out of the rivals table and calls rival websites weak.
+  FIX: [GameBiller](https://www.gamebiller.com/) charges ₹499 a month with a free tier. On Premium it also offers a no-install, 0% seat-request page, close to this report's first change (results untested). Others:
+[read:logic#34] missing | Risks, rules and next steps
+  QUOTE: 
+  PROBLEM: Add to the red-team bullet list. The red team's objection that the supply that matters does not need you was dropped ((scratch)/round2/red_team.json, objection 8), while Winning cafes starts with Intencity and Refill24x7, which idea 9 says already sell groups by hand. Cafes' own channels are listed in research_notes/Gaming cafe booking aggregator research/market_economics.md, line 394.
+  FIX: - **The best cafes may not need you.** Intencity, Dark World and Gamerz Nation already take bookings through ggLeap, WhatsApp or their own pages, and the smallest cafes cannot pay.
+[read:logic#35] missing | What is already out there
+  QUOTE: District's lounge listings are live and on sale, but several warn of waits at the venue.
+  PROBLEM: The fact-checker's corrected wording says at least six other lounge listings have ended ((scratch)/round2/verify_gaming.txt, C1; not a churn rate, since they came from search results). That bears directly on whether platform bookings are real, and those lounges are the most useful calls. The draft reports only the live ones.
+  FIX: District's 13 lounge listings are live and on sale, but several warn of waits at the venue. At least six other lounge listings have ended, including Gravity in Pune, so call those too.
+[read:logic#36] missing | Risks, rules and next steps
+  QUOTE: while [Chennai's rules](https://indiankanoon.org/doc/148461945/) set 10 AM to 10 PM hours (undated text)
+  PROBLEM: The row covers Delhi and Chennai but not Maharashtra, where the plan launches. The notes call its position unclear (research_notes/Gaming cafe booking aggregator research/regulation.md, line 116). The Kalyan raid cited elsewhere in the report is in that state.
+  FIX: while [Chennai's rules](https://indiankanoon.org/doc/148461945/) set 10 AM to 10 PM hours (undated text). Maharashtra, your launch state, is unclear: a 2016 notification reportedly exempted parlours, yet Kalyan police cited no licence in November 2025
+[read:logic#37] missing | Risks, rules and next steps
+  QUOTE: 48-hour grievance acknowledgement, one-figure total price, no pre-ticked consent, and a written contract with each cafe
+  PROBLEM: The fact-checker found Rule 4(8) applies today: no cancellation charge on consumers unless the entity bears similar charges when it cancels ((scratch)/round2/verify_indian.txt, new findings). Any no-show or cancellation rule for Seat Lock must fit it, and the rules table leaves it out.
+  FIX: 48-hour grievance acknowledgement, one-figure total price, no pre-ticked consent, no cancellation charge unless you bear one too, and a written contract with each cafe
+[read:logic#38] unsupported | Bottom line
+  QUOTE: This is a solid small business to run lean, not a venture bet.
+  PROBLEM: The report gives revenue only, so solid does not follow. The operator model assumes ₹1,500 a cafe a month for field and support ((scratch)/round2/strategy_operator.json, monetisation), the red team prices a two-person evening rota at about ₹6 lakh a year against ₹3.3 lakh of first-year Pune revenue ((scratch)/round2/red_team.json, objection 3), and acquisition cost was not modelled (research_notes/Gaming cafe booking aggregator research/market_economics.md, Gaps). The red-team section itself opens with the prize may be too small.
+  FIX: At best this is a small business to run lean, not a venture bet. Field and support could take about ₹18,000 of each cafe's ₹31,000 a year (our estimate).
+[read:logic#39] misleading | Risks, rules and next steps
+  QUOTE: a customer is worth about ₹25 to ₹52, unlikely to cover paid acquisition (our judgement).
+  PROBLEM: This arithmetic uses commission, which the plan drops, so readers will assume the new tariff fixes it. It does not: the first-visit fee is ₹30 once, about ₹12.50 after the rep and staff bonuses in (scratch)/round2/strategy_operator.json (monetisation), plus any Seat Locks.
+  FIX: a customer is worth about ₹25 to ₹52, and the ₹30 first-visit fee is no better. Neither is likely to cover paid acquisition (our judgement).
+[read:logic#40] unsupported | Go-to-market, website and money
+  QUOTE: The squad link is the growth loop, because each plan reaches three or four friends.
+  PROBLEM: A loop needs invitees to start new plans. Squads are closed friend groups, the draft says play is local and friend-based, idea 1 calls the flow untested, and no Indian data on group share exists ((scratch)/round2/strategy_player.json, Squad Night).
+  FIX: The squad link is the hoped-for growth loop: each plan reaches three or four friends, but nothing shows they start plans of their own.
+[read:logic#41] unsupported | Go-to-market, website and money
+  QUOTE: Playo took about a decade to reach ₹20.5 Cr, so raise little; extending to other hourly indoor venues such as snooker and table tennis is the main route to something bigger.
+  PROBLEM: No researcher studied these categories. Playo already lists snooker halls (7 of its 34 visible Play Station listings, (scratch)/round2/verify_playo.txt, P1) and GameSpotter covers snooker and table tennis ((scratch)/round1/india_competitors.txt, claim 6), so this is the plain Playo contest the report says to avoid. Main route does not follow.
+  FIX: Playo took about a decade to reach ₹20.5 Cr, so raise little. Other hourly venues such as snooker could be bigger, but Playo and GameSpotter already list them and we did not research it.
+[read:logic#42] wrong | Go-to-market, website and money
+  QUOTE: Pune has the only disclosed cafe count, eight multi-outlet brands holding about 23 of the 59 confirmed outlets, thin platform coverage and no rival based there.
+  PROBLEM: The same table and the market section show a second disclosed count, Gurugram's 6, which the fact-checker says compares with Pune's 59 ((scratch)/round2/verify_market.txt, M1). Other cities read none published because nobody screened them, so the count is a fact about one affiliate site's work rather than about Pune's market.
+  FIX: Pune has the largest disclosed cafe count, which partly reflects where one site looked. It also has eight multi-outlet brands holding about 23 of the 59 confirmed outlets, thin platform coverage and no rival based there.
+[read:logic#43] wrong | Product ideas, ranked
+  QUOTE: a rate-card clinic as a sales tool, a ₹14,999 launch pack for new cafes, 
+  PROBLEM: The plan uses both sooner. Winning cafes offers a rate-card rewrite on the first visit, and the money table starts the launch pack in Month 3 or 4. Per-brand hour packs and the weekly drop, also listed as later, are counted in the revenue totals.
+  FIX: 
+[read:logic#44] wrong | Sources and how this was checked
+  QUOTE: every claim and URL is in the research notes in this repo, under `research_notes/Gaming cafe booking aggregator research/`.
+  PROBLEM: The ideas, money lines, tests and red team come from (scratch)/round2/strategy_player.json, (scratch)/round2/strategy_operator.json and (scratch)/round2/red_team.json, which sit in a temporary session folder. A search of the notes finds no Seat Lock or Daylight Priority. 16 of the draft's 156 linked URLs are absent from the notes, including Paytm Soundbox, Wikipedia on Groupon and the 2020 gazette. The notes folder is also untracked in git.
+  FIX: most claims and URLs are in the research notes under `research_notes/Gaming cafe booking aggregator research/`, not yet committed. The strategy and red-team working files still need copying there.
+[read:logic#45] wrong | Go-to-market, website and money
+  QUOTE: short videos cut from the Cafe Report
+  PROBLEM: The rules say use no game art or logos. Video of a working floor shows games on screen, so this step breaks the rule unless shots avoid them.
+  FIX: short videos cut from the Cafe Report with no game screens or logos in shot
+[read:logic#46] wrong | Playo teardown
+  QUOTE: Copy GameTime as hosted squad nights in quiet hours
+  PROBLEM: GameTime is Playo-organised pay-per-seat play among players who may not know each other ((scratch)/round1/playo_product.txt, claim 13), which conflicts with build squad planning, not stranger matching. Squads do not need a host, quiet hours are mostly daytime, and the idea appears nowhere in the ideas or money tables.
+  FIX: Do not copy yet: GameTime seats strangers. Fill quiet hours with the dead-hour pass instead
+[read:logic#47] misleading | Market reality
+  QUOTE: Total floor spend is perhaps ₹240 Cr to ₹360 Cr a year, on 2,000 cafes at ₹1 lakh to ₹1.5 lakh a month (our estimate).
+  PROBLEM: The report's count is 2,000 to 4,000, but this sum uses only 2,000. The fact-checker says ₹1.5 lakh looks high as an all-cafe average and about ₹1 lakh is safer ((scratch)/round2/verify_market.txt, M8). Small-cafe revenue in the same section is ₹25,000 to ₹80,000.
+  FIX: Total floor spend is perhaps ₹240 Cr to ₹480 Cr a year, on 2,000 to 4,000 cafes at about ₹1 lakh monthly (our estimate).
+[read:logic#48] missing | Product ideas, ranked
+  QUOTE: about ₹50,000 to ₹75,000 for 103 cafes (our estimate)
+  PROBLEM: Only 59 of the 103 are named; the other 44 are unnamed and the 103 cannot be checked ((scratch)/round2/verify_market.txt, M1). The plan cannot visit cafes it cannot identify, and this week's Google Places step covers only two other cities.
+  FIX: about ₹50,000 to ₹75,000 for 103 cafes (our estimate), though only 59 are named, so re-run the Pune screen first
+[read:logic#49] missing | Risks, rules and next steps
+  QUOTE: - [ ] Sign 10 cafes for a GTA VI pre-sale, and re-check the date after Take-Two's results on 9 November
+  PROBLEM: Rockstar posted on 3 November that pre-load begins 10 November ((scratch)/round2/verify_marketplace.txt, B7). Cafes must commit and buy copies by then, so that is the real deadline, a day after the re-check.
+  FIX: - [ ] Sign 10 cafes for a GTA VI pre-sale before pre-load opens on 10 November, and re-check the date after Take-Two's results on 9 November
+[read:logic#50] missing | Risks, rules and next steps
+  QUOTE: Under 140 across 10 cafes in the 14 days from 19 November
+  PROBLEM: If fewer than 10 sign, the row has no rule; the red team's version holds 1 per cafe per day ((scratch)/round2/red_team.json, kill_criteria). A miss may reflect 16 days' notice or consoles without the game ((scratch)/round2/strategy_player.json, Launch Seats) rather than demand, and a pass says nothing about an ordinary week.
+  FIX: Under 1 per signed cafe a day in the 14 days from 19 November, so 140 at 10 cafes. A pass proves launch demand only
+[read:logic#51] unclear | Risks, rules and next steps
+  QUOTE: Under 3 an evening across 5 cafes, over 3 weekends
+  PROBLEM: The next three weekends include launch weekend, 20 to 22 November, which could pass the test for the wrong reason. The red team's version also counted parties quoted more than 30 minutes ((scratch)/round2/red_team.json, kill_criteria), which the draft dropped.
+  FIX: Under 3 an evening, turned away or quoted over 30 minutes, across 5 cafes, over 3 weekends outside the GTA VI launch fortnight
+[read:logic#52] unclear | Risks, rules and next steps
+  QUOTE: Count paid arrivals only, excluding friends and family
+  PROBLEM: With seats paid at the counter, every arrival pays, so paid arrivals does not separate platform bookings from walk-ins. This row is a stop line, so the count must be clear.
+  FIX: Count arrivals who came through your link and paid by any route, excluding friends and family
+[read:logic#53] missing | Go-to-market, website and money
+  QUOTE: Offer something useful on the first visit, such as a rate-card rewrite, then the one-page tariff and charter.
+  PROBLEM: Rewriting rate cards for rival cafes in one corridor, then selling them benchmarks in Owner Pro, could raise competition questions. The operator strategy says this was not researched and counsel must review ((scratch)/round2/strategy_operator.json, Rate-Card Clinic). The rules table and counsel list omit it.
+  FIX: Offer something useful on the first visit, such as a rate-card rewrite from that cafe's own numbers, then the one-page tariff and charter. Ask counsel before sharing prices or benchmarks across cafes.
+[read:logic#54] misleading | Playo teardown
+  QUOTE: Fees barely register: of 500 Playo reviews, one complains about the convenience fee and one about a cancellation charge.
+  PROBLEM: The fact-checker warns that rare fee complaints do not show the fee is accepted, and the feed is unrepresentative ((scratch)/round2/verify_playo.txt, P11). A Play review also objects to Console's per-booking fee ((scratch)/round2/verify_gaming.txt, C4). The first revenue line is a fee, so this should not read as comfort.
+  FIX: Fees rarely come up: of 500 Playo reviews, one complains about the convenience fee and one about a cancellation charge. That does not show fees are accepted, and a Console reviewer objects to a per-booking fee.
+[read:logic#55] missing | Market reality
+  QUOTE: so 2 a day at a walk-in cafe is not conservative.
+  PROBLEM: The fact-checker says order value looks high: listings imply ₹100 to ₹267 per visit and Console's graphic shows ₹170; at ₹250, base falls to ₹97 lakh, and with 1 a day to ₹60.5 lakh ((scratch)/round2/verify_market.txt, M7). The draft flags bookings as soft but not order value.
+  FIX: so 2 a day at a walk-in cafe is not conservative. The ₹350 order also looks high: listings imply ₹100 to ₹267 a visit, and ₹250 at 1 a day gives ₹60.5 lakh.
+[read:logic#56] missing | Market reality
+  QUOTE: so very roughly 60,000 a month by proxy.
+  PROBLEM: The report calls search the opening and the website the front door, yet never sets the proxy against supply. 60,000 a month over 2,000 to 4,000 cafes is 15 to 30 per cafe (my arithmetic, this head term only). The base case needs about 60 bookings per cafe a month.
+  FIX: so very roughly 60,000 a month by proxy. Across 2,000 to 4,000 cafes that is only 15 to 30 searches per cafe a month, against the base case's 60 bookings.
+[read:logic#57] missing | Risks, rules and next steps
+  QUOTE: Seat time looks outside the money-game ban (our reading)
+  PROBLEM: The fact-checker's corrected wording adds that online titles at a cafe remain online games and the Rules' provider definition has not been tested against venues ((scratch)/round2/verify_indian.txt, L2). The draft's shorter wording reads as safer than the evidence.
+  FIX: Seat time looks outside the money-game ban (our reading). Online titles at a cafe stay online games, and the provider definition is untested at venues
+[read:logic#58] unsupported | Bottom line
+  QUOTE: A plain "Playo for gaming cafes" already exists and has not taken off, so do not build that.
+  PROBLEM: The oldest dedicated apps date from late 2024 (Olympus) and January 2025 (Console), Hash from August 2025, and no shutdown or stated failure was found ((scratch)/round1/india_competitors.txt, claims 3 to 5 and 12). The report itself says Playo took a decade, so this is an early read, not a settled result.
+  FIX: A plain "Playo for gaming cafes" already exists and, about two years in, has not taken off, so do not build that.
+[read:logic#59] unclear | Bottom line
+  QUOTE: The first test is cheap and has a deadline: calling lounges already on Playo and District will show within days whether platform bookings are real.
+  PROBLEM: The deadline belongs to GTA VI, not the calls, and the calls rest on owners' self-reports, so will show whether bookings are real overclaims. Pre-load on 10 November is the nearer date ((scratch)/round2/verify_marketplace.txt, B7).
+  FIX: The first test is cheap and fast: calling lounges already on Playo and District gives a rough read within days on platform bookings. The second has a hard deadline: GTA VI launches on 19 November, with pre-load from 10 November.
+[read:logic#60] unclear | Risks, rules and next steps
+  QUOTE: If the first gate fails on player demand but owners still pay for groups or quiet-hour customers, lead with those and stay small.
+  PROBLEM: The gates sit only in the embedded roadmap, which the draft text shows as a placeholder, so this sentence has no definition and I could not check the roadmap's gates against the tests.
+  FIX: If lounge calls or GTA VI sessions miss stop lines but owners pay for groups or quiet hours, lead with those and stay small.
+[read:logic#61] unclear | Playo teardown
+  QUOTE: Only about half of the 34 visible listings are gaming-led; the rest are snooker halls and sports venues with a console add-on.
+  PROBLEM: The bottom line and rivals table say about 60, the six named cities sum to 44, and this sentence says 34. The fact-checker's 60 spans 15 city pages, and results look radius-based, so they should not be summed blindly ((scratch)/round2/verify_playo.txt, new findings). The half-gaming-led share was measured only on the 34.
+  FIX: Across 15 city pages the total is about 60, though results look radius-based and may overlap. Only about half of the 34 listings read are gaming-led; the rest are snooker halls and sports venues with a console add-on.
+[read:logic#62] unclear | What is already out there
+  QUOTE: Bands understate the gaps: Console Gaming's page data carries an undocumented 44,281 installs.
+  PROBLEM: The one figure shown lifts Console above its band, which narrows its gap to Playo and District. The wider gap is among specialists: about seven times the next app on page data ((scratch)/round2/verify_gaming.txt, C3 and new findings). As written the sentence does not follow.
+  FIX: Bands hide the spread among specialists: page data shows Console Gaming at 44,281 installs against 6,922 for Olympus and 6,060 for Hash (undocumented figures).
+[read:logic#63] unclear | What is already out there
+  QUOTE: These are seller claims, but no venture round for a cafe booking aggregator turned up either.
+  PROBLEM: The but and either do not connect. The reader is not told why to watch this listing, though the fact-checker notes its locations and features overlap with Console Gaming, an unconfirmed inference ((scratch)/round2/verify_gaming.txt, C13).
+  FIX: These are seller claims. Its locations and features overlap with Console Gaming, an unconfirmed link worth one enquiry. No venture round for a cafe booking aggregator turned up.
+[read:logic#64] unclear | Product ideas, ranked
+  QUOTE: so treat the ranking as what to try first rather than what will work.
+  PROBLEM: The next paragraph says the map shows the order of work, and the money table starts with ideas 2 and 11, while idea 1 takes a quarter. So this sentence gives a third ordering. Expected value was also never calculated.
+  FIX: so treat the ranking as our judgement of value, not proof of what will work or the order of work.
+[read:logic#65] unclear | Market reality
+  QUOTE: **What an aggregator could earn at maturity, on a commission and software model (our estimate).**
+  PROBLEM: The heading does not warn that this is the model change 3 drops, and later sections reuse its ₹1.26 Cr as the success number and as the basis of the test thresholds.
+  FIX: **What an aggregator could earn at maturity, on the commission and software model this report rejects (our estimate, kept as a size check).**

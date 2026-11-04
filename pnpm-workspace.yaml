@@ -1,0 +1,35 @@
+packages:
+  - apps/*
+  - packages/*
+
+# pnpm 10 blocks dependency build scripts unless they are approved here.
+# @sentry-internal/node-cpu-profiler comes with @supabase/postgres-meta (root devDependency for
+# Docker-less type generation); its install script only checks that a shipped prebuilt binary
+# matches the platform, so approving it costs nothing and keeps `pnpm install` warning-free.
+onlyBuiltDependencies:
+  - '@sentry-internal/node-cpu-profiler'
+  - '@tailwindcss/oxide'
+  - esbuild
+  - sharp
+  - unrs-resolver
+
+# One version per shared dependency (ADR 0002). Packages reference these as "catalog:".
+# React and its types match the Expo SDK 58 template exactly; React Native 0.88 requires React ^19.3.
+catalog:
+  react: 19.3.0
+  react-dom: 19.3.0
+  '@types/react': 19.3.0
+  '@types/react-dom': 19.3.0
+  '@types/node': 22.20.5
+  typescript: 6.0.3
+  zod: 4.6.7
+  '@supabase/supabase-js': 2.118.0
+  '@tanstack/react-query': 5.105.3
+  vitest: 5.1.0
+  # ESLint 9.x reached end-of-life on 2026-08-06; every config we use declares 10.x support (ADR 0010).
+  eslint: 10.14.0
+  '@eslint/js': 10.0.1
+  typescript-eslint: 8.72.1
+  eslint-config-prettier: 10.1.8
+  prettier: 3.9.10
+  turbo: 2.11.10

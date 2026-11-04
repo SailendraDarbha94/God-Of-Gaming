@@ -1,0 +1,70 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "ui": "stream",
+  "globalDependencies": [".npmrc", "pnpm-workspace.yaml", ".prettierrc"],
+  "globalEnv": ["CI", "NODE_ENV"],
+  "tasks": {
+    // Transit node (no script behind it). Packages are consumed as TypeScript source (ADR 0002),
+    // so lint, typecheck and test of a package must miss cache when one of its workspace
+    // dependencies changes; depending on `topo` adds those packages' files to the hash while
+    // the tasks themselves still run in parallel.
+    "topo": {
+      "dependsOn": ["^topo"]
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "env": [
+        "GOG_DATA_SOURCE",
+        "NEXT_PUBLIC_*",
+        "APPLE_TEAM_ID",
+        "IOS_BUNDLE_ID",
+        "ANDROID_PACKAGE",
+        "ANDROID_SHA256_FINGERPRINTS",
+        "VERCEL_ENV"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      // Strict env mode hides everything not listed here from the dev server, including the
+      // `GOG_DATA_SOURCE=fixtures pnpm dev:web` form the README documents. Values from
+      // apps/web/.env.local are loaded by Next itself and are not affected.
+      "passThroughEnv": [
+        "GOG_DATA_SOURCE",
+        "NEXT_PUBLIC_*",
+        "APPLE_TEAM_ID",
+        "IOS_BUNDLE_ID",
+        "ANDROID_PACKAGE",
+        "ANDROID_SHA256_FINGERPRINTS",
+        "VERCEL_ENV"
+      ]
+    },
+    "lint": {
+      "dependsOn": ["topo"]
+    },
+    "typecheck": {
+      "dependsOn": ["topo"]
+    },
+    "test": {
+      "dependsOn": ["topo"]
+    },
+    "doctor": {
+      "cache": false
+    },
+    // `expo customize tsconfig.json` (the player's typecheck) and expo-doctor evaluate
+    // app.config.ts, which reads these at config time; strict env mode would otherwise hide them.
+    // All four are optional with placeholders, so nothing breaks when they are unset.
+    "@gog/player#typecheck": {
+      "dependsOn": ["topo"],
+      "env": ["EXPO_PUBLIC_SITE_URL", "IOS_BUNDLE_ID", "ANDROID_PACKAGE", "EAS_PROJECT_ID"]
+    },
+    "@gog/player#doctor": {
+      "cache": false,
+      "env": ["EXPO_PUBLIC_SITE_URL", "IOS_BUNDLE_ID", "ANDROID_PACKAGE", "EAS_PROJECT_ID"]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

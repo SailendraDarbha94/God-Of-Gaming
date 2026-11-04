@@ -1,0 +1,42 @@
+{
+  "name": "@gog/web",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Showcase website: cafes, areas, events, download. No booking, no accounts (ADR 0004).",
+  "license": "UNLICENSED",
+  "type": "module",
+  "sideEffects": false,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf .next"
+  },
+  "dependencies": {
+    "@gog/data": "workspace:*",
+    "@gog/domain": "workspace:*",
+    "next": "16.4.5",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-markdown": "10.1.0",
+    "remark-gfm": "4.0.1",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@gog/eslint-config": "workspace:*",
+    "@gog/tsconfig": "workspace:*",
+    "@tailwindcss/postcss": "4.3.4",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "eslint": "catalog:",
+    "postcss": "8.5.32",
+    "tailwindcss": "4.3.4",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

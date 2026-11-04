@@ -1,0 +1,378 @@
+{
+ "thesis": "Most weeks a player can just walk in, so booking alone won't bring anyone back weekly. What's hard is getting four friends to one cafe on good rigs, at a known per-head price, without risking a Saturday-night queue. Win that weekly squad plan with a product that works at any cafe, integrated or not. Charge players only for peak certainty, backed by cash if the seat fails. Then use real player data to win cafes. Start adults-only in one Pune corridor and expect a small, profitable business.",
+ "wedge": "Ship one thing first: a Squad Night plan with an optional Seat Lock, for adults in Pune's Pimpri-Chinchwad, Wakad and Hinjawadi corridor (21 of GamingNation's 59 confirmed Pune cafes). Start by hand over WhatsApp for GTA VI launch week, 19 November 2026.\n\nSquad Night is a link a player drops in the squad's WhatsApp group. It opens on the web with no install and shows who is in, the per-head price and whether seats together are confirmed. Seat Lock is a fee of about ₹39 per squad, offered only on Friday to Sunday evenings and launch days. The seat is still paid at the counter, so the cafe's own prepaid hours keep working. If the seat isn't ready within 15 minutes of the slot, the squad gets the fee back plus ₹100 by UPI.\n\nWhy this beats the alternatives:\n- A booking marketplace needs signed cafes and live inventory, and it goes straight at District and Playo, which both already sell gaming slots. Only 1 of 1,480 YouTube comments asked for online booking (a rough convenience sample).\n- Free cafe software is crowded and nearly free: Console and GameSpotter charge ₹0, GameBiller ₹499 a month.\n- Tournaments and coins are where Hash and Console already are, and paid-entry prize events carry the most legal risk.\n- A feature list won't set you apart. GameSpotter's three-week-old listing already claims free-machine counts, search by game, teammate posts, points and passes.\n\nThe plan works at a cafe that has signed nothing, because the cafe only answers a WhatsApp message it would get anyway. It needs no payment splitting or merchant onboarding. The real rival is a WhatsApp thread plus one phone call, so that is the bar to beat. It also tests the belief everything else rests on: will players pay for certainty? If fewer than 50 locks sell around a launch this big, you have lost six weeks, not a year.\n\nWhy Pune: it has the only rigorous large-city count (103 cafes screened). Playo lists 3 PlayStation venues there against 18 in Hyderabad, District's Pune esports page showed one cafe when I checked today, and Hash, Console and GoPlaya are all Mumbai-region.\n\nWhy adults only: children's data rules bar tracking, the political risk around school students is real, and one operator says kids have no money while college students pay more.",
+ "ideas": [
+  {
+   "name": "Squad Night plan link",
+   "problem": "A session usually needs three to five friends, one time, one cafe and seats together. Today that means a WhatsApp thread and then someone phoning the cafe. Existing apps start at the slot picker, not at who is coming.",
+   "how_it_works": "The planner picks a time and up to three cafes, then drops a link in the squad's WhatsApp group. Friends tap In or Out on the web with a phone number and no install. The card shows the all-in price per head for the actual head count, using each cafe's group rate. At quorum the request goes to the cafe over WhatsApp: a staff member at first, one-tap Confirm or Full buttons later. Everyone gets the confirmation and a running-late button. Payment stays at the counter, so cash, UPI and the cafe's prepaid hours all work. On Thursday evening, last week's planner gets a nudge to rerun the plan. Track weekly active squads rather than installs, because only one person needs to open the app each week.",
+   "evidence": "Partly evidenced; the no-install flow is untested in cafes. Every first-hand play comment found describes going with friends (small sample), and an NVIDIA paper from about 2017 said 72% visit with friends (stale, search excerpt). GameBiller says groups matter more than individuals and that adjacent seats need advance booking (vendor). Console rate cards run about 1.8x, 2.5x and 3.2x for two, three and four players (vendor sample). Dark World sells a ₹2,400 squad pack for up to four. Intencity says its team confirms WhatsApp bookings within minutes. Playo reviewers ask for invite links that open properly and booking details on WhatsApp. Hash's store text mentions squads, but its how-to-book post describes no dedicated group flow. No Indian data on solo versus group share was found.",
+   "impact": "high",
+   "effort": "medium",
+   "defensible": "Yes. Hash, GameSpotter or Playo could copy the flow in about a quarter, and District could too, though gaming is a sliver of its business. Squad history and a weekly habit inside one dense corridor are harder to take.",
+   "sources": [
+    "https://www.youtube.com/watch?v=rKxDPYUeM5s",
+    "https://www.youtube.com/watch?v=hdWlvkP4nYg",
+    "https://images.nvidia.com/content/pdf/white-paper-print-file-23-08-17.pdf",
+    "https://www.gamebiller.com/blog/cyber-cafe-vs-gaming-cafe-what-changed",
+    "https://www.gamebiller.com/blog/managing-peak-hours-in-a-gaming-cafe",
+    "https://www.gamebiller.com/blog/how-to-price-gaming-cafe-sessions-in-india",
+    "https://darkstudio.shop",
+    "https://intencity.in",
+    "https://itunes.apple.com/in/rss/customerreviews/page=1/id=1018786950/sortby=mostrecent/json",
+    "https://www.hashforgamers.com/blog/how-to-book-gaming-cafe-near-you",
+    "https://play.google.com/store/apps/details?id=com.hfg.hash"
+   ]
+  },
+  {
+   "name": "Seat Lock with a cash-backed promise",
+   "problem": "Players want certainty at peak, the hours when cafes need no help. A paid booking that fails with no human to fix it is the worst failure in sports apps, and a fee left out of the displayed price already draws complaints on Console.",
+   "how_it_works": "An optional fee of about ₹39 per squad, tested from ₹19 to ₹49, shown in the first price and never pre-ticked. It is offered only on Friday to Sunday evenings, holidays and launch days. At quiet times the app says there is no need to book, which also protects cafes' walk-ins. The fee belongs to the platform and the seat is paid at the counter. The rules fit on one card. Instant undo for 10 minutes and free cancellation until 2 hours before. Seat not ready within 15 minutes of the slot: the fee comes back plus ₹100 by UPI within minutes, with a named person on WhatsApp. Honoured lock: the cafe earns ₹10. Squad no-show: the cafe keeps most of the fee. A lock can name a tier such as 240Hz or PS5, and power cuts get a published rule. Each cafe's honour rate appears on its page.",
+   "evidence": "Willingness to pay is untested in cafes; the parts have precedents. Bookings not honoured make up 6% of Playo's low-star reviews, about 27% of Hudle's and 33% of KheloMore's (hand count of iOS reviews, which shows what people complain about, not how often it happens). Refund and support complaints lead on the booking-first rivals. Meituan's New Year's Eve deposits make a merchant who fails to honour a booking refund double. On small fees, Playo's ₹9 injury cover reaches nearly 10% of monthly users (company-claimed), and a 2019 report put BookMyShow's handling fee near ₹64 plus GST on two tickets (search-result text; the page refused fetching). Fees are under 1% of Playo's low-star reviews, but one Console review objects to a per-booking fee left out of the displayed price, and CCPA fined Zepto for charges added at checkout. Console's partner terms describe no customer remedy, and GoPlaya promises guaranteed bookings without stating compensation. Failure and no-show rates are unmeasured. My arithmetic: payouts cost about ₹4 per lock at 3% failure and about ₹14 at 10%.",
+   "impact": "high",
+   "effort": "medium",
+   "defensible": "The price and rules can be copied in weeks. A public honour rate built on thousands of real arrivals, and a support desk that answers at 9 PM on a Saturday, take much longer. Rivals may not want the refund cost. District could afford it if gaming ever mattered to it.",
+   "sources": [
+    "https://itunes.apple.com/in/rss/customerreviews/page=3/id=1018786950/sortby=mostrecent/json",
+    "https://itunes.apple.com/in/rss/customerreviews/page=1/id=1380053168/sortby=mostrecent/json",
+    "https://itunes.apple.com/in/rss/customerreviews/page=1/id=1536558207/sortby=mostrecent/json",
+    "https://www.itiger.com/hant/news/1115132277",
+    "https://www.passionateinmarketing.com/?p=736746",
+    "https://www.deccanherald.com/amp/story/india%2Fkarnataka%2Fbengaluru%2Finternet-handling-fee-under-scrutiny-731842.html",
+    "https://play.google.com/store/apps/details?id=com.consolegaming.consolegaming",
+    "https://en.channeliam.com/2026/08/06/ccpa-action-dark-patterns-digital-platforms-india/",
+    "https://www.consolegaming.in/terms-and-conditions",
+    "https://play.google.com/store/apps/details?id=com.goplaya",
+    "https://izi.is/wiki/en/hall/handle-no-show/"
+   ]
+  },
+  {
+   "name": "The Cafe Report: every floor audited in person",
+   "problem": "Players can't tell which cafes have the rig, game or price they want. Guides tell them to ask staff which GPU is fitted or to confirm rates at the counter, listing data conflicts on whether some cafes are even open, and District's ratings are Google reviews.",
+   "how_it_works": "Send a person to every screened cafe in Pune, starting with the corridor. They pay for and play one hour, then record the GPU actually fitted, monitor refresh rate, mouse and headset condition, ping, AC, per-controller and seating charges, installed games, and a dated photo of the rate card. Every fact carries the date it was checked. Publish one page per cafe and cut short videos from the results, such as the best 240Hz floors in Wakad. After launch, verified players confirm or correct facts, and cafes can claim a page and fix errors within 24 hours. Word safety items as documents on file as of a date, never as safe, and stick to measured facts. Budget about ₹50,000 to ₹75,000 for 103 cafes (my estimate).",
+   "evidence": "The need is evidenced; the audit's effect on bookings is untested. GamingNation's Pune screen passed 103 cafes and confirmed 59, and it says the cafes were not visited. One comment thread quotes ₹40 to ₹700 an hour. Better rigs already earn 30% to 57% more at Intencity and Refill (single venues, a sibling's calculation). Cafe-rating videos drew 1.24M and 484K views in 2026, which shows interest, not bookings. Google allows review stars only from reviews a site collects itself, and District's rating on a sampled cafe comes from Google reviews. Zomato began in 2008 as a listing site with menu information and user reviews, a loose local precedent. GameSpotter says its team checks venues; how deeply is unknown.",
+   "impact": "high",
+   "effort": "low",
+   "defensible": "District is unlikely to audit small cafes across 909 cities. A funded specialist could copy Pune in one or two months, so the lasting asset is keeping the data fresh and collecting first-party reviews, which compound.",
+   "sources": [
+    "https://gamingnation.in/best-gaming-cafe-in-pune/",
+    "https://gamingnation.in/gaming-cafe-near-me/",
+    "https://gamingnation.in/best-gaming-cafe-in-bangalore/",
+    "https://www.youtube.com/watch?v=rKxDPYUeM5s",
+    "https://refill24x7.com/offers",
+    "https://intencity.in",
+    "https://www.youtube.com/watch?v=VJav2ydDnzA",
+    "https://www.youtube.com/watch?v=rccodQLAbqc",
+    "https://developers.google.com/search/docs/appearance/structured-data/review-snippet",
+    "https://www.district.in/events/console-hub-premium-gaming-zone-2025-buy-tickets",
+    "https://en.wikipedia.org/wiki/Zomato",
+    "https://wanderlog.com/place/details/1507334/gamysticafe",
+    "https://play.google.com/store/apps/details?id=com.funpixelnest.hubledger"
+   ]
+  },
+  {
+   "name": "Tonight board with WhatsApp seat checks",
+   "problem": "Before leaving home a squad wants to know whether there is room, how long the wait is and what it will cost each of them. Walk-in is the default, so nobody can see this without calling.",
+   "how_it_works": "The home screen lists the squad's usual cafes and nearby ones. Each row shows the all-in price per head, seat status with a timestamp, and plain advice: walk in, lock, or try elsewhere. Status comes from a WhatsApp message sent to each cafe at 5, 7 and 9 PM on Friday to Sunday, with reply buttons for none free, 1 to 3, 4 or more, or a wait time. The cafe installs nothing. Where a cafe has live data and opts in, such as Dark World's seat map or a per-venue key on iCafeCloud or ggLeap, use that instead. Show counts by category, not a seat map. Never show a low-seats warning without a fresh reply, because false urgency is a dark pattern.",
+   "evidence": "Practice exists, but no measured uplift was found, and the WhatsApp check is untested. LANGAME's visible RuStore reviews praise seeing free seats and not having to wait (only four visible). Dark World's map refreshes every 5 seconds and opens WhatsApp. Kaikatsu in Japan shows remaining seats by category. GameSpotter claims live free-machine counts, which rely on its venue app. GameBiller says people wait if given a concrete time and advises taking bookings only for hours that fill (vendor). Evidence of peak waits rests largely on one affiliate site, with Hash and Clutchr pointing the same way, and no turn-away data exists.",
+   "impact": "high",
+   "effort": "medium",
+   "defensible": "GameSpotter already claims free counts and could copy the rest quickly. District's slot format can't show this today, but it could change. The replying habit among local cafes gives a modest, local lead.",
+   "sources": [
+    "https://www.rustore.ru/catalog/app/com.f5computers.langame_aggregator",
+    "https://darkstudio.shop",
+    "https://apps.apple.com/jp/app/958083643",
+    "https://play.google.com/store/apps/details?id=com.funpixelnest.hubledger",
+    "https://www.gamebiller.com/blog/managing-peak-hours-in-a-gaming-cafe",
+    "https://gamingnation.in/best-gaming-cafe-in-mumbai/",
+    "https://www.hashforgamers.com/blog/how-to-book-gaming-cafe-near-you",
+    "https://dev.icafecloud.com/docs",
+    "https://ggcircuit.atlassian.net/wiki/spaces/GKB/pages/15862859/API"
+   ]
+  },
+  {
+   "name": "Launch Seats and Story Seat",
+   "problem": "Big console releases create demand from players with no console, and a long story game needs the same console and save next week. Nobody sells that certainty today.",
+   "how_it_works": "GTA VI comes first. A plain-text page lists which corridor cafes will have it on PS5, from when, and at what per-head price, with Seat Locks sold by hand. After the first session the concierge records the console number and profile name, so the next lock can hold the same console and the app can tell the player where their save is. The app never touches game or PSN accounts and uses no game art or logos. Repeat for later major releases.",
+   "evidence": "The date is verified; demand is untested. Rockstar's page shows 19 Nov 2026 on PS5 and Xbox Series X|S, with no PC version in the text I could read. Hash's news feed reports preload from 12 Nov and about 210GB on PS5 (secondary source), which suggests cafes may keep it on only some consoles (my inference). A PS5 costs about 458 cafe hours at ₹120 (a sibling's arithmetic), and the only India console count is a stale 2022 estimate. A commenter sees the launch as an opening for cafes, and a Pune cafe advertises it, per a sibling. Spike size and demand for save continuity have no data. PSN terms bar commercial use without consent and no cafe route was found, so never imply official status.",
+   "impact": "medium",
+   "effort": "low",
+   "defensible": "Anyone can run this: Hash is already publishing GTA VI news. Being first in one corridor gives only a short lead, but the squads recruited stay useful.",
+   "sources": [
+    "https://www.rockstargames.com/VI",
+    "https://www.hashforgamers.com/blog",
+    "https://gnez.in",
+    "https://www.youtube.com/watch?v=rKxDPYUeM5s",
+    "https://0451games.substack.com/p/horizon-forbidden-west-ps5-india-sales-review",
+    "https://www.playstation.com/en-in/legal/psn-terms-of-service/"
+   ]
+  },
+  {
+   "name": "Thursday Drop",
+   "problem": "A local regular has no reason to open a booking app between visits. Deals and events are scattered across cafe websites and Instagram.",
+   "how_it_works": "Every Thursday at 6 PM the app, a web page and a WhatsApp channel publish the coming week for your corridor: dead-hour deals, new installs, rig upgrades, LAN nights and tournaments. It starts as editorial work. The team republishes public offers such as Intencity's weekday 8 AM to 4 PM rates and Gamerz Nation's ₹250 morning pack, which needs no cafe's permission. Once cafes opt in, add limited seats sold only in the Drop. Keep price history from day one for the 30-day prior-price rule. Adults only, and never aimed at school hours.",
+   "evidence": "Untested for cafes; only the cadence is borrowed. Epic Games Store moved to one free game a week in June 2019, and trial documents put its pre-2020 cost at about $0.50 to $5 per new user (via Wikipedia; a different product). Swiggy says its low-ticket Steal Deals reach younger, impulse-led diners. Cafes announce tournaments on Instagram 7 to 14 days ahead, per a guide. A few Console reviewers praise rewards and offers (small sample). I found no site that collects these local offers across cafes.",
+   "impact": "medium",
+   "effort": "low",
+   "defensible": "Anyone could copy the format in a week. Exclusive partner seats and a built audience take longer, and steady weekly editorial work is something rivals may skip.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Epic_Games_Store",
+    "https://www.swiggy.com/corporate/wp-content/uploads/2026/10/Q2-FY2027-Shareholder-letter.pdf",
+    "https://intencity.in",
+    "https://gnez.in/pricing",
+    "https://gamingnation.in/best-gaming-cafe-in-mumbai/",
+    "https://itunes.apple.com/in/rss/customerreviews/id=6739500864/sortBy=mostRecent/json",
+    "https://taxguru.in/corporate-law/consumer-protection-commerce-amendment-rules-2026.html"
+   ]
+  },
+  {
+   "name": "Squad Tab",
+   "problem": "After a session one friend has usually paid and must chase the others. Group rates make each share unclear, and shared hour packs add more confusion.",
+   "how_it_works": "When the session ends the plan card becomes a bill: hours, head count, snacks and each person's share. Each friend gets a link that opens their own UPI app to pay the friend who fronted the money. No money touches the platform and there is no wallet. It also tracks who has used what from a shared pack such as Dark World's 30-hour squad plan. It works at any cafe, and only among friends in the squad, never strangers.",
+   "evidence": "Untested as a retention hook. Playo says it can't recover money owed between players because it can't control offline transactions, reviewers report being blocked after paying (unverified), and a host asks for a paid-or-not tracker. Refill's own price page does per-head maths for four players on a PS4. News coverage says NPCI told banks and apps to stop person-to-person UPI collect requests from 1 Oct 2025, with merchant collect unaffected (circular not opened, so verify). That means pay links, not requests.",
+   "impact": "medium",
+   "effort": "low",
+   "defensible": "Easily copied in weeks. Its value is closing the weekly loop and giving the streak evidence that a session happened.",
+   "sources": [
+    "https://playo.freshdesk.com/support/solutions/articles/1070000107606-my-playpals-have-not-paid-me-after-the-activity-will-playo-be-able-to-help-",
+    "https://itunes.apple.com/in/rss/customerreviews/page=1/id=1018786950/sortby=mostrecent/json",
+    "https://refill24x7.com/offers",
+    "https://darkstudio.shop",
+    "https://www.theweek.in/wire-updates/business/2025/08/14/dcm65-biz-npci-collect.html"
+   ]
+  },
+  {
+   "name": "Squad Streak and Cafe Passport",
+   "problem": "Loyalty is stuck at one branch, even inside one brand at Intencity, so nothing a player earns travels with them. Rival apps reward individuals with coins.",
+   "how_it_works": "One profile across every cafe: hours, visits, cafes played and a badge for each floor, plus a streak owned by the squad rather than the individual. Proof of a visit is two squad members checking in inside the cafe's geofence, or a counter QR once the cafe opts in. Ladders count attendance, not skill. Rewards are status and priority, not cash or random prizes. A squad can pause its streak for exam weeks. A yearly recap card is built for sharing. Adults only, since tracking and behavioural monitoring of under-18s are barred.",
+   "evidence": "Mechanics have precedents; the squad-level streak and two-person check-in are untested. Console claims 810+ August sessions from players chasing a 10-visit milestone (company-claimed, no denominator). LANGAME's store text lists profiles, friends and a global ladder. Duolingo says learners who reach a 7-day streak are 3.6 times as likely to finish a course (company, 2022, a correlation). Riot bars MMR or ELO alternatives, and Playo's peer ratings reportedly get gamed. GameBiller calls exam season the sharpest dip (qualitative) and advises rewarding frequency.",
+   "impact": "medium",
+   "effort": "medium",
+   "defensible": "The mechanics can be copied in a month, and Console and Hash already have streaks. A player's multi-cafe history can't be imported, so it gains value with time if the data stays honest.",
+   "sources": [
+    "https://www.consolegaming.in/list-your-cafe",
+    "https://www.rustore.ru/catalog/app/com.f5computers.langame_aggregator",
+    "https://zoom.cnews.ru/news/item/698358",
+    "https://blog.duolingo.com/how-duolingo-streak-builds-habit/",
+    "https://developer.riotgames.com/policies/general",
+    "https://blog.playo.co/playo-user-rating-graph/",
+    "https://intencity.in",
+    "https://www.gamebiller.com/blog/seasonal-demand-in-indian-gaming-cafes",
+    "https://www.gamebiller.com/blog/turning-walk-ins-into-regulars",
+    "https://dpdpa.com/dpdpa2023/chapter-2/section9.html"
+   ]
+  },
+  {
+   "name": "Daylight Priority: dead-hour play earns peak access",
+   "problem": "This is the core mismatch. Players want peak seats, and cafes need their empty hours filled. A flat commission is smallest exactly where the cafe's need is greatest.",
+   "how_it_works": "Each verified weekday 11 AM to 5 PM session at a partner cafe earns a Priority token. One token waives the next Seat Lock fee at that cafe and opens its peak seats to the holder 24 hours before everyone else. Tokens can't be bought, transferred or cashed. Cafes agree because a quiet-hours seat costs them almost nothing and a full Saturday loses nothing. Pilot at 10 cafes against 10 control cafes.",
+   "evidence": "The exchange is untested. The mismatch is well described but modelled: peaks of 70% to 90% and weekday mornings near 0% (vendor), with quiet hours already discounted 30% to 50%. Dark World bundles priority booking into its top pack, so priority has value. Refill's page offers free early Sunday hours to players who buy 3+ hours in the week, a cafe already linking one period's spending to another (the page could not confirm it is live). GameBiller says weekday afternoons belong to students and shift workers, but a guide says school students, which could leave an adult-only pool thin. One owner's comment describes 50% off in school hours, the behaviour behind a July 2025 assault at a Kalyan gaming zone, so this must stay adults-only. Whether tokens fall under RBI's prepaid rules is for counsel.",
+   "impact": "high",
+   "effort": "medium",
+   "defensible": "The mechanic is simple, but it needs players and cafes in the same corridor, so a rival without density can't make it work. District could run a version through its pass if it chose to.",
+   "sources": [
+    "https://cafenex.com/blog/gaming-cafe-profit-margin-india",
+    "https://www.clutchr.in/blog/gaming-cafe-pricing-strategies",
+    "https://www.gamebiller.com/blog/filling-empty-hours-in-a-gaming-cafe",
+    "https://gamingnation.in/gaming-cafe-near-me/",
+    "https://darkstudio.shop",
+    "https://refill24x7.com/offers",
+    "https://www.youtube.com/watch?v=rKxDPYUeM5s",
+    "https://www.theweek.in/wire-updates/national/2025/07/30/bom4-mh-mns-assault.html",
+    "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=12156"
+   ]
+  },
+  {
+   "name": "Tip-or-Refund Nights",
+   "problem": "Overnight sessions and whole-floor nights are sold by phone, and a cafe can't risk opening late for a handful of players.",
+   "how_it_works": "A player or cafe proposes a night: date, cafe, games, 12 to 30 seats and price per head. Friends buy tickets. If the minimum is reached by a deadline such as Thursday 9 PM, the night is on. If not, every ticket is refunded to source automatically. A licensed split product such as Razorpay Route or Cashfree Easy Split holds the money until the night has happened. The same page takes birthdays and office nights as a quote. It sells seat time with no prizes or entry fees. The format could also carry a paid practice block led by a strong local player (untested). Check local closing rules first.",
+   "evidence": "The threshold is live at one cafe; the player-run format is untested. Intencity's Camp branch keeps its lights on overnight if 5 or more bookings are active, and it bars minors after 10 PM without a guardian or written consent. Refill sells whole-hall parties and weekend lock-ins by phone, and Intencity takes groups of 10 to 30. Gamerz Nation sells an 11-hour overnight for ₹700, and a guide reports ₹600 to ₹1,200 in metros. CafeNex calls party blocks the highest-margin booking (vendor). No revenue share for these lines was found. Chennai's rules set a 10 AM to 10 PM window. In sport, Machaxi's playing-and-coaching memberships grew 205% to ₹15.3 Cr in FY25.",
+   "impact": "medium",
+   "effort": "medium",
+   "defensible": "Copyable in a quarter. Cafe relationships and the local pool of regulars matter more than code. District sells events but is unlikely to chase player-proposed nights of this size.",
+   "sources": [
+    "https://intencity.in",
+    "https://refill24x7.com/offers",
+    "https://gnez.in/pricing",
+    "https://gamingnation.in/gaming-cafe-near-me-open-now/",
+    "https://cafenex.com/blog/gaming-cafe-marketing-ideas-india",
+    "https://razorpay.com/docs/payments/route/dashboard",
+    "https://www.cashfree.com/docs/payments/split/faq",
+    "https://indiankanoon.org/doc/148461945/",
+    "https://inc42.com/company/machaxi/"
+   ]
+  },
+  {
+   "name": "Proof-of-Demand Report (how cafes are won later)",
+   "problem": "Owners complain about revenue against rent, not booking, so managing bookings answers a question they aren't asking. Vendors have also taught them to fear platforms that own the customer.",
+   "how_it_works": "Once a corridor has enough players, give every cafe a free monthly report: active squads living within 2 km, how many played there, which rigs or games sent them elsewhere, and busy and dead hours. All of it is aggregated, with no personal data. The ask stays small: tap Confirm on WhatsApp and keep earning ₹10 per honoured lock. Paid steps come next: a fee only on a new player's first visit (20%, capped at ₹30) with 0% on repeats, and dead-hour seats in the Drop. The listing and one-tap confirm stay free.",
+   "evidence": "The reframing is evidenced; paying cafes per honoured lock and the report's pull are untested. In about 16 operator comments, revenue and rent recur and booking is never raised (small sample). Shunwang's CEO said in 2022 that attracting and reactivating customers matters most to cafes (stale). Langame sells aggregator traffic as a benefit. Treatwell, Mindbody, Booksy and Fresha charge only on a new client's first booking; on a ₹170 ticket, 20% is ₹34. On Hash's own model a flat 10% takes more than all profit at 30% occupancy. SENET warns owners about platforms owning customer data, so the report must not expose individuals.",
+   "impact": "high",
+   "effort": "low",
+   "defensible": "Only someone with real local player data can produce it, so it can't be copied without density. The pricing can be matched quickly, though that costs a rival on full commission real revenue.",
+   "sources": [
+    "https://www.youtube.com/watch?v=RiOwXVj4y9A",
+    "https://www.youtube.com/watch?v=rKxDPYUeM5s",
+    "https://www.cls.cn/detail/1086211",
+    "https://langame.ru/software",
+    "https://www.treatwell.co.uk/partners/pricing/",
+    "https://www.mindbodyonline.com/business/pricing",
+    "https://biz.booksy.com/en-us/pricing",
+    "https://www.fresha.com/pricing",
+    "https://www.hashforgamers.com/blog/is-gaming-cafe-profitable-india",
+    "https://senet.cloud/blog/who-owns-gaming-center-customer-data"
+   ]
+  },
+  {
+   "name": "Library Match and Game Requests",
+   "problem": "PC squads don't know what they can all play or whether a cafe has it. Cafes handle this over WhatsApp or at the desk.",
+   "how_it_works": "Players can link Steam. The app shows games the whole squad owns plus free-to-play titles, and filters cafes by the installed list from the Cafe Report. If a game is missing, one tap sends the cafe a request with the arrival time and tells the squad when it is ready. Everything is plain text with no game art. Console titles simply show what the audit last saw.",
+   "evidence": "Library matching itself has no outcome data. Intencity asks for 3 to 4 hours' notice, requires paid games to come from the player's own Steam account, and starts PCs from a clean image at every boot. Gamer Time Arena tells players to ask the desk. Steam's PC Cafe Program lets patrons use their own accounts and libraries at registered venues (India not named). Steam's partner docs describe a call listing owned games where they are visible to the caller. Commenters criticise narrow game lists. GameSpotter already searches by game.",
+   "impact": "medium",
+   "effort": "low",
+   "defensible": "Quick to copy. Linked accounts add mild stickiness, nothing more.",
+   "sources": [
+    "https://intencity.in",
+    "https://gamertimearena.com/",
+    "https://partner.steamgames.com/pccafe",
+    "https://partner.steamgames.com/doc/sitelicense/licensees",
+    "https://partner.steamgames.com/doc/webapi/IPlayerService",
+    "https://www.youtube.com/watch?v=hdWlvkP4nYg",
+    "https://play.google.com/store/apps/details?id=com.funpixelnest.hubledger"
+   ]
+  },
+  {
+   "name": "Hours Vault",
+   "problem": "Regulars hold prepaid hours at different cafes with different expiry dates. Nothing shows them in one place, so unused hours lapse.",
+   "how_it_works": "The player adds a pack by photo or by typing it in. The app shows hours left across cafes and warns before expiry, with a one-tap plan to use them. It holds no money and is not a wallet. Later, at partner cafes, it can sell that cafe's own pack for a fee, one venue at a time.",
+   "evidence": "A player-run vault across cafes is untested, and manual entry may be too much for most players. Packs are widespread: Intencity's 10 hours last 30 days and 50 hours last 120, Dark World's 10 hours last a month and 100 hours last 6 months, and Refill's never expire. A Hudle reviewer complains of plans that expire quickly. Clutchr claims wallet customers visit 2 to 3 times as often (vendor, no data). Dark World and GoPlaya track hours only inside their own systems. RBI's closed-system logic needs checking for per-venue packs.",
+   "impact": "low",
+   "effort": "low",
+   "defensible": "Easy to copy, though rivals pushing their own wallets have little reason to. Over time it shows where regulars' prepaid money sits, which helps when pitching cafes.",
+   "sources": [
+    "https://intencity.in",
+    "https://darkstudio.shop",
+    "https://refill24x7.com/offers",
+    "https://itunes.apple.com/in/rss/customerreviews/page=1/id=1380053168/sortby=mostrecent/json",
+    "https://www.clutchr.in/blog/gaming-cafe-pricing-strategies",
+    "https://play.google.com/store/apps/details?id=com.goplaya",
+    "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=12156"
+   ]
+  },
+  {
+   "name": "First Night for mobile squads",
+   "problem": "Most Indian gamers play on phones and may never have sat at a cafe PC or PS5. Cafes are quiet by day, and first visits can go badly through surprise bills.",
+   "how_it_works": "A low-priced first session for adult mobile squads at an off-peak time: one hour on PC or PS5 at a set all-in price, offered only at cafes with a good audit. The app explains what it costs, how to extend and what to bring. The cafe funds the discount and pays only for a provably new player. Run a small test with women-led squads, without free-for-women gimmicks, which one commenter criticised.",
+   "evidence": "Untested for gaming cafes. A YouthTalks pulse found 89% mainly on mobile and 71% preferring multiplayer (100 respondents, indicative only). Meituan and Douyin reportedly sell 3-hour trial vouchers for internet cafes (low-quality sources). GameBiller says unexplained pricing and surprise bills stop first-timers returning (vendor). Niko puts women at 49% of all Indian players, but their share of cafe visitors is unknown and nothing usable on safety was found.",
+   "impact": "medium",
+   "effort": "low",
+   "defensible": "Any rival or District can run a trial offer in weeks. The only edge is pointing first-timers at cafes you have actually audited.",
+   "sources": [
+    "https://theyouthtalks.com/india-gen-z-gaming-report-2026-how-young-india-plays-connects-and-escapes-through-games/",
+    "https://www.sina.cn/news/article/nikknsc1953211.html",
+    "https://www.gamebiller.com/blog/turning-walk-ins-into-regulars",
+    "https://substack.nikopartners.com/p/indias-gaming-market-surpasses-1",
+    "https://www.youtube.com/watch?v=OhIYPBvSrwg"
+   ]
+  },
+  {
+   "name": "Off-Peak Pass across cafes",
+   "problem": "Students have free daytime and little money. Regulars like passes, but today a pass ties them to one cafe.",
+   "how_it_works": "₹599 a month for 15 weekday daytime hours at any partner cafe, with cafes paid per hour used, about ₹30 in my model. It is an entitlement, not a stored balance: no rupee value, no top-up, and hours lapse monthly. Limiting it to dead hours avoids pass-holders fighting over peak seats. Launch only with a written legal view and 50 or more cafes.",
+   "evidence": "No cafe proof exists. A Kanpur cafe's ₹1,500 monthly unlimited offer drew enthusiasm and worry about 20 pass-holders sharing 10 PCs, and one player said he would go daily on a ₹1,600 pass (comments, about 2024, stale). FITPASS shows FY25 revenue of ₹61.7 Cr and about ₹2.4 Cr profit on about $2M raised (Inc42). EazyDiner Prime refunds the shortfall or extends membership if savings fall short. RBI treats instruments usable across a group of merchants as licensed, with ₹5 Cr net worth at application, and whether a credit subscription escapes that is for counsel. My arithmetic: up to ₹149 per pass per month if fully used, and realised cafe rates of ₹40 to ₹90 may make ₹30 a hard sell.",
+   "impact": "high",
+   "effort": "high",
+   "defensible": "Hard to copy once running, because it needs many cafes and a real player base. The threat is District Pass reaching activities: Eternal has the money, though its own results suggest passes carry real cost.",
+   "sources": [
+    "https://www.youtube.com/watch?v=OhIYPBvSrwg",
+    "https://inc42.com/company/fitpass/financials/",
+    "https://fitpass.co.in/",
+    "https://www.mindbodyonline.com/business/classpass",
+    "https://www.eazydiner.com/prime",
+    "https://www.rbi.org.in/Scripts/BS_ViewMasDirections.aspx?id=12156",
+    "https://b.zmtcdn.com/investor-relations/Eternal_Shareholders_Letter_Q3FY26_Results.pdf"
+   ]
+  }
+ ],
+ "not_to_build": [
+  "A booking-first marketplace with commission on every booking. Owners don't raise booking, 1 of 1,480 comments asked for it, and on Hash's own model a 10% cut exceeds profit at 30% occupancy. ₹10 crore of commission needs about 20 bookings per cafe per day at 400 cafes, more than many small cafes' entire footfall.",
+  "Cafe management software in year one. Console and GameSpotter give it away and GameBiller charges ₹499 a month, so 1,000 paying cafes yield only about ₹60 lakh to ₹3.6 Cr a year. Control of the PC is powerful, as Langame shows, but that fight is with 10 or more vendors. Use one-tap WhatsApp now and connect to software cafes already run, through their own keys, later.",
+  "A stored wallet valid across cafes. On a plain reading of RBI's rules it is a licensed prepaid instrument needing ₹5 Cr net worth at application. Refunds as credits also breed distrust on Playo, Hudle and KheloMore. Refund to source and keep tokens non-cash.",
+  "Paid-entry prize tournaments and the esports label. The legal researcher reads these as the feature most likely to count as online money gaming, with non-bailable exposure for facilitators. GameBiller says fees and prizes roughly cancel (vendor), esports revenue fell 7.5% in 2025, and Hash's site already promotes entry fees and prize pools. If you run cups later, make them free to enter.",
+  "Jackpot boxes and mini-games for coins. Console and Hash use them, but random prizes tied to paid play invite questions under gaming law (my inference; counsel should check), and coins cost real money. GameBiller advises rewarding visit frequency, and status costs nothing.",
+  "Stranger matching and skill ratings at launch. Find-a-game matches were about 3% of Playo's pickleball games (rough calculation), peer ratings reportedly get gamed, off-platform money scams follow, Riot requires opt-in for teammate tools and bars rating alternatives, and no public BGMI rank API was found. Add open seats inside a squad later.",
+  "Under-18 accounts, school-hour deals or teen marketing at launch. DPDP requires verifiable parental consent, bars tracking and targeted ads for under-18s, and carries penalties up to ₹200 crore. Streaks and ladders sit close to behavioural monitoring (my reading). The Kalyan assault of July 2025 and the Kalyan East raid of November 2025 show the local risk. Revisit with parent-booked accounts once survey data shows what adults-only costs.",
+  "Station-level seat maps and food to seat in version one. Both need live floor data. No measured uplift for seat maps was found, food through the platform may trigger GST section 9(5), and reserved seats in quiet hours block walk-ins. LANGAME's reviews suggest timers and food are loved, so return to them once cafes are connected.",
+  "A national page matrix, scraped listings or Reserve with Google. District already has 909-city pages, many of them thin. Google's rules target doorway pages and scraped stars. Taking money for unconfirmed venues causes arrival failures and owner anger, as one KheloMore complaint alleges. Reserve with Google offers appointments redirect only and doesn't list recreation.",
+  "Creator deals and city-wide paid social. I found no evidence that creators drive offline cafe bookings in any market, and GameBiller advises against city-wide paid social (vendor). Use campus captains and audit videos, tracked by code.",
+  "Your own cafes or a franchise arm. Hash and Console go this way, but my sibling's model puts payback at 2 to 5 years, rent is the top failure cause (vendor), and Western chains such as Belong contracted sharply.",
+  "Spending on the God of Gaming brand before clearance. The .com is held, .in is reported unavailable, a US shop trades under the name, GodLike and GodGreek sit nearby, and a trademark lawyer should assess a possible Sony objection and the religious-sensitivity bar. Use a working name for the test."
+ ],
+ "monetisation": [
+  "1. Seat Lock, from the first week. About ₹39 per squad, opt-in, all-in and peak only (test ₹19 to ₹49). Roughly ₹15,000 a month billed at the Phase 1 gate (250 squads x 1.5 locks). About ₹1.5 Cr a year billed and ₹75 lakh net at 50,000 weekly active players, after an assumed 18% GST, ₹10 to the cafe and 3% failure payouts. It comes first because it needs no cafe contract, taxes nobody's regulars and tests the core belief. Peak seats look underpriced: 95% of GameBiller's sampled cafes keep weekend prices flat (vendor sample, my reading), though Intencity's sim rates rise from ₹300 to ₹500 at weekends.",
+  "2. Tip-or-Refund Nights and group quotes, from about month 6. Around 12% of tickets on ₹8,000 to ₹25,000 nights, birthdays and office events. Eight a month in Pune at ₹12,000 is about ₹11,500 a month, and 400 a month nationally is about ₹70 lakh a year. Second because one event earns as much as dozens of locks and these are sold by phone today. No revenue-share data exists for these lines.",
+  "3. First-visit fee paid by cafes, from about month 8, only where a cafe has opted in. 20% of a provably new player's first visit, capped at ₹30, with 0% on repeats, following Treatwell, Mindbody, Booksy and Fresha. At 150,000 to 300,000 first visits a year that is ₹45 to ₹90 lakh. Third because cafes will pay only once players are visibly arriving.",
+  "4. Drop margin, from about month 8. The cafe sets a net price for empty weekday seats and the app adds ₹9 to ₹15, shown in the price. 15,000 players buying twice a month at ₹12 is about ₹43 lakh a year. Empty seats cost cafes little (IZI, vendor), but quiet hours are already discounted 30% to 50%, so margin per seat stays small.",
+  "5. Squad Pass, from about month 10, sold on the web. ₹99 a month or ₹799 a year for four free locks, early access to launch seats, double Priority tokens, and EazyDiner's structure of an extension or refund if savings fall short. At 5% to 8% of 50,000 players that is ₹30 to ₹48 lakh a year. Later because a subscription needs real savings behind it. District Pass shows such passes can cost real money, and Playo's planned subscription (expected Q2 FY27, launch not confirmed) is aimed at discovery and verification.",
+  "6. Brand money, only after about 20,000 weekly players, adults only and labelled. Hardware-funded rig trials, where a brand pays per verified hour on a new GPU or monitor (untested), and free-entry house cups, for ₹50 lakh to ₹1 Cr a year. A regular spending about ₹1,500 a month (my assumption, below one player's ₹600 Sundays and another's ₹2,250 hypothetical budget) far exceeds Niko's US$2.04 annual game-spend ARPU, though that is only a rough contrast. NVIDIA and Gigabyte funded a 20-cafe event in 2024. Esports sponsorship fell in 2025, so treat this as upside.",
+  "7. Off-Peak Pass, year two at the earliest and only with a written legal view. ₹599 for 15 weekday daytime hours, paying cafes about ₹30 an hour, leaves up to ₹149 per pass per month, or about ₹54 lakh a year at 3,000 passes. It has the largest upside and the largest legal and supply risk.",
+  "Total: about ₹3 to ₹5 Cr a year at 50,000 weekly active players, which is 25% of my estimate of about 200,000 regular-equivalents nationally (₹360 Cr estimated floor spend divided by ₹18,000 a year), likely 4 to 5 years out. That beats the ₹1.26 Cr base case for commission plus software but stays small. Playo took about a decade to reach ₹20.5 Cr in FY25, on under $3M raised. All figures here are my estimates, low confidence and untested. Raise little and keep costs low. The main route to something bigger is extending the squad plan to other indoor group play such as snooker and VR, which GameSpotter already bundles."
+ ],
+ "website": [
+  "Answer three questions on the first screen: where can my squad play tonight, what will it cost each of us, and what happens if the seat isn't there? Show real, dated data, because rival site counters already conflict with store numbers.",
+  "Make the squad link the front door. A shared plan opens as a fast web page showing who is in and the per-head price, with In or Out by phone number and no install. Build the app with Expo Router so App Links and Universal Links fall back to the site, and use Play Install Referrer to keep the plan after install, because Firebase Dynamic Links shut down in August 2025. Use a small install banner only, since Google discourages full-screen overlays.",
+  "Publish one server-rendered page per audited cafe: checked-on date, GPU, refresh rate, per-head prices for one to four players, a rate card photo, installed games in plain text, honour rate and verified reviews. This is the main search asset. Console's sitemap has 8 URLs and no venue pages, GoPlaya's home page is client-rendered, and an estimated 60% of Playo's traffic comes from Google organic, including venue names. Use InternetCafe markup and stars only from your own post-visit reviews, and never copy Google ratings.",
+  "Build pages only where audited inventory exists: corridors (Wakad, Hinjawadi), formats (PS5, 240Hz PC, overnight) and titles (GTA VI on PS5 in Pune, plain text, no art or logos). Noindex thin pages. Don't copy District's 909-city matrix, because Google's rules target doorway pages and District's reach can't be matched anyway.",
+  "Run a Tonight page per corridor with a timestamp on every seat status. Never show a low-seats claim without a fresh reply from the cafe.",
+  "Publish each Thursday Drop as a dated page linked to a WhatsApp channel. Use Event markup for tournaments and LAN nights, which fits Google's event results, and not for daily slots.",
+  "Sell Seat Locks, and later Squad Pass, on the web by UPI with a phone number. Bookings for physical services are exempt from store billing, but a discount membership's status is unsettled, so keep it on the web until counsel rules. Web checkout also serves players who won't install.",
+  "Put the promise on one plain page: fee in the first price, refund to source within 24 hours, the 15-minute rule, the power-cut rule and human WhatsApp hours. From 1 January 2027 this page also carries ranking factors, sponsored labels, 30-day prior prices, grievance timelines, helpline integration and the yearly dark-pattern self-audit certificate.",
+  "Apply adults-only and privacy rules on the site too: a neutral 18+ screen at account creation, and no ad pixels, retargeting or lookalike audiences for under-18 or unknown-age visitors. Have counsel test whether a screen is enough, since one law firm says simple age confirmation is not.",
+  "Add a For Cafes page: claim a page for free, fix errors within 24 hours, see the catchment report and tap Confirm on WhatsApp. State plainly that repeat players carry 0% and that no money is ever collected for a cafe that hasn't confirmed. This is where the supply push starts.",
+  "Add Hindi and Marathi to the top pages once the first corridor works. GameSpotter already ships Hindi and Telugu, but no uplift data exists."
+ ],
+ "launch_plan": [
+  {
+   "phase": "Phase 0: Launch test by hand",
+   "duration": "3 Nov to mid-Dec 2026, about 6 weeks",
+   "actions": "Visit all 21 corridor cafes to record rate cards, rigs, PS5 counts and GTA VI plans. Ask each to answer a WhatsApp seat check and offer ₹10 per honoured lock. Before the reported 12 Nov preload, publish one plain-text page and a WhatsApp concierge. Sell Seat Locks at ₹19, ₹39 and ₹49, varying the price by week, with the seat paid at the counter. Survey 300 players on 10 floors: age band, squad size, visits a month, cafes used and prepaid hours. Read Reddit and Google reviews by hand. Book one counsel session on the fee, adults-only design, tokens and Maharashtra's entertainment duty. Use no game art.",
+   "gate": "My thresholds: 150 paid locks from 100 squads; 25% of squads lock again within 21 days; 95% of locks honoured within 15 minutes; 12 of 21 cafes reply within 10 minutes at peak; under-18s below about 35% of surveyed spend. Under 50 locks: drop paid certainty and keep only the free guide and group quotes."
+  },
+  {
+   "phase": "Phase 1: Squad Night in one corridor",
+   "duration": "Mid-Dec 2026 to Mar 2027, about 15 weeks",
+   "actions": "Ship the React Native app and website together: plan link, Tonight board with WhatsApp seat checks, Squad Tab and Squad Streak. Publish the Cafe Report for all 103 screened Pune cafes and start the Thursday Drop. Recruit campus captains at colleges in the corridor and cut short videos from the audit, with no city-wide paid ads. Staff human WhatsApp support from 5 PM to 1 AM, Friday to Sunday. Build to the e-commerce rules effective 1 Jan 2027 from the first release.",
+   "gate": "250 weekly active squads (about 1,000 players, roughly 20% of my estimate of corridor regulars); weekly-to-monthly active ratio of 40%; 30% of squads still active at week 8; 1.5 paid locks per active squad per month; first human reply under 5 minutes at peak; refunds to source within 24 hours. A ratio under 20% by week 12 means the weekly-habit thesis is wrong: stop streak and Drop work."
+  },
+  {
+   "phase": "Phase 2: Win cafes with proof",
+   "duration": "Apr to Aug 2027, about 20 weeks",
+   "actions": "Give every Pune cafe its Proof-of-Demand Report. Turn on the first-visit fee, partner Drops, Tip-or-Refund Nights and group quotes, using Razorpay Route or Cashfree Easy Split for prepaid money. Pilot Daylight Priority at 10 cafes against 10 control cafes. Connect live floor data only where a cafe issues its own key or already has a live map. Be ready for DPDP duties by 13 May 2027. Expect an exam-season dip.",
+   "gate": "25 opted-in cafes; 1,500 weekday 11 AM to 5 PM seat-hours a month through the app, at least 40% from players new to that cafe or hour; 800 weekly active squads citywide; 8 tipped nights a month; fees cover refunds and support."
+  },
+  {
+   "phase": "Phase 3: Pass and a second city",
+   "duration": "Sep 2027 to Mar 2028, about 7 months",
+   "actions": "Launch Squad Pass on the web with a savings guarantee. Pilot the Off-Peak Pass only with a written legal view and 50 cafes. Choose the second city from out-of-Pune squad links and waitlists rather than from a map of rivals, then repeat the kit: audit, seat checks and captains. Run one brand-funded, free-entry house cup.",
+   "gate": "Pass held by 5% of weekly actives with 50% still paying at month 3; second city reaches 100 weekly active squads within 10 weeks; contribution per active squad positive in both cities; Pune retention holds."
+  }
+ ],
+ "assumptions_to_test": [
+  "Squads will pay about ₹39 for peak certainty. Test ₹19, ₹39 and ₹49 by week in GTA VI launch month. Under 50 paid locks kills the idea.",
+  "Peak scarcity is real and frequent. The evidence leans on one affiliate site. Log seat checks at 21 corridor cafes over six weekend evenings and count how often they are full.",
+  "GTA VI causes a real cafe spike and cafes will have it on day one. Ask all 21 corridor cafes, and don't assume it from online excitement.",
+  "Most visits are in groups of three or more. The 72% figure is from about 2017. Measure it in a floor survey of 300 players at 10 cafes.",
+  "The regular population is about 10,000 to 15,000 regular-equivalents in Pune (my estimate: about ₹18.5 Cr floor spend at ₹1,500 a month, low confidence). Check against survey visits a month and cafes used.",
+  "Adults make most of the spend. If under-18s exceed about 35% of surveyed spend, adults-only costs too much and parent-booked accounts must come sooner.",
+  "A weekly open is realistic for regulars. One player reports 3 to 4 visits a month and a Jaipur group goes weekly, but Playo's claimed numbers imply only about 0.55 games per monthly user. A ratio of weekly to monthly actives under 20% by week 12 means rethink.",
+  "Plan links beat a WhatsApp thread plus a phone call. Measure the share of plans reaching three In replies, and time to confirmation against phoning.",
+  "Cafes will answer WhatsApp at peak and tolerate a public honour rate and audit results. Measure reply times, and ask each owner directly. Paying ₹10 per honoured lock is itself untested.",
+  "Failure rates stay under about 5%. Payouts cost about ₹4 per lock at 3% and about ₹14 at 10%.",
+  "Squads keep using the app after the first lock instead of simply phoning the cafe. Compare locks to surveyed visits. Phoning is tolerable if plans and Squad Tab stay in use, but it caps lock revenue.",
+  "Adult students and shift workers can fill dead hours. Sources conflict on whether weekday afternoons are college or school students. The 10-cafe Daylight Priority pilot should measure weekday seat-hours against control cafes.",
+  "Legal readings hold. Get written advice on: Maharashtra's entertainment duty, because the Bombay High Court on 7 Aug 2025 upheld duty on online ticket convenience fees above ₹10 per ticket and reports don't say if it reaches game parlours; whether tokens and the Off-Peak Pass are prepaid instruments; whether check-ins and streaks raise DPDP issues; GST and TCS when the fee is the platform's own; and free-entry cups under the Online Gaming Act.",
+  "District and Playo stay shallow on gaming in Pune. Today District's esports page shows one cafe and Playo shows 3 PlayStation venues. Re-check monthly, since 27 of 33 sampled Playo gaming listings date from January 2025 or later.",
+  "Search demand exists. No India volume for gaming cafe near me could be read, and the nearest yardstick is about 74,000 a month for box cricket near me (Semrush estimate). Keyword Planner and Google Trends can settle this in about 30 minutes.",
+  "Audit data stays current cheaply. Re-check 20% of cafes monthly and record how often rate cards and installed games change."
+ ]
+}

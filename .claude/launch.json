@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "env",
+      "runtimeArgs": [
+        "GOG_DATA_SOURCE=fixtures",
+        "NEXT_PUBLIC_SITE_URL=http://localhost:3000",
+        "pnpm",
+        "--filter",
+        "@gog/web",
+        "dev"
+      ],
+      "port": 3000
+    }
+  ]
+}

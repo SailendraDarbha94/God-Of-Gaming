@@ -1,0 +1,158 @@
+@import 'tailwindcss';
+
+/* Design tokens (05-web.md, Design): dark by default, one accent, AA contrast on every pair used. */
+@theme {
+  --color-bg: #0a0a0f;
+  --color-surface: #13131b;
+  --color-surface-2: #1c1c27;
+  --color-border: #2b2b3a;
+  --color-text: #f4f4f8;
+  --color-muted: #a6a6b7;
+  --color-accent: #c8ff4a;
+  --color-accent-ink: #0a0a0f;
+}
+
+/* Font tokens reference the next/font variables set on <html>, so they are declared inline. */
+@theme inline {
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-text font-sans antialiased;
+    min-height: 100dvh;
+    overflow-x: clip;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 0.25rem;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+
+  .skip-link {
+    @apply bg-accent text-accent-ink fixed top-2 left-2 z-50 -translate-y-24 rounded-md px-4 py-2 text-sm font-semibold transition-transform focus:translate-y-0;
+  }
+
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-semibold transition-colors;
+  }
+
+  .btn-lg {
+    @apply min-h-12 px-6 text-base;
+  }
+
+  .btn-primary {
+    @apply bg-accent text-accent-ink hover:bg-[#d9ff7a];
+  }
+
+  .btn-secondary {
+    @apply border-border bg-surface text-text hover:border-muted border;
+  }
+
+  .btn-store {
+    @apply border-border bg-surface text-text hover:border-muted min-h-14 border px-5 text-left;
+  }
+
+  .btn-disabled {
+    @apply border-border text-muted cursor-not-allowed border border-dashed bg-transparent;
+  }
+
+  .chip {
+    @apply border-border bg-surface-2 text-text inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium;
+  }
+
+  .chip-link {
+    @apply hover:border-muted transition-colors;
+  }
+
+  .chip-selected {
+    @apply bg-accent text-accent-ink border-accent;
+  }
+
+  .card {
+    @apply border-border bg-surface overflow-hidden rounded-lg border;
+  }
+
+  .link-accent {
+    @apply text-accent font-semibold hover:underline;
+  }
+
+  .eyebrow {
+    @apply text-accent text-xs font-semibold tracking-widest uppercase;
+  }
+
+  /* Promotion bodies rendered from markdown. */
+  .prose-dark {
+    @apply text-text max-w-none text-base leading-7;
+  }
+
+  .prose-dark :is(p, ul, ol, blockquote, pre, table) {
+    @apply my-4;
+  }
+
+  .prose-dark :is(h2, h3, h4) {
+    @apply font-display mt-8 mb-3 font-semibold;
+  }
+
+  .prose-dark h2 {
+    @apply text-2xl;
+  }
+
+  .prose-dark h3 {
+    @apply text-xl;
+  }
+
+  .prose-dark a {
+    @apply text-accent underline underline-offset-4;
+  }
+
+  .prose-dark :is(ul, ol) {
+    @apply pl-6;
+  }
+
+  .prose-dark ul {
+    @apply list-disc;
+  }
+
+  .prose-dark ol {
+    @apply list-decimal;
+  }
+
+  .prose-dark blockquote {
+    @apply border-accent text-muted border-l-2 pl-4;
+  }
+
+  .prose-dark code {
+    @apply bg-surface-2 rounded px-1.5 py-0.5 text-sm;
+  }
+
+  .prose-dark th,
+  .prose-dark td {
+    @apply border-border border px-3 py-2 text-left;
+  }
+}

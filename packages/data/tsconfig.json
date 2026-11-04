@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@gog/tsconfig/library.json",
+  "compilerOptions": {
+    // The surface Node 22 and React Native share (fetch, URL, console, AbortController): this
+    // package logs transport failures, wraps DataError causes and passes fetch to createClient,
+    // none of which exist under es2023 alone (spec 04, @gog/tsconfig).
+    "lib": ["es2023", "dom"],
+    "types": [],
+    "noEmit": true
+  },
+  "include": ["src"]
+}

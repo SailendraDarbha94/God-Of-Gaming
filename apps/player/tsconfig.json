@@ -1,0 +1,4 @@
+{
+  "extends": "@gog/tsconfig/expo.json",
+  "include": ["app", "src", ".expo/types/**/*.ts", "expo-env.d.ts"]
+}

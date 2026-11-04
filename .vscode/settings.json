@@ -1,0 +1,43 @@
+{
+  // Prettier formats everything (docs/spec/07-standards-and-verification.md, Tooling).
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  // ESLint 10 flat config (ADR 0010). The setting is the default for ESLint 9+ and is
+  // ignored by ESLint 10, where flat config is the only mode; it is kept explicit so an
+  // older ESLint resolved from a stray install never falls back to eslintrc.
+  "eslint.useFlatConfig": true,
+  // Each package has its own eslint.config.js and typescript-eslint's projectService
+  // resolves tsconfig.json relative to the working directory, so lint from the package
+  // directory (apps/*, packages/*), not from the repository root.
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+
+  // Use the TypeScript pinned in the pnpm catalog, not the copy bundled with VS Code.
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Tailwind CSS 4 is configured in CSS (@import "tailwindcss", @theme); the built-in CSS
+  // linter does not know those at-rules.
+  "css.lint.unknownAtRules": "ignore",
+
+  // Installed, generated and cached files stay out of search results.
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/.expo": true,
+    "**/.turbo": true,
+    "**/dist": true,
+    "**/coverage": true,
+    "**/.local": true,
+    "pnpm-lock.yaml": true,
+    "packages/data/src/database.types.ts": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/.expo/**": true,
+    "**/.turbo/**": true,
+    "**/.local/**": true
+  }
+}

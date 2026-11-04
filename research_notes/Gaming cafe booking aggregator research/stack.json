@@ -1,0 +1,591 @@
+{
+ "recommendation": "Start on Supabase Pro in Mumbai (ap-south-1) with no separate server. Enforce no-overlap with a Postgres EXCLUDE constraint on station and tstzrange, over one bookings table that includes holds and walk-ins. Put order creation and payment webhooks in Next.js route handlers on Vercel Pro in bom1, calling SQL functions; sweep expired holds with pg_cron. Send OTP through the Send SMS hook to a DLT-registered Indian vendor. Use pnpm and Turborepo, Expo SDK 58 development builds, and Next.js for SEO pages. Share types and Zod schemas, not UI. Ship apps against your own subdomain, because supabase.co was ISP-blocked in India for about a week in 2026. Add NestJS only on a named trigger. Reject Firestore for bookings and FastAPI as the main server. First confirm split access in writing: Razorpay Route requires over ₹40 lakh turnover, which may block a new entity.",
+ "evolution": "Launch shape: Supabase Pro plus custom domain ($35), Vercel Pro in bom1 ($20 to $40), Expo Free or Starter ($0 to $19), about $55 to $95 a month by my estimate, plus DLT at ₹5,000 a year, SMS and gateway fees.\n\nTriggers:\n- Before launch: move from Free to Pro, since Free pauses after a week idle and has no backups. Turn the spend cap off before peak connections near 500, since Pro with the cap is limited to 500. Add your own audit table on day one, since Pro keeps logs 7 days and regulation.md cites one-year log retention.\n- Sustained CPU or memory pressure: Micro to Small or Medium, in a planned window, since resizing causes downtime.\n- Losing up to 24 hours of bookings becomes unacceptable, which I would set at payouts going live in a city: add PITR at $100 a month, which also needs Small compute.\n- Any of these: a long-lived connection to cafe software or hardware, a CPU-heavy job such as bulk invoices or large settlement files, a real job queue beyond pg_cron's 8 concurrent jobs and 10-minute guidance, a versioned partner API, or enough backend people that webhooks should not ship with the website. Then add apps/api in NestJS, hosted in Mumbai on Cloud Run or AWS. Railway, Render and Fly list no Mumbai region. Add BullMQ and Redis when the queue need is real.\n- Over 15 builds per platform a month or 1K update users: Expo Starter at $19 plus usage.\n- CDN spend passes about $100 to $300 a month, or the 150M request top tier: move Next.js to Cloudflare with OpenNext or self-host with a shared cache handler.\n- Paid campaigns on two or more networks aimed at adults: add an attribution vendor, after checking DPDP and Play Families rules.\n- Repeated blocks in India, a compliance demand or an outgrown platform limit: move to plain Postgres in Mumbai. Move the database first, then Auth and Realtime. The table, constraint and SQL functions are portable.\n- A real pricing, recommendation or analytics workload: add a Python service beside the core, not inside it.\n- Each Expo SDK upgrade: bump the React version in the pnpm catalog in the same change.",
+ "options": [
+  {
+   "option": "Supabase Pro in Mumbai, with Postgres EXCLUDE on tstzrange",
+   "fit_for_booking_core": "Best. One row per booking and one constraint rejects overlap for every writer, including walk-ins, with error 23P01. Hold expiry needs a pg_cron status flip, because index predicates cannot use now().",
+   "cost_as_of_2026": "Pro $25 a month with $10 compute credit covering Micro. Custom domain $10. Small about $15. PITR $100 per 7 days. 100,000 MAU, 5M Realtime messages and 500 peak connections included.",
+   "india_notes": "ap-south-1 is available as a specific region only. supabase.co was blocked on several Indian ISPs for about a week in February and March 2026, so ship your own subdomain and rehearse a proxy fallback. Auth data stays in the project database. OTP goes through the Send SMS hook to a DLT-registered vendor.",
+   "verdict": "Start here.",
+   "sources": [
+    "https://www.postgresql.org/docs/current/rangetypes.html",
+    "https://www.postgresql.org/docs/current/sql-createtable.html",
+    "https://supabase.com/pricing",
+    "https://supabase.com/docs/guides/platform/regions",
+    "https://supabase.com/docs/guides/auth/auth-hooks",
+    "https://techcrunch.com/2026/02/27/india-disrupts-access-to-popular-developer-platform-supabase-with-blocking-order/"
+   ]
+  },
+  {
+   "option": "Firestore with per-slot documents and Firebase Auth",
+   "fit_for_booking_core": "Can be made correct, but the rule lives in every writer and needs a fixed time grid. Three hours at 15 minutes is 12 documents in one transaction. TTL usually acts within 24 hours, so it cannot end a hold. Transactions fail offline.",
+   "cost_as_of_2026": "Free quota of 50,000 reads and 20,000 writes a day. Listed $0.03 and $0.09 per 100,000 reads and writes, Mumbai column not confirmed. Phone auth in India is $0.07 per SMS.",
+   "india_notes": "asia-south1 and asia-south2 exist, and location cannot change later. Firebase Authentication runs only from US data centres. OTP is about 25 times the MSG91 list price per SMS.",
+   "verdict": "Reject for the booking core and for OTP. Keep FCM only.",
+   "sources": [
+    "https://firebase.google.com/docs/firestore/manage-data/transactions",
+    "https://firebase.google.com/docs/firestore/transaction-data-contention",
+    "https://firebase.google.com/docs/firestore/ttl",
+    "https://firebase.google.com/docs/firestore/locations",
+    "https://cloud.google.com/identity-platform/pricing",
+    "https://firebase.google.com/support/privacy"
+   ]
+  },
+  {
+   "option": "Firebase Data Connect, now shown in docs as SQL Connect, on Cloud SQL Postgres",
+   "fit_for_booking_core": "Possible only with a hand-managed schema, since migrations are GraphQL-driven and the page does not mention exclusion constraints. React Native is not a listed SDK target, and native SQL is in preview.",
+   "cost_as_of_2026": "Cloud SQL from $9.37 a month after a 3-month trial. 250,000 operations free a month, then $0.90 per million.",
+   "india_notes": "asia-south1 is listed. Pairing it with Firebase phone auth brings the $0.07 SMS price.",
+   "verdict": "Reject for now. Reconsider only if React Native becomes a supported target.",
+   "sources": [
+    "https://firebase.google.com/docs/data-connect",
+    "https://firebase.google.com/docs/sql-connect/native-sql",
+    "https://firebase.google.com/docs/sql-connect/manage-schemas-and-connectors",
+    "https://firebase.google.com/docs/sql-connect/manage-services-and-databases",
+    "https://firebase.google.com/docs/sql-connect/pricing",
+    "https://firebase.google.com/docs/sql-connect/realtime"
+   ]
+  },
+  {
+   "option": "No separate server: Next.js route handlers as the thin server",
+   "fit_for_booking_core": "Good. The constraint holds the safety rule, and handlers only verify webhooks, create orders and call SQL functions. Node and monorepo imports work directly. Logic in plain functions moves to NestJS later.",
+   "cost_as_of_2026": "Included in Vercel Pro usage. Active CPU in bom1 is $0.14 an hour, and I/O wait is not billed.",
+   "india_notes": "Set the region to bom1, since new projects default to iad1. Handlers call Supabase from Vercel's network, so an Indian ISP's DNS block should not affect them (inference, untested).",
+   "verdict": "Start here.",
+   "sources": [
+    "https://vercel.com/docs/functions/limitations",
+    "https://vercel.com/docs/functions/configuring-functions/region",
+    "https://vercel.com/docs/pricing/regional-pricing/bom1",
+    "https://razorpay.com/docs/webhooks/best-practices/"
+   ]
+  },
+  {
+   "option": "Supabase Edge Functions for webhooks",
+   "fit_for_booking_core": "Viable. Limits of 2 seconds CPU, 400 seconds wall clock on paid plans and 150 seconds idle suit I/O-bound webhooks. Deno runtime, and workspace imports are not covered in the docs.",
+   "cost_as_of_2026": "2M invocations on Pro, then $2 per million.",
+   "india_notes": "ap-south-1 can be pinned with the forceFunctionRegion query parameter for webhooks.",
+   "verdict": "Fair alternative if you want one vendor. Not the default.",
+   "sources": [
+    "https://supabase.com/docs/guides/functions/limits",
+    "https://supabase.com/docs/guides/functions/regional-invocation",
+    "https://supabase.com/docs/guides/functions/dependencies",
+    "https://supabase.com/docs/guides/functions/function-configuration"
+   ]
+  },
+  {
+   "option": "NestJS server",
+   "fit_for_booking_core": "Fine, but the safety rule still belongs in Postgres. rawBody support handles webhooks, and BullMQ gives queues but needs Redis. Shares TypeScript directly. Turborepo has a with-nestjs example.",
+   "cost_as_of_2026": "Lightsail 2 GB at $12 a month, or Cloud Run by usage. Redis extra.",
+   "india_notes": "Railway, Render and Fly list no Mumbai region. Cloud Run asia-south1 and Lightsail Mumbai are options.",
+   "verdict": "Later, on a named trigger. The server of choice when one is needed.",
+   "sources": [
+    "https://docs.nestjs.com/faq/raw-body",
+    "https://docs.nestjs.com/techniques/queues",
+    "https://github.com/vercel/turborepo/tree/main/examples",
+    "https://docs.railway.com/reference/deployment-regions",
+    "https://render.com/docs/regions",
+    "https://docs.fly.io/reference/regions",
+    "https://docs.cloud.google.com/run/docs/locations",
+    "https://aws.amazon.com/lightsail/pricing/"
+   ]
+  },
+  {
+   "option": "FastAPI server",
+   "fit_for_booking_core": "Fine for the booking write path, but validation, price maths and booking states must be written twice or kept server-only. Types reach clients through a generated OpenAPI client. Heavy jobs point to Celery and a broker.",
+   "cost_as_of_2026": "Same hosting range as NestJS.",
+   "india_notes": "Same Mumbai hosting limits as NestJS.",
+   "verdict": "Not the main server unless the team is Python-first. Possible later as a sidecar.",
+   "sources": [
+    "https://fastapi.tiangolo.com/advanced/generate-clients/",
+    "https://fastapi.tiangolo.com/tutorial/background-tasks/"
+   ]
+  },
+  {
+   "option": "Plain Postgres in Mumbai with your own server from day one",
+   "fit_for_booking_core": "Same booking safety and the cleanest exit, but you build OTP, realtime and row-level access yourself.",
+   "cost_as_of_2026": "RDS prices not checked.",
+   "india_notes": "No shared vendor domain to be blocked, though you run more yourself.",
+   "verdict": "The exit destination, not the start.",
+   "sources": [
+    "https://www.postgresql.org/docs/current/btree-gist.html",
+    "https://supabase.com/docs/guides/platform/migrating-within-supabase/backup-restore",
+    "https://supabase.com/docs/guides/self-hosting"
+   ]
+  },
+  {
+   "option": "Monorepo: pnpm and Turborepo with Expo SDK 58 and Next.js 16",
+   "fit_for_booking_core": "Neutral for the rule itself. Shares Zod schemas, DB types, booking states and price maths across app, site and dashboard.",
+   "cost_as_of_2026": "Expo Free covers 15 builds per platform and 1K update users. Starter is $19 plus usage.",
+   "india_notes": "None specific. Payment SDKs force development builds rather than Expo Go.",
+   "verdict": "Start here. Catalog React at exactly 19.3.0 and keep React Native in apps/player only.",
+   "sources": [
+    "https://docs.expo.dev/guides/monorepos/",
+    "https://docs.expo.dev/versions/latest/",
+    "https://registry.npmjs.org/next/latest",
+    "https://raw.githubusercontent.com/vercel/turborepo/main/examples/with-react-native-web/apps/native/package.json",
+    "https://raw.githubusercontent.com/vercel/turborepo/main/examples/with-react-native-web/apps/web/package.json",
+    "https://pnpm.io/catalogs",
+    "https://expo.dev/pricing"
+   ]
+  },
+  {
+   "option": "Expo Router on web for the SEO pages, and shared UI through react-native-web",
+   "fit_for_booking_core": "Not relevant to booking safety. Static output means rebuilds for data changes. Server output is stable in SDK 58 but renders per request, leaves caching to the CDN, and its docs do not mention ISR.",
+   "india_notes": "None specific.",
+   "verdict": "Reject for SEO pages, and do not share UI at the start. Share tokens at most.",
+   "sources": [
+    "https://docs.expo.dev/router/web/static-rendering/",
+    "https://docs.expo.dev/router/web/server-rendering/",
+    "https://docs.expo.dev/guides/using-nextjs/",
+    "https://nextjs.org/docs/app/guides/incremental-static-regeneration"
+   ]
+  },
+  {
+   "option": "Vercel Pro in bom1 for about 10,000 ISR pages",
+   "fit_for_booking_core": "Neutral. Keep live availability out of cached HTML.",
+   "cost_as_of_2026": "About $40 a month at 200,000 views and $120 to $130 at 2,000,000 views (my estimate, assumptions in the notes). ISR writes $4.40 and reads $0.44 per million 8 KB units in bom1. Flat Rate CDN tiers are $0, $20, $100 and $300.",
+   "india_notes": "bom1 is available and its rates are slightly above the starting rates. Hobby is non-commercial only.",
+   "verdict": "Start here. It is cheap to leave later.",
+   "sources": [
+    "https://vercel.com/docs/pricing/regional-pricing/bom1",
+    "https://vercel.com/docs/incremental-static-regeneration/limits-and-pricing",
+    "https://vercel.com/docs/pricing/flat-rate-cdn",
+    "https://vercel.com/docs/plans/pro-plan",
+    "https://vercel.com/docs/limits/fair-use-guidelines",
+    "https://nextjs.org/docs/app/api-reference/functions/generate-static-params"
+   ]
+  },
+  {
+   "option": "Cloudflare Workers with OpenNext, or one self-hosted next start server",
+   "fit_for_booking_core": "Neutral.",
+   "cost_as_of_2026": "Cloudflare about $5 to $15 a month (my estimate), from $5 Workers plus R2 free tier. Lightsail 2 GB $12 a month.",
+   "india_notes": "Lightsail Mumbai plans have half the transfer allowance. Cloudflare latency in India was not checked.",
+   "verdict": "Exit options. OpenNext is community-maintained with more parts, and self-hosting beyond one instance needs a shared cache handler.",
+   "sources": [
+    "https://opennext.js.org/cloudflare",
+    "https://opennext.js.org/cloudflare/caching",
+    "https://developers.cloudflare.com/workers/platform/pricing/",
+    "https://developers.cloudflare.com/r2/pricing/",
+    "https://nextjs.org/docs/app/guides/self-hosting",
+    "https://aws.amazon.com/lightsail/pricing/"
+   ]
+  },
+  {
+   "option": "OTP: MSG91-style Indian SMS vendor through the Send SMS hook, with WhatsApp as fallback",
+   "fit_for_booking_core": "Neutral. Vendor swap is one hook.",
+   "cost_as_of_2026": "MSG91 ₹0.25 at 5,000 down to ₹0.16 at 9.6 lakh, plus 18% GST (vendor). WhatsApp authentication ₹0.127 to ₹0.145 through resellers (vendor). Firebase $0.07 and Twilio $0.0832 per SMS for comparison.",
+   "india_notes": "DLT needs Principal Entity registration (₹5,000 on Vi, valid one year), a header and a template. An app login OTP is listed under Service Implicit.",
+   "verdict": "Start here. File DLT in week one.",
+   "sources": [
+    "https://msg91.com/in/pricing/sms",
+    "https://www.vilpower.in/faq/",
+    "https://supabase.com/docs/guides/auth/auth-hooks/send-sms-hook",
+    "https://aisensy.com/pricing",
+    "https://www.interakt.shop/pricing/",
+    "https://www.twilio.com/en-us/sms/pricing/in"
+   ]
+  },
+  {
+   "option": "Razorpay Route",
+   "fit_for_booking_core": "Fits with a separate hold and webhook state machine. Manual capture from a 12-minute window means a late payment for a lost slot need not be captured.",
+   "cost_as_of_2026": "0.25% per transfer plus gateway fee, excluding GST.",
+   "india_notes": "Needs over ₹40 lakh turnover in FY25 or FY26, with a first-year self-declaration route whose outcome for a low figure is unstated. SDK 3.0.0 has New Architecture support, untested on SDK 58.",
+   "verdict": "Apply in week one. Use whichever gateway confirms split access first.",
+   "sources": [
+    "https://razorpay.com/docs/build/llm-docs/payments/route/faqs.md",
+    "https://razorpay.com/docs/build/llm-docs/payments/route/pricing.md",
+    "https://razorpay.com/docs/payments/payments/capture-settings/",
+    "https://razorpay.com/docs/webhooks/best-practices/",
+    "https://registry.npmjs.org/react-native-razorpay/latest"
+   ]
+  },
+  {
+   "option": "Cashfree Easy Split",
+   "fit_for_booking_core": "Fits. Server-side order_expiry_time maps cleanly to a hold. Default webhook retries are short, so add a polling job.",
+   "cost_as_of_2026": "0.2% per split plus gateway fee. Maximum 5 vendors per transaction, and deferred settlement up to 45 days.",
+   "india_notes": "Docs state no turnover test, but the RBI rule in regulation.md applies to aggregators generally, so ask. Expo support via prebuild is a vendor claim. The New Architecture build is 3.0.0 under the turbo tag, while latest 2.5.1 has no codegen config.",
+   "verdict": "Apply in week one. Use whichever gateway confirms split access first.",
+   "sources": [
+    "https://www.cashfree.com/docs/payments/split/faq",
+    "https://www.cashfree.com/docs/help/easy-split/faqs/faqs.md",
+    "https://www.cashfree.com/docs/api-reference/payments/latest/orders/create",
+    "https://www.cashfree.com/docs/payments/online/webhooks/overview",
+    "https://www.cashfree.com/docs/payments/online/mobile/react-native",
+    "https://registry.npmjs.org/react-native-cashfree-pg-sdk"
+   ]
+  },
+  {
+   "option": "Deep links: own Universal Links and App Links, Play Install Referrer, phone-keyed resume on iOS",
+   "fit_for_booking_core": "Neutral. A web hold tied to the verified phone can reappear in the app after OTP (my design, untested).",
+   "cost_as_of_2026": "No vendor cost.",
+   "india_notes": "Adds no tracking SDK, which suits minors under DPDP s.9(3) and Play Families rules (see regulation.md).",
+   "verdict": "Start here.",
+   "sources": [
+    "https://docs.expo.dev/linking/overview/",
+    "https://docs.expo.dev/linking/ios-universal-links/",
+    "https://docs.expo.dev/linking/android-app-links/",
+    "https://developer.android.com/google/play/installreferrer",
+    "https://docs.expo.dev/versions/latest/sdk/application/"
+   ]
+  },
+  {
+   "option": "Paid attribution vendor such as Branch or AppsFlyer",
+   "fit_for_booking_core": "Not relevant.",
+   "cost_as_of_2026": "Branch shows no prices. AppsFlyer Zero gives 12K free conversions in the first year and is described as unsuitable for apps with paid activities; then $0.07 per conversion (vendor).",
+   "india_notes": "Tracking SDKs conflict with the minors position in regulation.md.",
+   "verdict": "Not needed at the start. Add for adult-targeted paid campaigns on two or more networks.",
+   "sources": [
+    "https://firebase.google.com/support/dynamic-links-faq",
+    "https://www.branch.io/pricing/",
+    "https://www.appsflyer.com/pricing/?view=full"
+   ]
+  }
+ ],
+ "hard_to_reverse_decisions": [
+  "Booking source of truth. Postgres ranges versus Firestore slot documents touches data, every writer and every client. Choose Postgres now and make it the only place bookings live, walk-ins included.",
+  "Hostnames and API shape inside shipped apps. Old binaries keep calling what they shipped with. Use your own subdomain plus an api schema or route handlers, never direct table access. The 2026 supabase.co block makes this more than tidiness.",
+  "Who holds the money. Merchant structure, Route or Easy Split, and each cafe's KYC with one provider. Switching means re-onboarding every venue, and pooling funds has legal risk. Keep a provider-neutral ledger: integer paise, provider name and ids, split and refund rows that are never edited, and separate online and at-venue amounts.",
+  "Data region. Firestore's location cannot change, and moving Supabase means a project migration. Choose Mumbai at creation.",
+  "Identity and the minors model. Use your own user UUID, not the phone number, as the key. Decide adult-only accounts with parent-led under-18 bookings before launch, and store age band, guardian link and consent version from day one, planning to 13 May 2027. Data already collected through tracking SDKs cannot be un-collected.",
+  "Public URLs and app identity. SEO paths, the link domain, the iOS bundle ID, the Android package name and signing keys. Path changes on iOS effectively wait for an App Store update, and search engines have indexed the old URLs. Keep one common path prefix.",
+  "Server language once logic accumulates. TypeScript keeps a move to NestJS cheap. A Python main server later means rewriting shared logic."
+ ],
+ "facts": [
+  {
+   "fact": "Postgres exclusion constraints reject any second row whose compared columns all match. The docs show EXCLUDE USING GIST (room WITH =, during WITH &&) with btree_gist, where an overlapping insert for the same room fails and another room succeeds.",
+   "sources": [
+    "https://www.postgresql.org/docs/current/rangetypes.html",
+    "https://www.postgresql.org/docs/current/ddl-constraints.html"
+   ],
+   "as_of": "Read 3 Nov 2026, Postgres 18 docs"
+  },
+  {
+   "fact": "btree_gist covers uuid and is trusted, so a non-superuser with CREATE can install it. tstzrange is built in and its two-argument constructor defaults to [), so back-to-back sessions do not collide.",
+   "sources": [
+    "https://www.postgresql.org/docs/current/btree-gist.html",
+    "https://www.postgresql.org/docs/current/rangetypes.html"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "EXCLUDE accepts a WHERE predicate, but index definitions must be immutable and cannot depend on the current time, so a hold cannot expire through now() in the predicate. Violations raise SQLSTATE 23P01.",
+   "sources": [
+    "https://www.postgresql.org/docs/current/sql-createtable.html",
+    "https://www.postgresql.org/docs/current/sql-createindex.html",
+    "https://www.postgresql.org/docs/current/errcodes-appendix.html"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Firestore transactions need reads before writes, may rerun, and fail when offline. Limits are 10 MiB, a 20-second lock deadline, 270 seconds total and 60 seconds idle. Security Rules allow 20 document access calls for an atomic operation plus 10 per single-document operation.",
+   "sources": [
+    "https://firebase.google.com/docs/firestore/manage-data/transactions"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Firestore gives serializable isolation. Standard edition server libraries default to pessimistic locks and mobile and web SDKs are always optimistic. Contention can end in an ABORTED error after finite retries.",
+   "sources": [
+    "https://firebase.google.com/docs/firestore/transaction-data-contention"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Firestore TTL deletion usually happens within 24 hours, is not transactional, and expired documents still appear in queries until removed.",
+   "sources": [
+    "https://firebase.google.com/docs/firestore/ttl"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Firestore offers asia-south1 (Mumbai) and asia-south2 (Delhi), and a database location cannot change after creation.",
+   "sources": [
+    "https://firebase.google.com/docs/firestore/locations"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Firebase phone auth costs $0.07 per SMS to India, with the first ten SMS a day not billed. SMS needs Blaze, with 3,000 SMS a day on Firebase Auth unless upgraded to Identity Platform.",
+   "sources": [
+    "https://cloud.google.com/identity-platform/pricing",
+    "https://firebase.google.com/docs/auth/limits"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Firebase Authentication runs only from US data centres, according to Firebase's privacy page.",
+   "sources": [
+    "https://firebase.google.com/support/privacy"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Google's docs now show Data Connect as Firebase SQL Connect. Generated SDKs are Kotlin Android, iOS, Flutter and web, realtime is described for Swift, Android, web and Flutter, native SQL is in preview, and asia-south1 is listed. Cloud SQL starts at $9.37 a month after a trial, with 250,000 operations free then $0.90 per million.",
+   "sources": [
+    "https://firebase.google.com/docs/data-connect",
+    "https://firebase.google.com/docs/sql-connect/realtime",
+    "https://firebase.google.com/docs/sql-connect/native-sql",
+    "https://firebase.google.com/docs/sql-connect/manage-services-and-databases",
+    "https://firebase.google.com/docs/sql-connect/pricing"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Supabase lists Mumbai (ap-south-1) as a specific region only. The APAC general region is Singapore.",
+   "sources": [
+    "https://supabase.com/docs/guides/platform/regions"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Supabase tiers: Free $0, 500 MB database, 50,000 MAU, pauses after a week idle. Pro from $25 with $10 compute credit, 8 GB, 100,000 MAU, 250 GB egress, 7-day backups. Team from $599. Custom domain $10 a month. PITR $100 a month per 7 days.",
+   "sources": [
+    "https://supabase.com/pricing",
+    "https://supabase.com/docs/guides/platform/manage-your-usage/custom-domains"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Supabase Realtime limits are 200 connections and 100 messages a second on Free, 500 and 500 on Pro, and 10,000 and 2,500 on Pro with no spend cap or Team. Pro includes 5M messages, then $2.50 per million, and 500 peak connections, then $10 per 1,000. Spend caps are on by default on Pro.",
+   "sources": [
+    "https://supabase.com/docs/guides/realtime/limits",
+    "https://supabase.com/pricing"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Supabase recommends Broadcast over Postgres Changes for most cases. Postgres Changes runs on one thread and authorises per subscriber. A broadcast heard by four clients counts as five messages, and billing rounds up to whole millions.",
+   "sources": [
+    "https://supabase.com/docs/guides/realtime/subscribing-to-database-changes",
+    "https://supabase.com/docs/guides/realtime/postgres-changes",
+    "https://supabase.com/docs/guides/platform/manage-your-usage/realtime-messages"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Supabase's built-in SMS providers are MessageBird, Twilio, Vonage and community-supported TextLocal, and its docs name India's DLT rules as yours to follow. The Send SMS hook is on Free and Pro, and its page names Msg91 as an India option without giving Msg91 code.",
+   "sources": [
+    "https://supabase.com/docs/guides/auth/phone-login",
+    "https://supabase.com/docs/guides/auth/auth-hooks",
+    "https://supabase.com/docs/guides/auth/auth-hooks/send-sms-hook"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Supabase Edge Functions limits are 256 MB memory, 150 seconds wall clock on Free and 400 on paid, 2 seconds CPU per request, 150 seconds idle, and a 20 MB CLI bundle. ap-south-1 can be pinned.",
+   "sources": [
+    "https://supabase.com/docs/guides/functions/limits",
+    "https://supabase.com/docs/guides/functions/regional-invocation"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Supabase Cron runs from every second to once a year, with guidance of no more than 8 concurrent jobs and each finishing within 10 minutes.",
+   "sources": [
+    "https://supabase.com/docs/guides/cron"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "supabase.co was blocked on several Indian ISPs from about 24 to 26 Feb 2026, reportedly under Section 69A, with patchy enforcement. Supabase first described a DNS problem. Reports give restoration as 3, 4 or 5 Mar 2026, and no reason was published.",
+   "sources": [
+    "https://techcrunch.com/2026/02/27/india-disrupts-access-to-popular-developer-platform-supabase-with-blocking-order/",
+    "https://www.medianama.com/2026/02/223-supabase-isp-level-block-jiofiber-users-india/",
+    "https://officechai.com/stories/supabase-says-that-access-to-its-website-is-fully-restored-for-indian-users-after-govt-intervention",
+    "https://analyticsindiamag.com/ai-news/india-restores-access-to-supabase-after-isp-level-block",
+    "https://status.lovable.dev/incidents/01KJDBPNKJRQZPEDCY6MW95CYX"
+   ],
+   "as_of": "Sources dated Feb and Mar 2026, read 3 Nov 2026"
+  },
+  {
+   "fact": "Supabase's custom domain adds your own hostname, and the original project domain keeps working. The page does not mention Realtime.",
+   "sources": [
+    "https://supabase.com/docs/guides/platform/custom-domains"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Supabase exit: supabase db dump exports roles, schema and data. Storage objects, Edge Functions, Realtime publications, webhooks and extensions need manual steps. Self-hosting is community-supported, without managed backups or PITR.",
+   "sources": [
+    "https://supabase.com/docs/guides/platform/migrating-within-supabase/backup-restore",
+    "https://supabase.com/docs/guides/self-hosting"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Expo SDK 52+ configures Metro automatically in monorepos. SDK 54+ has first-class pnpm isolated installs, with nodeLinker hoisted as a fallback. Duplicate React Native versions in a monorepo are unsupported and duplicate React versions in one app cause runtime errors.",
+   "sources": [
+    "https://docs.expo.dev/guides/monorepos/"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Expo SDK 58 pairs React Native 0.88 with React 19.3.0. Next.js 16.4.4 allows React ^19.0.0, and its App Router uses a built-in React canary. Turborepo's community-maintained with-react-native-web example pins React 19.3.0 in both apps but uses Yarn Classic.",
+   "sources": [
+    "https://docs.expo.dev/versions/latest/",
+    "https://registry.npmjs.org/next/latest",
+    "https://nextjs.org/docs/app/getting-started/installation",
+    "https://raw.githubusercontent.com/vercel/turborepo/main/examples/with-react-native-web/apps/native/package.json",
+    "https://raw.githubusercontent.com/vercel/turborepo/main/examples/with-react-native-web/package.json"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Expo Router static output has no request-time rendering. Server output is stable in SDK 58, needs a deployed server, cannot mix with static, and its page does not mention ISR or revalidation.",
+   "sources": [
+    "https://docs.expo.dev/router/web/static-rendering/",
+    "https://docs.expo.dev/router/web/server-rendering/"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Next.js ISR renders unlisted paths on first visit, with on-demand revalidatePath and revalidateTag. An empty generateStaticParams works without Cache Components but is a build error with it. A single next start instance with persistent disk works, while several instances need a shared cache handler.",
+   "sources": [
+    "https://nextjs.org/docs/app/guides/incremental-static-regeneration",
+    "https://nextjs.org/docs/app/api-reference/functions/generate-static-params",
+    "https://nextjs.org/docs/app/guides/self-hosting"
+   ],
+   "as_of": "Pages updated 1 to 15 Oct 2026, read 3 Nov 2026"
+  },
+  {
+   "fact": "Vercel Pro is $20 a month with $20 credit and one deploying seat. Flat Rate CDN tiers are included (1M requests, 1 TB), $20 (10M), $100 (50M) and $300 (150M). In bom1, ISR writes are $4.40 and reads $0.44 per million 8 KB units. Hobby is non-commercial only, and new projects default to iad1.",
+   "sources": [
+    "https://vercel.com/docs/plans/pro-plan",
+    "https://vercel.com/docs/pricing/flat-rate-cdn",
+    "https://vercel.com/docs/pricing/regional-pricing/bom1",
+    "https://vercel.com/docs/limits/fair-use-guidelines",
+    "https://vercel.com/docs/functions/configuring-functions/region"
+   ],
+   "as_of": "Pages updated Aug to Sep 2026, read 3 Nov 2026"
+  },
+  {
+   "fact": "OpenNext's Cloudflare adapter is community-maintained and supports all Next.js 16 releases and ISR. Workers paid is $5 a month with 10M requests and 30M CPU-ms. R2 has 10 GB free and no egress fee.",
+   "sources": [
+    "https://opennext.js.org/cloudflare",
+    "https://developers.cloudflare.com/workers/platform/pricing/",
+    "https://developers.cloudflare.com/r2/pricing/"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "MSG91 lists India SMS at ₹0.25 at 5,000, falling to ₹0.16 at 9.6 lakh, plus 18% GST (vendor claim). Twilio lists $0.0832 per segment for India, current as of October 2026 (vendor claim).",
+   "sources": [
+    "https://msg91.com/in/pricing/sms",
+    "https://www.twilio.com/en-us/sms/pricing/in"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Vi's DLT FAQ gives ₹5,000 non-refundable Principal Entity registration, valid one year, with a 72-hour stated approval. Templates are verified within 60 minutes as stated, and app login OTP is listed under Service Implicit. URLs and callback numbers in SMS must be whitelisted.",
+   "sources": [
+    "https://www.vilpower.in/faq/"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "WhatsApp authentication messages cost ₹0.145 for Indian users effective 1 Oct 2026 per AiSensy, and ₹0.127 to ₹0.129 per Interakt, undated (vendor claims). Meta bills per message, and Indian accounts must move to INR by 31 Dec 2026.",
+   "sources": [
+    "https://aisensy.com/pricing",
+    "https://www.interakt.shop/pricing/",
+    "https://developers.facebook.com/docs/whatsapp/pricing"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Razorpay says Route needs domestic turnover over ₹40 lakh or export over ₹5 lakh in FY25 or FY26, and a linked account that directly serves customers. A first-year business without GST returns can self-declare turnover. The FAQ's fallback for refused accounts is settling to your own account and paying vendors manually.",
+   "sources": [
+    "https://razorpay.com/docs/build/llm-docs/payments/route.md",
+    "https://razorpay.com/docs/build/llm-docs/payments/route/faqs.md"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Route charges 0.25% per transfer plus gateway fee. Easy Split charges 0.2% per split plus gateway fee, allows up to 5 vendors per transaction, and defers settlement up to 45 days, after which funds settle to the merchant.",
+   "sources": [
+    "https://razorpay.com/docs/build/llm-docs/payments/route/pricing.md",
+    "https://www.cashfree.com/docs/payments/split/faq",
+    "https://www.cashfree.com/docs/help/easy-split/faqs/faqs.md"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Razorpay capture windows run from 12 minutes to 3 days. Razorpay can poll a bank for up to 3 days for late authorization, and uncaptured payments are auto-refunded in 5 to 7 working days.",
+   "sources": [
+    "https://razorpay.com/docs/payments/payments/capture-settings/"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Razorpay webhooks need the raw body for HMAC-SHA256 and a response within 5 seconds. Razorpay retries for 24 hours, disables the webhook if failures last that long, delivers at least once and does not guarantee order. Cashfree retries at 2, 10 and 30 minutes by default, configurable to 10 retries.",
+   "sources": [
+    "https://razorpay.com/docs/webhooks/validate-test/",
+    "https://razorpay.com/docs/webhooks/best-practices/",
+    "https://www.cashfree.com/docs/payments/online/webhooks/overview"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "SDK 55 and later run only on the New Architecture. react-native-razorpay 3.0.0 (21 Apr 2026) added New Architecture support and needs expo prebuild. On Cashfree's SDK, latest 2.5.1 has no codegen config and 3.0.0 with codegen sits under the turbo tag. Cashfree's docs claim Expo compatibility with mandatory prebuild (vendor claim).",
+   "sources": [
+    "https://docs.expo.dev/guides/new-architecture/",
+    "https://github.com/razorpay/react-native-razorpay/releases",
+    "https://github.com/razorpay/react-native-razorpay",
+    "https://registry.npmjs.org/react-native-cashfree-pg-sdk",
+    "https://www.cashfree.com/docs/payments/online/mobile/react-native"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Firebase Dynamic Links shut down on 25 Aug 2025. Google points to App Links and Universal Links for installed apps, and names third-party vendors for deferred links while saying it has not vetted them.",
+   "sources": [
+    "https://firebase.google.com/support/dynamic-links-faq"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Expo exposes the Play Install Referrer as Application.getInstallReferrerAsync(), Android only. Both link types fall back to the website when the app is absent. iOS fetches the association file on install or update and rarely after, so path changes effectively ship with an App Store update.",
+   "sources": [
+    "https://docs.expo.dev/versions/latest/sdk/application/",
+    "https://developer.android.com/google/play/installreferrer",
+    "https://docs.expo.dev/linking/overview/",
+    "https://docs.expo.dev/linking/ios-universal-links/"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Expo's push service is free, limited to 600 notifications a second per project. getDevicePushTokenAsync gives native tokens for moving away. FCM has no charge.",
+   "sources": [
+    "https://docs.expo.dev/push-notifications/faq/",
+    "https://firebase.google.com/pricing"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  },
+  {
+   "fact": "Railway, Render and Fly list no Mumbai region. Cloud Run has asia-south1 at Tier 1 pricing, and Lightsail lists 2 GB at $12 a month with half the transfer allowance in Mumbai.",
+   "sources": [
+    "https://docs.railway.com/reference/deployment-regions",
+    "https://render.com/docs/regions",
+    "https://docs.fly.io/reference/regions",
+    "https://docs.cloud.google.com/run/docs/locations",
+    "https://aws.amazon.com/lightsail/pricing/"
+   ],
+   "as_of": "Read 3 Nov 2026"
+  }
+ ],
+ "not_checked": [
+  "No code was run. The exclusion constraint sketch, a concurrency race, the payment SDKs on Expo SDK 58 and React Native 0.88, and the webhook flow are all untested.",
+  "Whether a Supabase custom domain's CNAME would survive a DNS-level block, and whether a proxy fallback carries Realtime WebSockets. The custom-domain page does not mention Realtime.",
+  "Supabase uptime or SLA for ap-south-1. A third-party incident tracker page refused the fetch, and the status history visible to me starts in October 2026.",
+  "Whether a low self-declared turnover passes Razorpay's Route review, whether the ₹40 lakh is platform turnover or GMV, and whether Cashfree applies the same test. Both need written answers. Route with manual capture and transfers on an order was also not tested.",
+  "Cashfree's order_expiry_time minimum, and DLT scrubbing charges at SMS vendors.",
+  "Meta's numeric India authentication rate, because the rate card is a download. Only reseller figures were read.",
+  "DLT fees and steps on Jio, Airtel and BSNL, and GST on the DLT fee. Only Vi's FAQ was readable.",
+  "Whether Firebase phone SMS to India needs your own DLT registration. Pages read did not say.",
+  "Apple's Universal Links page, which did not render. iOS details come from Expo's guide and marketplace_playbook.md. iOS deferred linking is my inference.",
+  "Mumbai-specific Firestore rates, Cloud Functions regions, RDS prices, Cloudflare static-asset billing and Cloudflare latency in India.",
+  "DPDP cross-border rules, which were not reviewed in this pass. regulation.md covers the wider picture. Rupee conversions assume ₹90 per USD, unchecked.",
+  "Android and iOS audience share. The value of sharing TypeScript is my judgement, not a measurement.",
+  "Text addressed to AI agents appeared on Expo pages (asking for feedback submission and fetching linked pages), Vercel pages (asking agents to follow links and use a feedback path) and one Next.js page (a prompt to paste into a coding agent). I ignored it and submitted nothing."
+ ]
+}
