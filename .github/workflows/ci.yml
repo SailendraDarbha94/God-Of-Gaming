@@ -111,6 +111,7 @@ jobs:
 
       # The Supabase repositories through the real PostgREST and GoTrue (spec 07, definition of done
       # item 2). Without these two variables the suites skip, so this is the only place they run.
+      # A skipped suite still exits 0, so the step also requires passing tests in both Supabase files.
       - name: Contract tests for the Supabase repositories
         run: |
           supabase status -o env \
@@ -120,4 +121,9 @@ jobs:
           set -a
           . /tmp/supabase.env
           set +a
-          pnpm --filter @gog/data test
+          pnpm --filter @gog/data test --reporter=default --reporter=json --outputFile.json=/tmp/vitest.json
+          for suite in booking/supabase-booking catalog/supabase-catalog; do
+            jq -e --arg suite "src/$suite.test.ts" \
+              '[.testResults[] | select(.name | endswith($suite)) | .assertionResults[] | select(.status == "passed")] | length > 0' \
+              /tmp/vitest.json > /dev/null || { echo "::error::$suite ran no tests"; exit 1; }
+          done

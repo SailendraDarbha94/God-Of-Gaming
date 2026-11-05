@@ -97,3 +97,5 @@ splitBookings compares instants numerically (and files a lapsed hold under past)
 ## First CI run, 4 November 2026
 
 The first push ran CI for the first time. The secret scan found no leaks, the migrations and seed applied on the real stack and `supabase test db` passed all 151 tests in 6 files, which closes the pgTAP caveat above. Two steps failed for tooling reasons (Prettier flagged the secret scan's `results.sarif`; the generated types differed from CI's in formatting only), and each failure skipped the steps after it. Both were fixed on 5 November, see `CHANGELOG.md` ("first CI run"). The sha256 comparisons above compared the local generator with itself, which is why they did not catch the second one.
+
+The next run, on 5 November, was green but proved less than it looked: the contract step had skipped all 38 Supabase tests because `supabaseTestTarget()` could not read `process.env`, so those suites had never run anywhere. That is fixed too, and the step now fails if they skip (same changelog section).
