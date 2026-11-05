@@ -166,8 +166,10 @@ EOF
 # `supabase gen types` (CLI 2.116) runs postgres-meta in a container even for --db-url, so without
 # Docker it fails with LegacyContainerRuntimeNotFoundError. The fallback runs the very same
 # generator the CLI pins (supabase/postgres-meta:v0.98.0, published to npm as
-# @supabase/postgres-meta 0.98.0) with the same environment the CLI gives the container, so the
-# output is byte-identical to CI's `supabase gen types typescript --local --schema public`.
+# @supabase/postgres-meta 0.98.0) with the same environment the CLI gives the container. It formats
+# its output with whichever Prettier it resolves (the repository's here, the image's own in the
+# container), so cmd_types reformats with the repository's, as `pnpm db:types` does, and the file
+# comes out the same on every path.
 PGMETA_SERVER="$ROOT_DIR/node_modules/@supabase/postgres-meta/dist/server/server.js"
 
 generate_types() {
@@ -197,6 +199,7 @@ cmd_types() {
   if generate_types "$tmp"; then
     mkdir -p "$(dirname "$TYPES_FILE")"
     mv "$tmp" "$TYPES_FILE"
+    "$ROOT_DIR/node_modules/.bin/prettier" --log-level warn --write "$TYPES_FILE"
     echo "Wrote ${TYPES_FILE#"$ROOT_DIR/"}"
   else
     rm -f "$tmp"

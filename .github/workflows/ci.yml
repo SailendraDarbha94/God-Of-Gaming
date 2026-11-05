@@ -93,11 +93,6 @@ jobs:
       - name: Run the pgTAP tests
         run: supabase test db
 
-      - name: Generated database types are current
-        run: |
-          supabase gen types typescript --local --schema public > /tmp/database.types.ts
-          diff -u packages/data/src/database.types.ts /tmp/database.types.ts
-
       - uses: pnpm/action-setup@v6
 
       - uses: actions/setup-node@v7
@@ -107,8 +102,16 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # `db:types` regenerates the file in place and formats it with the repository's Prettier, so
+      # only a real schema difference fails here, not the Prettier inside the generator's image.
+      - name: Generated database types are current
+        run: |
+          pnpm db:types
+          git diff --exit-code -- packages/data/src/database.types.ts
+
       # The Supabase repositories through the real PostgREST and GoTrue (spec 07, definition of done
       # item 2). Without these two variables the suites skip, so this is the only place they run.
+      # A skipped suite still exits 0, so the step also requires passing tests in both Supabase files.
       - name: Contract tests for the Supabase repositories
         run: |
           supabase status -o env \
@@ -118,4 +121,9 @@ jobs:
           set -a
           . /tmp/supabase.env
           set +a
-          pnpm --filter @gog/data test
+          pnpm --filter @gog/data test --reporter=default --reporter=json --outputFile.json=/tmp/vitest.json
+          for suite in booking/supabase-booking catalog/supabase-catalog; do
+            jq -e --arg suite "src/$suite.test.ts" \
+              '[.testResults[] | select(.name | endswith($suite)) | .assertionResults[] | select(.status == "passed")] | length > 0' \
+              /tmp/vitest.json > /dev/null || { echo "::error::$suite ran no tests"; exit 1; }
+          done
