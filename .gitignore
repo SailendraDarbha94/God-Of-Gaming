@@ -32,6 +32,9 @@ supabase/.temp/
 apps/player/ios/
 apps/player/android/
 
+# report the secret scan writes into the checkout (gitleaks action, CI)
+results.sarif
+
 # os and editors
 .DS_Store
 *.log

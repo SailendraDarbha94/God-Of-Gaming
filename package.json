@@ -24,7 +24,7 @@
     "db:stop": "supabase stop",
     "db:reset": "supabase db reset",
     "db:test": "supabase test db",
-    "db:types": "supabase gen types typescript --local --schema public > packages/data/src/database.types.ts",
+    "db:types": "supabase gen types typescript --local --schema public > packages/data/src/database.types.ts && prettier --write packages/data/src/database.types.ts",
     "db:local:up": "scripts/db/local.sh up",
     "db:local:down": "scripts/db/local.sh down",
     "db:local:reset": "scripts/db/local.sh reset",
