@@ -64,7 +64,7 @@ pnpm db:reset
 pnpm db:test
 ```
 
-Without Docker (schema, seed, SQL tests and type generation; no Auth, Storage or API). `pnpm db:local:types` runs the generator the Supabase CLI would start in a container (`@supabase/postgres-meta`, a root devDependency pinned to the CLI's image version) directly with Node, so the output matches CI byte for byte. `pnpm db:local:test` reports the SQL tests as skipped until the `pgtap` extension is installed (see Prerequisites):
+Without Docker (schema, seed, SQL tests and type generation; no Auth, Storage or API). `pnpm db:local:types` runs the generator the Supabase CLI would start in a container (`@supabase/postgres-meta`, a root devDependency pinned to the CLI's image version) directly with Node. `db:types` and `db:local:types` both finish by formatting the file with the repository's Prettier, so it comes out the same with or without Docker. `pnpm db:local:test` reports the SQL tests as skipped until the `pgtap` extension is installed (see Prerequisites):
 
 ```bash
 pnpm db:local:up && pnpm db:local:reset

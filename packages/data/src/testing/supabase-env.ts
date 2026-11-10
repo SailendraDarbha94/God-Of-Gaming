@@ -31,10 +31,14 @@ const TestEnv = z.object({
   GOG_TEST_SUPABASE_OTP: z.string().min(1).default('123456'),
 });
 
-const ProcessLike = z.object({ env: z.record(z.string(), z.string().optional()) });
+/**
+ * `z.looseObject`, not `z.record`: Zod 4's record rejects Node's exotic `process.env` as not a plain
+ * object, which made this read come back empty and every contract suite skip.
+ */
+const ProcessLike = z.object({ env: z.looseObject({}) });
 
 /** `process.env` when there is a `process` (Node, Vitest); this package has no Node types. */
-function processEnv(): Record<string, string | undefined> {
+function processEnv(): Record<string, unknown> {
   const candidate: unknown = Reflect.get(globalThis, 'process');
   const parsed = ProcessLike.safeParse(candidate);
   return parsed.success ? parsed.data.env : {};
