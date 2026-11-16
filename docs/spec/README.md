@@ -13,6 +13,8 @@ This folder is the target for the first iteration of the codebase. It is written
 | [07-standards-and-verification.md](07-standards-and-verification.md) | Coding standards, tooling, CI and the definition of done                        |
 | [08-sample-data.md](08-sample-data.md)                               | The sample dataset encoded by both the fixtures and the seed                    |
 
+Iteration 2, the partner dashboard (`apps/partner`), is specified as a set of changes in [`iteration-2/`](iteration-2/README.md).
+
 Rules for implementers:
 
 - Build what is written here and nothing more. If something is missing or wrong, implement the smallest sensible interpretation and record the deviation in your pull request description (or in `docs/spec/DEVIATIONS.md` when working without a PR).
