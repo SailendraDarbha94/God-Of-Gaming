@@ -1,7 +1,7 @@
 # 0016. Keeping app availability true at the counter
 
 Date: 2026-11-16
-Status: Proposed
+Status: Accepted
 Amends: ADR 0005 (which stays in force except where this record says otherwise)
 
 ## Context

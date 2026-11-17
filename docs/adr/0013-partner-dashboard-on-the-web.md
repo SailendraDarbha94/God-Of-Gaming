@@ -1,7 +1,7 @@
 # 0013. Partner dashboard on the web, with data access in the browser
 
 Date: 2026-11-16
-Status: Proposed
+Status: Accepted
 
 ## Context
 

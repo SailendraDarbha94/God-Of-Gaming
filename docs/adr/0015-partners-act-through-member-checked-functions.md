@@ -1,7 +1,7 @@
 # 0015. Partners act through member-checked functions
 
 Date: 2026-11-16
-Status: Proposed
+Status: Accepted
 
 ## Context
 

@@ -1,7 +1,7 @@
 # 0017. Cafes see bookings, not players
 
 Date: 2026-11-16
-Status: Proposed
+Status: Accepted
 Amends: ADR 0011 (what we share, and with whom)
 
 ## Context

@@ -1,7 +1,7 @@
 # 0005. Booking integrity is enforced in Postgres
 
 Date: 2026-11-04
-Status: Accepted
+Status: Accepted, amended by [0016](0016-keeping-app-availability-true-at-the-counter.md)
 
 ## Context
 
