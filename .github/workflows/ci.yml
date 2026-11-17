@@ -60,6 +60,12 @@ jobs:
 
       - name: expo-doctor
         # Required. It may only fail when the network it depends on is unreachable from the runner.
+        # EXPO_OFFLINE makes its dependency check compare the installed packages with the map that
+        # ships in the installed `expo` (expo/bundledNativeModules.json) instead of Expo's latest
+        # patches, so the same lockfile gets the same answer every day. Newer patches are reported
+        # by the weekly expo-sdk-patches workflow instead of failing every pull request.
+        env:
+          EXPO_OFFLINE: '1'
         run: |
           if pnpm --filter @gog/player exec expo-doctor; then
             exit 0

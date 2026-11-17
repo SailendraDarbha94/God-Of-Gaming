@@ -1,0 +1,35 @@
+# Newer Expo SDK patches (docs/spec/07-standards-and-verification.md, "CI").
+# CI's expo-doctor step checks the lockfile against the dependency map of the installed `expo`, so
+# it gives the same answer for the same commit every day. This workflow asks Expo's API, which knows
+# the SDK's latest patch releases, and fails when the player app is behind them. To catch up, run
+# `npx expo install --fix` in apps/player (or set the versions it lists) and open a pull request.
+name: Expo SDK patches
+
+on:
+  schedule:
+    - cron: '30 3 * * 1' # Mondays 03:30 UTC, 09:00 in Bengaluru
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  latest-patches:
+    name: Player app is on the SDK's latest patches
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      # No `version` input: the action reads `packageManager` from the root package.json.
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: expo-doctor against Expo's latest versions
+        run: pnpm --filter @gog/player exec expo-doctor

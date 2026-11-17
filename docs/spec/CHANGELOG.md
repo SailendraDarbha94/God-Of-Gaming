@@ -2,6 +2,14 @@
 
 Amendments to the iteration-1 specification and root tooling, applied after the review of 4 November 2026. Entries with severity blocker or important were applied; minors are listed under Deferred and were not applied. Each applied entry names the file, what changed, why, and the evidence. Nothing in the "review amendments" section touches `apps/`, `supabase/`, `packages/domain` or `packages/data`; two amendments that target `apps/*/package.json` are recorded under "Not applied in this step" with the exact change to make. The "review fixes" and "first CI run" sections do touch code and spec together.
 
+## 2026-11-17 — Expo patch releases no longer fail CI
+
+CI's `expo-doctor` step compared the player app with the newest SDK 58 patches on Expo's API, so a commit that passed could fail the next day without any change: Expo published patches on 11 and 12 November (pull request 2 took them) and again on 17 November, about two hours before pull request 2 merged, which turned `main` red on its merge commit `9be5594`.
+
+- `.github/workflows/ci.yml` (`check`, `expo-doctor`), `docs/spec/07-standards-and-verification.md` (CI job 1), `README.md` (How we work) — the step sets `EXPO_OFFLINE=1`. Why: `expo-doctor` checks dependency versions by spawning `expo install --check` with the original environment, and the CLI then validates against `expo/bundledNativeModules.json` from the installed `expo` instead of the API, so the result depends only on the lockfile. Evidence (expo-doctor 1.21.6, @expo/cli 58.1.20, 17 Nov 2026): with `expo` 58.0.25 installed, the online check failed on three newer patches and the offline check passed 20 of 20; with the local map edited to expect `expo-status-bar` ~58.0.99 and async-storage 3.1.1, the offline check failed on both, so it still catches a real mismatch such as iteration 1's async-storage pin.
+- `.github/workflows/expo-sdk-patches.yml` (new) — runs `expo-doctor` against Expo's API on Mondays at 03:30 UTC and on demand, and fails when the SDK has newer patches than the lockfile. Why: without it, nothing would say when the app falls behind the SDK's bug fixes.
+- Not taken here: the 17 November patches (`expo` 58.0.26, `expo-dev-client` 58.0.21, `expo-router` 58.0.32). CI no longer needs them, and the weekly check reports them, so they can be taken in a pull request a few days after release, once a bad publish would have been caught.
+
 ## 2026-11-05 — first CI run (tooling and spec together)
 
 The first push ran the whole of CI for the first time (4 November): the secret scan found no leaks, the migrations and seed applied on the real stack and `supabase test db` passed all 151 tests in 6 files. Two steps failed for tooling reasons, and each failure skipped the steps after it. `docs/spec/INTEGRATION.md` (First CI run) has the summary.
