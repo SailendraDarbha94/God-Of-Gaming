@@ -1,7 +1,7 @@
 # 0014. Platform operators are listed by phone in the database
 
 Date: 2026-11-16
-Status: Proposed
+Status: Accepted
 
 ## Context
 

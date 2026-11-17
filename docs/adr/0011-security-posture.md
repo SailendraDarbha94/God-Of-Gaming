@@ -1,7 +1,7 @@
 # 0011. Security posture: RLS everywhere, writes through functions
 
 Date: 2026-11-04
-Status: Accepted
+Status: Accepted, amended by [0017](0017-cafes-see-bookings-not-players.md)
 
 ## Context
 

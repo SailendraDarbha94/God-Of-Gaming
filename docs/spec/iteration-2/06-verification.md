@@ -12,7 +12,7 @@ Run from a clean clone on this machine (macOS, Node 22, pnpm 10, Homebrew Postgr
 6. In CI's `database` job, the contract step passes with tests from every must-pass file, the partner suite included, and no Supabase suite skipped.
 7. `pnpm format:check` passes.
 8. The lint boundaries are proven with probe files, then deleted: under `apps/web/src`, importing `@gog/data/partner` fails; under `apps/player`, the same; under `apps/partner/src`, importing `@supabase/supabase-js`, `@supabase/ssr`, `next/headers`, `@gog/data/booking`, the `@gog/data` root and `createBookingRepository` each fail, and so does a file starting with `'use server'`.
-9. The living specifications are current: `docs/spec/01` to `08` amended in the pull requests that changed the code, `docs/spec/09-partner-app.md` created in M0 and kept current, each milestone recorded in `docs/spec/CHANGELOG.md`, deviations recorded, and ADRs 0013 to 0017 set to Accepted when their pull request merges.
+9. The living specifications are current: `docs/spec/01` to `08` amended in the pull requests that changed the code, `docs/spec/09-partner-app.md` created in M0 and kept current, each milestone recorded in `docs/spec/CHANGELOG.md`, and deviations recorded. ADRs 0013 to 0017 were accepted when this plan merged (17 November 2026); a change to one of them needs a new record (ADR 0001).
 10. The checks only a person can make (below) are done and their results written into `docs/spec/09-partner-app.md` or the pull request.
 
 ## Tests per layer
