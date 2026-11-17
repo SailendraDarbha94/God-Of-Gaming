@@ -88,6 +88,13 @@ export type Database = {
             referencedColumns: ['id'];
           },
           {
+            foreignKeyName: 'booking_seats_booking_id_fkey';
+            columns: ['booking_id'];
+            isOneToOne: false;
+            referencedRelation: 'my_booking_details';
+            referencedColumns: ['id'];
+          },
+          {
             foreignKeyName: 'booking_seats_station_id_fkey';
             columns: ['station_id'];
             isOneToOne: false;
@@ -766,6 +773,97 @@ export type Database = {
           status: Database['public']['Enums']['cafe_status'] | null;
         };
         Relationships: [];
+      };
+      my_booking_details: {
+        Row: {
+          cafe_id: string | null;
+          cafe_name: string | null;
+          cafe_slug: string | null;
+          created_at: string | null;
+          ends_at: string | null;
+          hold_expires_at: string | null;
+          hourly_rate_paise: number | null;
+          id: string | null;
+          lock_fee_paise: number | null;
+          seat_count: number | null;
+          seats: Json | null;
+          source: Database['public']['Enums']['booking_source'] | null;
+          starts_at: string | null;
+          status: Database['public']['Enums']['booking_status'] | null;
+          tier_id: string | null;
+          tier_kind: Database['public']['Enums']['station_kind'] | null;
+          tier_name: string | null;
+          total_paise: number | null;
+          updated_at: string | null;
+          user_id: string | null;
+        };
+        Insert: {
+          cafe_id?: string | null;
+          cafe_name?: string | null;
+          cafe_slug?: string | null;
+          created_at?: string | null;
+          ends_at?: string | null;
+          hold_expires_at?: string | null;
+          hourly_rate_paise?: number | null;
+          id?: string | null;
+          lock_fee_paise?: number | null;
+          seat_count?: number | null;
+          seats?: never;
+          source?: Database['public']['Enums']['booking_source'] | null;
+          starts_at?: string | null;
+          status?: Database['public']['Enums']['booking_status'] | null;
+          tier_id?: string | null;
+          tier_kind?: Database['public']['Enums']['station_kind'] | null;
+          tier_name?: string | null;
+          total_paise?: number | null;
+          updated_at?: string | null;
+          user_id?: string | null;
+        };
+        Update: {
+          cafe_id?: string | null;
+          cafe_name?: string | null;
+          cafe_slug?: string | null;
+          created_at?: string | null;
+          ends_at?: string | null;
+          hold_expires_at?: string | null;
+          hourly_rate_paise?: number | null;
+          id?: string | null;
+          lock_fee_paise?: number | null;
+          seat_count?: number | null;
+          seats?: never;
+          source?: Database['public']['Enums']['booking_source'] | null;
+          starts_at?: string | null;
+          status?: Database['public']['Enums']['booking_status'] | null;
+          tier_id?: string | null;
+          tier_kind?: Database['public']['Enums']['station_kind'] | null;
+          tier_name?: string | null;
+          total_paise?: number | null;
+          updated_at?: string | null;
+          user_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'bookings_cafe_id_fkey';
+            columns: ['cafe_id'];
+            isOneToOne: false;
+            referencedRelation: 'cafe_cards';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'bookings_cafe_id_fkey';
+            columns: ['cafe_id'];
+            isOneToOne: false;
+            referencedRelation: 'cafes';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'bookings_tier_id_fkey';
+            columns: ['tier_id'];
+            isOneToOne: false;
+            referencedRelation: 'station_tiers';
+            referencedColumns: ['id'];
+          },
+        ];
       };
     };
     Functions: {

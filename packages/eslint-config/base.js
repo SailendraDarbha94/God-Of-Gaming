@@ -67,10 +67,55 @@ export const rules = {
 };
 
 export const jsNoTypeInfo = {
-  // Plain JavaScript config files have no type information.
-  files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
+  // JavaScript files have no type information: no tsconfig includes them, so the project service
+  // would refuse to parse one (a .jsx file would fail lint before any boundary rule ran).
+  files: ['**/*.js', '**/*.jsx', '**/*.mjs', '**/*.cjs'],
   ...tseslint.configs.disableTypeChecked,
 };
+
+/**
+ * Refuses an `import()` whose specifier is not a plain string literal (a template literal, a
+ * concatenation, a variable), which no boundary can read: bundlers still resolve a template literal
+ * without expressions, so `` import(`@gog/data/booking`) `` would otherwise bypass every ban below.
+ */
+export const nonLiteralImportBan = {
+  selector: "ImportExpression[source.type!='Literal']",
+  message: 'Write the import() specifier as a plain string, so the import boundary can check it.',
+};
+
+/**
+ * `no-restricted-imports` checks `import` and `export … from` declarations only, so a dynamic
+ * `import('x')` slips past it. This turns a boundary's `paths` into the matching
+ * `no-restricted-syntax` entries, plus `nonLiteralImportBan`, so each boundary refuses both forms.
+ * A path restricted to some of its exports (`importNames`) is refused whole when imported
+ * dynamically, because lint cannot see which export a dynamic import goes on to use.
+ *
+ * @param {{ name: string; message: string; importNames?: string[] }[]} paths
+ * @returns {{ selector: string; message: string }[]}
+ */
+export function dynamicImportBans(paths) {
+  return [
+    ...paths.map(({ name, message, importNames }) => ({
+      selector: `ImportExpression[source.value=${JSON.stringify(name)}]`,
+      message:
+        importNames === undefined
+          ? message
+          : `Import ${name} statically, so lint can check which of its exports you use. ${message}`,
+    })),
+    nonLiteralImportBan,
+  ];
+}
+
+/**
+ * The files a boundary applies to under each of its roots: TypeScript and any JavaScript Next or
+ * Metro would compile, so a `.js` or `.mjs` module cannot carry what a `.ts` one may not.
+ *
+ * @param {string[]} roots e.g. ['src']
+ * @returns {string[]}
+ */
+export function boundaryFiles(roots) {
+  return roots.map((root) => `${root}/**/*.{ts,tsx,js,jsx,mjs,cjs}`);
+}
 
 export { prettier };
 

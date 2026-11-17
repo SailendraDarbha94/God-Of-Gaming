@@ -3,14 +3,22 @@
  * pasted into `EXPO_PUBLIC_SUPABASE_ANON_KEY` would be inlined into the public app bundle and bypass
  * every RLS policy. The dashboard shows both keys side by side, so the mistake is one paste away.
  *
- * Policy: reject only what is recognisably a secret and accept everything else. `sb_secret_*` keys
- * and any JWT whose payload does not say `role: "anon"` (service_role, a user's `authenticated`
- * token, an undecodable `eyJ…` string) are refused; `sb_publishable_*` keys, anon JWTs and any other
- * string pass, and the server judges their validity.
+ * Policy: reject only what is recognisably a secret and accept everything else. Refused: `sb_secret_`
+ * anywhere in the value, and any JWT whose payload does not say `role: "anon"` (service_role, a
+ * user's `authenticated` token, an undecodable `eyJ…` string), whether it is the whole value or sits
+ * inside other text. A quoted or prefixed paste (`"sb_secret_…"`, `Bearer eyJ…`) never works as a
+ * key, but it would still be bundled into public JavaScript. `sb_publishable_*` keys, anon JWTs and
+ * any other string pass, and the server judges their validity.
  */
 
-const SECRET_KEY_PREFIX = 'sb_secret_';
+const SECRET_KEY_MARKER = 'sb_secret_';
 const JWT_PREFIX = 'eyJ';
+/**
+ * A JWT's header and payload are base64url JSON objects, so each starts with `eyJ` (`{"`). This finds
+ * every JWT inside other text, so a paste of both legacy keys cannot hide the service_role one
+ * behind the anon one; a publishable key has no dot, so it cannot match by chance.
+ */
+const JWT_IN_TEXT = /eyJ[A-Za-z0-9_-]*\.eyJ[A-Za-z0-9_-]*/g;
 
 /** Why a key was refused, without the key itself: the message may end up in a log. */
 export class PublishableKeyError extends Error {
@@ -54,17 +62,28 @@ function jwtRole(token: string): string | null {
   }
 }
 
+function jwtRefusal(token: string): string | null {
+  const role = jwtRole(token);
+  if (role === null) {
+    return 'holds a JWT whose payload cannot be read';
+  }
+  return role === 'anon' ? null : `holds a JWT with role "${role}"`;
+}
+
 function refusal(key: string): string | null {
-  if (key.startsWith(SECRET_KEY_PREFIX)) {
-    return `holds an sb_secret_ key`;
+  if (key.includes(SECRET_KEY_MARKER)) {
+    return 'holds an sb_secret_ key';
   }
   if (key.startsWith(JWT_PREFIX)) {
-    const role = jwtRole(key);
-    if (role === null) {
-      return 'holds a JWT whose payload cannot be read';
+    const whole = jwtRefusal(key);
+    if (whole !== null) {
+      return whole;
     }
-    if (role !== 'anon') {
-      return `holds a JWT with role "${role}"`;
+  }
+  for (const [token] of key.matchAll(JWT_IN_TEXT)) {
+    const reason = jwtRefusal(token);
+    if (reason !== null) {
+      return reason;
     }
   }
   return null;

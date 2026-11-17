@@ -1,31 +1,41 @@
 // eslint-config-expo has no `exports` map, so the file extension is required under ESM resolution.
 import expoConfig from 'eslint-config-expo/flat.js';
 
-import { jsNoTypeInfo, presets, prettier, rules } from './base.js';
+import {
+  boundaryFiles,
+  dynamicImportBans,
+  jsNoTypeInfo,
+  presets,
+  prettier,
+  rules,
+} from './base.js';
 
 /**
  * For apps/player: the shared presets, Expo's flat config (React, React Native, Expo and import
  * rules), Prettier, then our rules (after Expo's, which would otherwise soften `eqeqeq` and
- * `no-unused-vars`) and one boundary: the app never imports the Supabase SDK itself. The client is
- * created by `createNativeClient` from @gog/data in src/lib/supabase.ts, so no file is exempt
- * (ADR 0011).
+ * `no-unused-vars`) and the boundary: the app never imports the Supabase SDK itself (the client is
+ * created by `createNativeClient` from @gog/data in src/lib/supabase.ts, so no file is exempt; ADR
+ * 0011), nor the partner repositories, which belong to apps/partner (ADR 0013). The same paths are
+ * refused as dynamic `import()` expressions (`dynamicImportBans`, base.js).
  */
+const restrictedPaths = [
+  {
+    name: '@supabase/supabase-js',
+    message:
+      'Go through @gog/data (createNativeClient in src/lib/supabase.ts builds the client); the app never imports the SDK (ADR 0011).',
+  },
+  {
+    name: '@gog/data/partner',
+    message: 'The partner repositories belong to apps/partner only (ADR 0013).',
+  },
+];
+
 const boundaries = {
   name: 'gog/player-boundaries',
-  files: ['app/**/*.{ts,tsx}', 'src/**/*.{ts,tsx}'],
+  files: boundaryFiles(['app', 'src']),
   rules: {
-    'no-restricted-imports': [
-      'error',
-      {
-        paths: [
-          {
-            name: '@supabase/supabase-js',
-            message:
-              'Go through @gog/data (createNativeClient in src/lib/supabase.ts builds the client); the app never imports the SDK (ADR 0011).',
-          },
-        ],
-      },
-    ],
+    'no-restricted-imports': ['error', { paths: restrictedPaths }],
+    'no-restricted-syntax': ['error', ...dynamicImportBans(restrictedPaths)],
   },
 };
 

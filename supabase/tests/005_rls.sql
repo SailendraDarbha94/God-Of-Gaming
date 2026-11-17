@@ -1,7 +1,8 @@
 -- 005: row level security (docs/spec/03-database.md, Row Level Security; ADR 0011).
--- Users: 1111... holds at Pixel Den, 2222... holds at Frame Rate, 3333... is staff at Pixel Den.
+-- Users: 1111... holds at Pixel Den, 2222... holds at Frame Rate, 3333... is staff at Pixel Den and
+-- holds nothing.
 begin;
-select plan(24);
+select plan(26);
 
 create function pg_temp.ist_tomorrow(p_time time) returns timestamptz
 language sql stable as $$
@@ -66,13 +67,12 @@ select results_eq(
 select is((select count(*)::integer from public.booking_details), 1, 'booking_details is filtered the same way');
 select is((select count(*)::integer from public.booking_seats), 1, 'and so are the seats');
 
--- user 3, staff at Pixel Den, sees the bookings of that cafe
+-- user 3, staff at Pixel Den, sees only their own bookings, which here means none: the member branch
+-- of the bookings policy is gone (migration 20261117120000; ADR 0015, ADR 0017)
 select set_config('request.jwt.claims', '{"sub":"33333333-3333-4333-8333-333333333333","role":"authenticated"}', true);
-select results_eq(
-  $$select id from public.bookings$$,
-  $$select id from hold1$$,
-  'a cafe member sees the bookings at their cafe and no others'
-);
+select is_empty($$select id from public.bookings$$, 'a cafe member does not see the bookings at their cafe');
+select is_empty($$select id from public.booking_details$$, 'nor in booking_details');
+select is_empty($$select booking_id from public.booking_seats$$, 'nor their seats');
 select is((select count(*)::integer from public.cafe_members), 1, 'a member sees their own membership row');
 
 -- user 2

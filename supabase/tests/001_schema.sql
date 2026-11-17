@@ -1,6 +1,6 @@
 -- 001: the schema exists as docs/spec/03-database.md describes it.
 begin;
-select plan(50);
+select plan(55);
 
 -- Enums
 select has_enum('public', 'station_kind', 'enum station_kind exists');
@@ -19,6 +19,20 @@ from unnest(array[
 -- Views
 select has_view('public', 'cafe_cards', 'view cafe_cards exists');
 select has_view('public', 'booking_details', 'view booking_details exists');
+select has_view('public', 'my_booking_details', 'view my_booking_details exists');
+
+-- Every view in public is security_invoker, so its readers' policies apply. `create or replace view`
+-- replaces a view's options with its own, so a replacement that forgets `with (security_invoker =
+-- true)` would read the tables as the view's owner and fail here.
+select is_empty(
+  $$select c.oid::regclass::text
+    from pg_class c
+    join pg_namespace n on n.oid = c.relnamespace
+    where n.nspname = 'public'
+      and c.relkind = 'v'
+      and not coalesce(c.reloptions @> array['security_invoker=true'], false)$$,
+  'every view in public is security_invoker'
+);
 
 -- Extensions
 select ok(
@@ -106,6 +120,64 @@ select ok(
 select ok(
   has_column_privilege('authenticated', 'public.profiles', 'display_name', 'update'),
   'authenticated keeps the column grant on profiles.display_name'
+);
+
+-- Schema-wide (docs/spec/03-database.md, Row Level Security). Supabase's default privileges grant ALL
+-- on every new table, view and function in public to anon and authenticated, so a migration that
+-- forgets its revoke fails one of these. Column grants such as profiles.display_name are not table
+-- privileges and pass.
+select is_empty(
+  $$select format('%s can %s %s', r.rolname, p.privilege, c.oid::regclass)
+    from pg_class c
+    join pg_namespace n on n.oid = c.relnamespace
+    cross join (values ('anon'), ('authenticated')) as r(rolname)
+    cross join (values ('insert'), ('update'), ('delete'), ('truncate')) as p(privilege)
+    where n.nspname = 'public'
+      and c.relkind in ('r', 'v', 'p')
+      and has_table_privilege(r.rolname, c.oid, p.privilege)$$,
+  'no table or view in public grants insert, update, delete or truncate to anon or authenticated'
+);
+
+-- The functions each client role can execute, extension members left out, as of this milestone
+-- (docs/spec/iteration-2/03-database.md, Grants). A new function is added here with its grant.
+select is(
+  array(
+    select p.oid::regprocedure::text
+    from pg_proc p
+    join pg_namespace n on n.oid = p.pronamespace
+    where n.nspname = 'public'
+      and has_function_privilege('anon', p.oid, 'execute')
+      and not exists (
+        select 1
+        from pg_depend d
+        where d.classid = 'pg_proc'::regclass and d.objid = p.oid and d.deptype = 'e'
+      )
+    order by 1
+  ),
+  array['get_availability(uuid,date,integer,integer)'],
+  'anon can execute get_availability and no other function in public'
+);
+select is(
+  array(
+    select p.oid::regprocedure::text
+    from pg_proc p
+    join pg_namespace n on n.oid = p.pronamespace
+    where n.nspname = 'public'
+      and has_function_privilege('authenticated', p.oid, 'execute')
+      and not exists (
+        select 1
+        from pg_depend d
+        where d.classid = 'pg_proc'::regclass and d.objid = p.oid and d.deptype = 'e'
+      )
+    order by 1
+  ),
+  array[
+    'cancel_booking(uuid)',
+    'confirm_booking(uuid)',
+    'create_booking(uuid,uuid,timestamp with time zone,integer,integer)',
+    'get_availability(uuid,date,integer,integer)'
+  ],
+  'authenticated can execute the booking functions and no other function in public'
 );
 
 select * from finish();

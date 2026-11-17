@@ -12,6 +12,7 @@ This folder is the target for the first iteration of the codebase. It is written
 | [06-player-app.md](06-player-app.md)                                 | The player app (`apps/player`)                                                  |
 | [07-standards-and-verification.md](07-standards-and-verification.md) | Coding standards, tooling, CI and the definition of done                        |
 | [08-sample-data.md](08-sample-data.md)                               | The sample dataset encoded by both the fixtures and the seed                    |
+| [09-partner-app.md](09-partner-app.md)                               | The partner dashboard (`apps/partner`), from iteration 2                        |
 
 Iteration 2, the partner dashboard (`apps/partner`), is specified as a set of changes in [`iteration-2/`](iteration-2/README.md).
 
@@ -20,4 +21,4 @@ Rules for implementers:
 - Build what is written here and nothing more. If something is missing or wrong, implement the smallest sensible interpretation and record the deviation in your pull request description (or in `docs/spec/DEVIATIONS.md` when working without a PR).
 - Pinned versions live in `pnpm-workspace.yaml` (the pnpm catalog). Do not pin a different version in a package.
 - Current documentation beats memory. Next.js 16, Expo SDK 58, Tailwind CSS 4 and Supabase have all changed recently; check their docs for any API you are not certain about.
-- Names: the product's working title is "God of Gaming". It appears only in `apps/web/src/config/site.ts`, `apps/player/app.config.ts` and copy, so that renaming is a search-and-replace. The package scope is `@gog`.
+- Names: the product's working title is "God of Gaming". It appears only in `apps/web/src/config/site.ts`, `apps/player/app.config.ts`, `apps/partner/src/config/site.ts` and copy, so that renaming is a search-and-replace. The package scope is `@gog`.

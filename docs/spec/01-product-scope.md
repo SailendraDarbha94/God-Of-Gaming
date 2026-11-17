@@ -8,7 +8,7 @@ A booking aggregator for gaming cafes in India, starting in Bengaluru. Players f
 
 1. Launch city is Bengaluru, where the founder lives and will sign cafes in person. (ADR 0006)
 2. The website is a showcase of cafes and promotions and a driver to download the apps. No booking, no accounts, no forms on the web. (ADR 0004)
-3. Booking happens in the apps. The first app is the player app. A partner (cafe) surface comes next and its form (web dashboard or native app) is still the founder's call.
+3. Booking happens in the apps. The first app is the player app. A partner (cafe) surface comes next; on 16 November 2026 the founder chose its form: a Next.js web app, `apps/partner`, with an Expo partner app possibly later (ADR 0013; built in iteration 2, `iteration-2/`, living specification `09-partner-app.md`).
 4. Good programming principles from the first commit. (ADR 0010, 0011, and `07-standards-and-verification.md`)
 5. Monorepo on React Native (Expo) and Next.js. Backend is Supabase; no NestJS or FastAPI until a named trigger. (ADR 0002, 0003)
 
@@ -44,5 +44,5 @@ A booking aggregator for gaming cafes in India, starting in Bengaluru. Players f
 
 ## Open decisions for the founder
 
-- Partner surface: Next.js dashboard (`apps/partner`, fast to ship, counters have PCs) or a second Expo app (owners manage from phones). Recommendation in the root README.
+- Partner surface: decided on 16 November 2026, a Next.js dashboard (`apps/partner`), with a second Expo app possibly later, when owners want push notifications (ADR 0013).
 - Product name and domain; Apple Developer and Google Play developer accounts; Supabase project in `ap-south-1`.

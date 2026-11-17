@@ -6,15 +6,16 @@ The research behind the product is in [the report](https://claude.ai/artifact/RJ
 
 ## What is in the repository
 
-| Path                                          | Package       | What                                                                                                              |
-| --------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `apps/web`                                    | `@gog/web`    | Next.js 16 showcase website: cafes, areas, events, download, for cafes. No booking, no accounts (ADR 0004).       |
-| `apps/player`                                 | `@gog/player` | Expo SDK 58 player app: explore, cafe detail, squad booking (hold → confirm), my bookings, phone OTP sign-in.     |
-| `packages/domain`                             | `@gog/domain` | Zod schemas, types and pure rules (prices, slots, opening hours, booking validation). No I/O.                     |
-| `packages/data`                               | `@gog/data`   | Repository interfaces with Supabase and fixture implementations, generated database types, mappers, auth gateway. |
-| `packages/tsconfig`, `packages/eslint-config` |               | Shared TypeScript and ESLint configuration.                                                                       |
-| `supabase/`                                   |               | Postgres migrations, SQL functions, RLS policies, pgTAP tests, seed, and a no-Docker local shim.                  |
-| `docs/`                                       |               | ADRs and the iteration spec.                                                                                      |
+| Path                                          | Package        | What                                                                                                                   |
+| --------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `apps/web`                                    | `@gog/web`     | Next.js 16 showcase website: cafes, areas, events, download, for cafes. No booking, no accounts (ADR 0004).            |
+| `apps/player`                                 | `@gog/player`  | Expo SDK 58 player app: explore, cafe detail, squad booking (hold → confirm), my bookings, phone OTP sign-in.          |
+| `apps/partner`                                | `@gog/partner` | Next.js 16 partner dashboard for cafe owners, staff and the founder (ADR 0013). Iteration 2: only its scaffold so far. |
+| `packages/domain`                             | `@gog/domain`  | Zod schemas, types and pure rules (prices, slots, opening hours, booking validation). No I/O.                          |
+| `packages/data`                               | `@gog/data`    | Repository interfaces with Supabase and fixture implementations, generated database types, mappers, auth gateway.      |
+| `packages/tsconfig`, `packages/eslint-config` |                | Shared TypeScript and ESLint configuration.                                                                            |
+| `supabase/`                                   |                | Postgres migrations, SQL functions, RLS policies, pgTAP tests, seed, and a no-Docker local shim.                       |
+| `docs/`                                       |                | ADRs and the iteration spec.                                                                                           |
 
 ## Prerequisites
 
@@ -47,6 +48,14 @@ pnpm dev:player
 ```
 
 Copy `apps/player/.env.example` to `apps/player/.env` first. With `EXPO_PUBLIC_DATA_SOURCE=fixtures` the catalog and booking flow work against in-memory sample data.
+
+Run the partner dashboard with sample data, no backend needed, on port 3001 (the website keeps 3000, so `pnpm dev` runs both):
+
+```bash
+NEXT_PUBLIC_GOG_DATA_SOURCE=fixtures pnpm dev:partner
+```
+
+Then open http://localhost:3001. Its environment is described in `apps/partner/.env.example`: everything it reads is public and inlined into the browser bundle, so `next.config.ts` refuses a service-role key before anything is built, and on Vercel it refuses sample data on the production deployment (`docs/spec/09-partner-app.md`).
 
 ## Database
 
@@ -82,7 +91,7 @@ Pointing at a real project: create a Supabase project in `ap-south-1` (Mumbai), 
 
 ## Scripts
 
-`pnpm dev`, `build`, `lint`, `typecheck`, `test`, `check` (lint + typecheck + test), `format`, `format:check`, and the `db:*` scripts above. Every package has `lint` and `typecheck` except the two config-only ones (`@gog/eslint-config` has `lint`, `@gog/tsconfig` has neither); the domain, data, web and player packages have `test` (the player's covers its pure helpers). The player app also has `run doctor` (`expo-doctor`; `pnpm doctor` without `run` is pnpm's own command) and `assets` (regenerates the icon PNGs).
+`pnpm dev`, `build`, `lint`, `typecheck`, `test`, `check` (lint + typecheck + test), `format`, `format:check`, and the `db:*` scripts above. Every package has `lint` and `typecheck` except the two config-only ones (`@gog/eslint-config` has `lint`, `@gog/tsconfig` has neither); the domain, data, web, player and partner packages have `test` (the player's covers its pure helpers). `pnpm dev:web` and `pnpm dev:partner` start one app each. The partner app also has `check:gate`, which loads its `next.config.ts` once per case to prove the build-time gate. The player app also has `run doctor` (`expo-doctor`; `pnpm doctor` without `run` is pnpm's own command) and `assets` (regenerates the icon PNGs).
 
 ## Testing against a real Supabase stack
 
@@ -92,11 +101,11 @@ Pointing at a real project: create a Supabase project in `ap-south-1` (Mumbai), 
 
 Read [`CONTRIBUTING.md`](CONTRIBUTING.md). In short: small pull requests, Conventional Commits, CI must pass, decisions go in an ADR, the spec says what to build.
 
-CI (`.github/workflows/ci.yml`) runs on every pull request and push to `main`: `check` scans the pushed commits for secrets (gitleaks), installs with a frozen lockfile, checks formatting, lints, typechecks and tests every package, builds the website against fixtures and runs `expo-doctor` against the lockfile's own Expo dependency map; `database` starts the local stack with Supabase CLI 2.116.0, applies the migrations and seed, runs the pgTAP tests, fails if `packages/data/src/database.types.ts` differs from the generated types, and runs the `@gog/data` contract suites against the real PostgREST and GoTrue. A weekly workflow (`.github/workflows/expo-sdk-patches.yml`) reports when Expo has published newer SDK patches than the lockfile has, so a new Expo release never fails a pull request. VS Code users get Prettier on save, ESLint per package and the recommended extensions from `.vscode/`.
+CI (`.github/workflows/ci.yml`) runs on every pull request and push to `main`: `check` scans the pushed commits for secrets (gitleaks), installs with a frozen lockfile, checks formatting, lints, typechecks and tests every package, builds the website and the partner app against fixtures, checks that the partner app's build refuses sample data in production and a service-role key and proves every rule of its build gate case by case, and runs `expo-doctor` against the lockfile's own Expo dependency map; `database` starts the local stack with Supabase CLI 2.116.0, applies the migrations and seed, runs the pgTAP tests, fails if `packages/data/src/database.types.ts` differs from the generated types, and runs the `@gog/data` contract suites against the real PostgREST and GoTrue. A weekly workflow (`.github/workflows/expo-sdk-patches.yml`) reports when Expo has published newer SDK patches than the lockfile has, so a new Expo release never fails a pull request. VS Code users get Prettier on save, ESLint per package and the recommended extensions from `.vscode/`.
 
 ## Status
 
-Iteration 1 (foundations): see `docs/spec/01-product-scope.md` for what is in and out. Nothing here is deployed yet. The sample cafes are fictional.
+Iteration 1 (foundations): see `docs/spec/01-product-scope.md` for what is in and out. Iteration 2, the partner dashboard, is planned in `docs/spec/iteration-2/` and being built milestone by milestone; M0 (foundations) is the first. Nothing here is deployed yet. The sample cafes are fictional.
 
 ## Open decisions for the founder
 

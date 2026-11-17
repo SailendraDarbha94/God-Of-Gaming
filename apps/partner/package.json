@@ -1,0 +1,40 @@
+{
+  "name": "@gog/partner",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Partner dashboard for cafe owners, staff and the platform operator. Data access in the browser only (ADR 0013).",
+  "license": "UNLICENSED",
+  "type": "module",
+  "sideEffects": false,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start -p 3001",
+    "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check:gate": "bash scripts/check-build-gate.sh",
+    "clean": "rm -rf .next"
+  },
+  "dependencies": {
+    "@gog/data": "workspace:*",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@gog/eslint-config": "workspace:*",
+    "@gog/tsconfig": "workspace:*",
+    "@tailwindcss/postcss": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "eslint": "catalog:",
+    "postcss": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}

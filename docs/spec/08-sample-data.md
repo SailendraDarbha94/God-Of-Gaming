@@ -1,6 +1,6 @@
 # 08. Sample data
 
-Used by `@gog/data/fixtures` and `supabase/seed.sql`. Everything here is fictional development data; cafe names, addresses and prices are invented and must not be presented as real venues. Area names and coordinates are real public geography (approximate centres). UUIDs are fixed so both encodings agree; use the pattern `00000000-0000-4000-8000-0000000000NN` with a distinct two- or three-digit suffix per row and a leading group per table as shown.
+Used by `@gog/data/fixtures` and `supabase/seed.sql`, except the cities, areas and games, which every project needs: those rows come from migration `supabase/migrations/20261117115900_reference_data.sql` (with the same UUIDs) instead of the seed, so production, which never runs the seed, has them too; the fixtures keep them as before. Everything else here is fictional development data; cafe names, addresses and prices are invented and must not be presented as real venues. Area names and coordinates are real public geography (approximate centres). UUIDs are fixed so both encodings agree; use the pattern `00000000-0000-4000-8000-0000000000NN` with a distinct two- or three-digit suffix per row and a leading group per table as shown.
 
 ## Cities
 

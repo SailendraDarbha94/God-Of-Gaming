@@ -42,6 +42,9 @@ describe('isPublishableKey', () => {
     ['a hosted anon JWT without padding', HOSTED_ANON],
     ['a padded anon JWT', token({ role: 'anon' }, { padded: true })],
     ['a publishable key', 'sb_publishable_x'],
+    ['a publishable key whose random part holds eyJ', 'sb_publishable_AbeyJx3eyJq'],
+    ['a quoted anon JWT, which is no secret (the server refuses it)', `"${DEMO_ANON}"`],
+    ['two anon JWTs, neither a secret', `${DEMO_ANON} ${HOSTED_ANON}`],
     ['an opaque string the server will judge', 'anon-key'],
     ['an empty string', ''],
   ])('accepts %s', (_name, key) => {
@@ -54,6 +57,15 @@ describe('isPublishableKey', () => {
     ['a secret key', 'sb_secret_x'],
     ['an eyJ string that is not a JWT', 'eyJ.garbage.sig'],
     ['a JWT without a role claim', token({ sub: 'someone' })],
+    ['a quoted secret key', '"sb_secret_x"'],
+    ['a secret key after an invisible character', '\u200Bsb_secret_x'],
+    ['a quoted service_role JWT', `'${DEMO_SERVICE_ROLE}'`],
+    ['a service_role JWT after "Bearer "', `Bearer ${DEMO_SERVICE_ROLE}`],
+    ['a quoted JWT without a role claim', `"${token({ sub: 'someone' })}"`],
+    ['an anon JWT, then a service_role JWT', `${DEMO_ANON} ${DEMO_SERVICE_ROLE}`],
+    ['both legacy keys on two lines', `${DEMO_ANON}\n${DEMO_SERVICE_ROLE}`],
+    ['both legacy keys as JSON', `{"anon":"${DEMO_ANON}","service_role":"${DEMO_SERVICE_ROLE}"}`],
+    ['an anon JWT joined to a service_role JWT by a dot', `${DEMO_ANON}.${DEMO_SERVICE_ROLE}`],
   ])('rejects %s', (_name, key) => {
     expect(isPublishableKey(key)).toBe(false);
   });

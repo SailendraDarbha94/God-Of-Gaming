@@ -25,6 +25,12 @@ catalog:
   zod: 4.6.7
   '@supabase/supabase-js': 2.118.0
   '@tanstack/react-query': 5.105.3
+  # The website and the partner app (docs/spec/iteration-2/04-packages.md). eslint-config-next stays
+  # pinned in packages/eslint-config/package.json and moves with next.
+  next: 16.4.5
+  tailwindcss: 4.3.4
+  '@tailwindcss/postcss': 4.3.4
+  postcss: 8.5.32
   vitest: 5.1.0
   # ESLint 9.x reached end-of-life on 2026-08-06; every config we use declares 10.x support (ADR 0010).
   eslint: 10.14.0

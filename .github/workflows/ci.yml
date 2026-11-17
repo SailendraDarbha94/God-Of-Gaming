@@ -58,6 +58,49 @@ jobs:
           GOG_DATA_SOURCE: fixtures
           NEXT_PUBLIC_SITE_URL: https://example.com
 
+      - name: Build the partner app against fixtures
+        run: pnpm turbo run build --filter=@gog/partner
+        env:
+          NEXT_PUBLIC_GOG_DATA_SOURCE: fixtures
+
+      # The gate in apps/partner/next.config.ts throws while the config loads, before anything is
+      # bundled (docs/spec/09-partner-app.md). Each of these two steps passes only when the build
+      # fails with that rule's own message, so an unrelated failure cannot pass for the gate, and
+      # prints the build's output when it fails for another reason.
+      - name: Partner app refuses fixtures in production
+        run: |
+          if output="$(VERCEL_ENV=production NEXT_PUBLIC_GOG_DATA_SOURCE=fixtures pnpm --filter @gog/partner build 2>&1)"; then
+            echo "$output"
+            echo "::error::the partner build accepted fixtures on the production deployment"
+            exit 1
+          fi
+          if ! grep -F 'NEXT_PUBLIC_GOG_DATA_SOURCE=fixtures is refused on the production deployment' <<<"$output"; then
+            echo "$output"
+            echo "::error::the partner build failed, but not because of the fixtures rule"
+            exit 1
+          fi
+
+      # sb_secret_probe is not a key: it only has the prefix the gate refuses.
+      - name: Partner app refuses a secret key
+        run: |
+          if output="$(NEXT_PUBLIC_GOG_DATA_SOURCE=supabase NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321 NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_secret_probe pnpm --filter @gog/partner build 2>&1)"; then
+            echo "$output"
+            echo "::error::the partner build accepted an sb_secret_ key"
+            exit 1
+          fi
+          if ! grep -F 'NEXT_PUBLIC_SUPABASE_ANON_KEY holds an sb_secret_ key' <<<"$output"; then
+            echo "$output"
+            echo "::error::the partner build failed, but not because of the key rule"
+            exit 1
+          fi
+
+      # Every rule of the gate, refused and accepted cases alike, through `next typegen` (seconds):
+      # the key rule in each form (sb_secret_, JWT roles, an unreadable token, a quoted or prefixed
+      # paste), the data-source and URL rules, the Vercel presence rules, and valid configurations
+      # that must still load.
+      - name: Partner app's build gate, case by case
+        run: pnpm --filter @gog/partner check:gate
+
       - name: expo-doctor
         # Required. It may only fail when the network it depends on is unreachable from the runner.
         # EXPO_OFFLINE makes its dependency check compare the installed packages with the map that
