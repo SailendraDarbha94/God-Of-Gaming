@@ -22,8 +22,11 @@ import type { BookingRepository } from './repository';
 /**
  * The booking flow over the SQL functions of spec 03 (ADR 0005): every write is an RPC and the
  * database is the final word on seats. The three transition RPCs return a `booking_details` row,
- * so no second fetch follows a hold, confirm or cancel; `listMine` reads the same view (never the
- * `bookings` table with catalog embeds, whose RLS would null out paused cafes).
+ * so no second fetch follows a hold, confirm or cancel. `listMine` reads `my_booking_details`, the
+ * same columns filtered to the caller by the view itself as well as by the booker-only bookings
+ * policy, so a cafe member's "My bookings" never lists another player's booking at their cafe (ADR
+ * 0015). It never reads the `bookings` table with catalog embeds, whose RLS would null out paused
+ * cafes.
  */
 export class SupabaseBookingRepository implements BookingRepository {
   constructor(private readonly client: DataClient) {}
@@ -73,14 +76,14 @@ export class SupabaseBookingRepository implements BookingRepository {
   /** Newest start first; equal starts (a re-held slot) newest hold first, like the fixture. */
   async listMine(): Promise<Booking[]> {
     const { data, error } = await this.client
-      .from('booking_details')
+      .from('my_booking_details')
       .select('*')
       .order('starts_at', { ascending: false })
       .order('created_at', { ascending: false });
     if (error !== null) {
       throw dataErrorFromPostgrest('listMine', error);
     }
-    return parseRows(data, 'booking_details').map(toBooking);
+    return parseRows(data, 'my_booking_details').map(toBooking);
   }
 
   private async hold(request: BookingRequest): Promise<Booking> {

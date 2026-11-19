@@ -54,10 +54,13 @@ alter default privileges in schema public grant all on tables to anon, authentic
 alter default privileges in schema public grant all on functions to anon, authenticated, service_role;
 alter default privileges in schema public grant all on sequences to anon, authenticated, service_role;
 
--- Only the columns the migrations and tests touch. GoTrue stores phone as digits without +.
+-- Only the columns the migrations and tests touch. GoTrue stores phone as digits without +, and sets
+-- phone_confirmed_at when the number's code is verified; the pgTAP files of iteration 2 insert their
+-- users with it set (docs/spec/iteration-2/03-database.md, pgTAP).
 create table if not exists auth.users (
   id uuid primary key default gen_random_uuid(),
   phone text,
+  phone_confirmed_at timestamptz,
   email text,
   created_at timestamptz not null default now()
 );

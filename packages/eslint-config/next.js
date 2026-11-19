@@ -1,7 +1,14 @@
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 
-import { jsNoTypeInfo, presets, prettier, rules } from './base.js';
+import {
+  boundaryFiles,
+  dynamicImportBans,
+  jsNoTypeInfo,
+  presets,
+  prettier,
+  rules,
+} from './base.js';
 
 /**
  * For apps/web: the shared presets, Next.js core web vitals and TypeScript rules, Prettier, then our
@@ -12,41 +19,44 @@ import { jsNoTypeInfo, presets, prettier, rules } from './base.js';
  * package root re-exports `./booking` and `./auth`, and `@gog/data/factory` exports the booking and
  * auth creators next to the catalog one. Both are named here; deep paths such as
  * `@gog/data/booking/supabase-booking` need no entry because the package's `exports` map does not
- * expose them.
+ * expose them. The same paths are refused as dynamic `import()` expressions (`dynamicImportBans`,
+ * base.js), and `@gog/data/partner` belongs to apps/partner only (ADR 0013).
  */
+const restrictedPaths = [
+  {
+    name: '@gog/data',
+    message:
+      'Import @gog/data/catalog, @gog/data/client or @gog/data/factory; the root re-exports booking and auth (ADR 0004).',
+  },
+  {
+    name: '@gog/data/booking',
+    message: 'The website never books; booking lives in the apps (ADR 0004).',
+  },
+  {
+    name: '@gog/data/auth',
+    message: 'The website has no accounts (ADR 0004).',
+  },
+  {
+    name: '@gog/data/factory',
+    importNames: ['createBookingRepository', 'createAuthGateway'],
+    message: 'The website only creates the catalog repository (ADR 0004).',
+  },
+  {
+    name: '@supabase/supabase-js',
+    message: 'Go through @gog/data; the website only needs the catalog (ADR 0011).',
+  },
+  {
+    name: '@gog/data/partner',
+    message: 'The partner repositories belong to apps/partner only (ADR 0013).',
+  },
+];
+
 const boundaries = {
   name: 'gog/web-boundaries',
-  files: ['src/**/*.{ts,tsx}'],
+  files: boundaryFiles(['src']),
   rules: {
-    'no-restricted-imports': [
-      'error',
-      {
-        paths: [
-          {
-            name: '@gog/data',
-            message:
-              'Import @gog/data/catalog, @gog/data/client or @gog/data/factory; the root re-exports booking and auth (ADR 0004).',
-          },
-          {
-            name: '@gog/data/booking',
-            message: 'The website never books; booking lives in the apps (ADR 0004).',
-          },
-          {
-            name: '@gog/data/auth',
-            message: 'The website has no accounts (ADR 0004).',
-          },
-          {
-            name: '@gog/data/factory',
-            importNames: ['createBookingRepository', 'createAuthGateway'],
-            message: 'The website only creates the catalog repository (ADR 0004).',
-          },
-          {
-            name: '@supabase/supabase-js',
-            message: 'Go through @gog/data; the website only needs the catalog (ADR 0011).',
-          },
-        ],
-      },
-    ],
+    'no-restricted-imports': ['error', { paths: restrictedPaths }],
+    'no-restricted-syntax': ['error', ...dynamicImportBans(restrictedPaths)],
   },
 };
 

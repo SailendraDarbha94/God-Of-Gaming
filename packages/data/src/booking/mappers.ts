@@ -4,9 +4,10 @@ import { InstantColumn } from '../columns';
 import { parseOrThrow } from '../parse';
 
 /**
- * `booking_details` rows (the view `listMine` reads and the type the three RPCs return) and
- * `get_availability` rows to domain objects (spec 04 §Booking queries). The generated types mark
- * every view column nullable, so the row schema states what a real row always carries.
+ * `booking_details` rows (the type the three RPCs return, and the columns of `my_booking_details`,
+ * which `listMine` reads) and `get_availability` rows to domain objects (spec 04 §Booking queries).
+ * The generated types mark every view column nullable, so the row schema states what a real row
+ * always carries.
  */
 
 const SeatJson = z.object({

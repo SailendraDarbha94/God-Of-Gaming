@@ -1,0 +1,79 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens: dark, one accent, AA contrast on every pair used. The partner app shares the brand
+ * with the website and the player app but no UI code (ADR 0007).
+ */
+@theme {
+  --color-bg: #0a0a0f;
+  --color-surface: #13131b;
+  --color-surface-2: #1c1c27;
+  --color-border: #2b2b3a;
+  /* A control's edge (a form field, a secondary button, whose fill is 1.07:1 on bg) is how it is
+     recognised, so it needs 3:1 against what surrounds it (WCAG 2.2 SC 1.4.11): 4.0:1 on bg, 3.7:1
+     on surface, 3.4:1 on surface-2. --color-border is 1.4:1 and only separates regions. */
+  --color-field-border: #6e6e88;
+  --color-text: #f4f4f8;
+  --color-muted: #a6a6b7;
+  --color-accent: #c8ff4a;
+  --color-accent-ink: #0a0a0f;
+}
+
+/* Font tokens reference the next/font variables set on <html>, so they are declared inline. */
+@theme inline {
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bg text-text font-sans antialiased;
+    min-height: 100dvh;
+    overflow-x: clip;
+  }
+
+  /* Focus rings are always visible (docs/spec/09-partner-app.md, Accessibility). */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 0.25rem;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Touch targets are at least 44 by 44 px (min-h-11). */
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-semibold transition-colors;
+  }
+
+  .btn-primary {
+    @apply bg-accent text-accent-ink hover:bg-[#d9ff7a];
+  }
+
+  .btn-secondary {
+    @apply border-field-border bg-surface text-text hover:border-muted border;
+  }
+
+  .field {
+    @apply border-field-border bg-surface text-text placeholder:text-muted min-h-11 w-full rounded-md border px-3 py-2 text-base;
+  }
+}

@@ -13,6 +13,18 @@
         "dev"
       ],
       "port": 3000
+    },
+    {
+      "name": "partner",
+      "runtimeExecutable": "env",
+      "runtimeArgs": [
+        "NEXT_PUBLIC_GOG_DATA_SOURCE=fixtures",
+        "pnpm",
+        "--filter",
+        "@gog/partner",
+        "dev"
+      ],
+      "port": 3001
     }
   ]
 }
