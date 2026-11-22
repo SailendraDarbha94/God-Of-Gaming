@@ -15,7 +15,8 @@ The research behind the product is in [the report](https://claude.ai/artifact/RJ
 | `packages/data`                               | `@gog/data`    | Repository interfaces with Supabase and fixture implementations, generated database types, mappers, auth gateway.      |
 | `packages/tsconfig`, `packages/eslint-config` |                | Shared TypeScript and ESLint configuration.                                                                            |
 | `supabase/`                                   |                | Postgres migrations, SQL functions, RLS policies, pgTAP tests, seed, and a no-Docker local shim.                       |
-| `docs/`                                       |                | ADRs and the iteration spec.                                                                                           |
+| `scripts/figma-board`                         |                | Draws the player app in Figma from its code: every state of every route, the flow and the tokens (`pnpm board:build`). |
+| `docs/`                                       |                | ADRs, the iteration spec, and design notes (`docs/design`).                                                            |
 
 ## Prerequisites
 
@@ -91,7 +92,7 @@ Pointing at a real project: create a Supabase project in `ap-south-1` (Mumbai), 
 
 ## Scripts
 
-`pnpm dev`, `build`, `lint`, `typecheck`, `test`, `check` (lint + typecheck + test), `format`, `format:check`, and the `db:*` scripts above. Every package has `lint` and `typecheck` except the two config-only ones (`@gog/eslint-config` has `lint`, `@gog/tsconfig` has neither); the domain, data, web, player and partner packages have `test` (the player's covers its pure helpers). `pnpm dev:web` and `pnpm dev:partner` start one app each. The partner app also has `check:gate`, which loads its `next.config.ts` once per case to prove the build-time gate. The player app also has `run doctor` (`expo-doctor`; `pnpm doctor` without `run` is pnpm's own command) and `assets` (regenerates the icon PNGs).
+`pnpm dev`, `build`, `lint`, `typecheck`, `test`, `check` (lint + typecheck + test), `format`, `format:check`, and the `db:*` scripts above. Every package has `lint` and `typecheck` except the two config-only ones (`@gog/eslint-config` has `lint`, `@gog/tsconfig` has neither); the domain, data, web, player and partner packages have `test` (the player's covers its pure helpers). `pnpm dev:web` and `pnpm dev:partner` start one app each. The partner app also has `check:gate`, which loads its `next.config.ts` once per case to prove the build-time gate. The player app also has `run doctor` (`expo-doctor`; `pnpm doctor` without `run` is pnpm's own command) and `assets` (regenerates the icon PNGs). `board:build`, `board:preview` and `board:check` build, inspect and check the Figma board of the player app; it is a tool to run on demand, outside `pnpm check` and CI ([`scripts/figma-board/README.md`](scripts/figma-board/README.md)).
 
 ## Testing against a real Supabase stack
 
