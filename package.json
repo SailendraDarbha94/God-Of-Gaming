@@ -31,10 +31,16 @@
     "db:local:reset": "scripts/db/local.sh reset",
     "db:local:test": "scripts/db/local.sh test",
     "db:local:types": "scripts/db/local.sh types",
+    "board:build": "node scripts/figma-board/run.mjs build.ts",
+    "board:preview": "node scripts/figma-board/run.mjs tools/preview.ts",
+    "board:check": "tsc -p scripts/figma-board/tsconfig.json && cd scripts/figma-board && eslint .",
     "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {
     "@supabase/postgres-meta": "0.98.0",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "jiti": "2.7.0",
     "prettier": "catalog:",
     "turbo": "catalog:",
     "typescript": "catalog:"

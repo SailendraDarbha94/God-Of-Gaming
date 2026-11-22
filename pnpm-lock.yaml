@@ -74,6 +74,15 @@ importers:
       '@supabase/postgres-meta':
         specifier: 0.98.0
         version: 0.98.0
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.20.5
+      eslint:
+        specifier: 'catalog:'
+        version: 10.14.0(jiti@2.7.0)
+      jiti:
+        specifier: 2.7.0
+        version: 2.7.0
       prettier:
         specifier: 'catalog:'
         version: 3.9.10
