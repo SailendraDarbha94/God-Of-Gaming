@@ -11,7 +11,12 @@ import {
   CANCEL_CONFIRMATION,
 } from '@app/features/booking/copy';
 import { effectiveStatus, isCancellable } from '@app/features/booking/history';
-import { durationOptions, type DayOption, type SlotOption } from '@app/features/booking/slots';
+import {
+  SLOT_GRID_COLUMNS,
+  durationOptions,
+  type DayOption,
+  type SlotOption,
+} from '@app/features/booking/slots';
 import {
   formatDuration,
   formatRatePerHour,
@@ -275,18 +280,16 @@ export const SLOT_GRID_WIDTH = DEVICE.w - 2 * spacing.lg;
 
 /**
  * styles.cell is `width: '31%'` with `flexGrow: 1` in a wrapping row with a gap. Yoga breaks lines on
- * the 31% basis (three fit, a fourth does not), then grows the cells of each line to share that
- * line's spare width, so a last line of one or two cells is stretched across the whole row.
+ * the 31% basis (SLOT_GRID_COLUMNS fit, one more does not), then grows the cells of each line to
+ * share that line's spare width. The component completes the last line with empty cells
+ * (emptyCellsInLastRow), so every cell has the width of a full line's; the empty cells draw nothing
+ * and are left out here.
  */
-function cellWidths(count: number, container: number): number[] {
-  const basis = container * 0.31;
-  const perLine = Math.max(1, Math.floor((container + spacing.sm) / (basis + spacing.sm)));
-  return Array.from({ length: count }, (_, index) => {
-    const line = Math.floor(index / perLine);
-    const inLine = Math.min(perLine, count - line * perLine);
-    // Rounded down so three cells and two gaps never exceed the row by a rounding error.
-    return Math.floor(((container - spacing.sm * (inLine - 1)) / inLine) * 100) / 100;
-  });
+function cellWidth(container: number): number {
+  // Rounded down so a full line of cells and gaps never exceeds the row by a rounding error.
+  return (
+    Math.floor(((container - spacing.sm * (SLOT_GRID_COLUMNS - 1)) / SLOT_GRID_COLUMNS) * 100) / 100
+  );
 }
 
 export interface SlotGridProps {
@@ -303,10 +306,10 @@ export function SlotGrid(
   { day, slots, value, change }: SlotGridProps,
   width: number = SLOT_GRID_WIDTH,
 ): Frame {
-  const widths = cellWidths(slots.length, width);
+  const cell = cellWidth(width);
   return row(
     { name: 'SlotGrid', wrap: true, gap: spacing.sm },
-    slots.map((slot, index) => {
+    slots.map((slot) => {
       const selected = slot.startsAt === value;
       const crossesMidnight = instantToIst(slot.startsAt).day !== day;
       // Both the next date (spec 06) and the free count: a late-night squad needs the number too.
@@ -319,7 +322,7 @@ export function SlotGrid(
       return box(
         {
           name: `cell${selected ? ' (selected)' : ''}${slot.selectable ? '' : ' (disabled)'}`,
-          w: widths[index] ?? width,
+          w: cell,
           pad: [spacing.md, spacing.sm],
           radius: radii.md,
           strokeW: 1,
@@ -350,12 +353,10 @@ export function SlotGridSkeleton(
   width: number = SLOT_GRID_WIDTH,
 ): Frame {
   const cells = Array.from({ length: Math.max(count, 3) }, (_, index) => index);
-  const widths = cellWidths(cells.length, width);
+  const cell = cellWidth(width);
   return row(
     { name: 'SlotGridSkeleton', wrap: true, gap: spacing.sm },
-    cells.map((index) =>
-      box({ name: 'cell', w: widths[index] ?? width }, Skeleton({ height: 64, radius: radii.md })),
-    ),
+    cells.map(() => box({ name: 'cell', w: cell }, Skeleton({ height: 64, radius: radii.md }))),
   );
 }
 

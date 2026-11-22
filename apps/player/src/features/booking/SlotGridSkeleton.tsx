@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native';
 
 import { Skeleton } from '../../components/Skeleton';
 import { radii, spacing } from '../../lib/theme';
+import { emptyCellsInLastRow } from './slots';
 
 export interface SlotGridSkeletonProps {
   /** How many cells to draw, normally the number of starts the domain predicts for the day. */
@@ -16,6 +17,9 @@ export function SlotGridSkeleton({ count }: SlotGridSkeletonProps) {
         <View key={index} style={styles.cell}>
           <Skeleton height={64} radius={radii.md} />
         </View>
+      ))}
+      {Array.from({ length: emptyCellsInLastRow(cells.length) }, (_, index) => (
+        <View key={`empty-${index}`} style={styles.cell} />
       ))}
     </View>
   );

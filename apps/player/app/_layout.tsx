@@ -43,6 +43,7 @@ export default function RootLayout() {
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               <Stack.Screen name="cafe/[slug]" options={{ title: '' }} />
               <Stack.Screen name="cafes/[slug]" options={{ headerShown: false }} />
+              <Stack.Screen name="cafes/index" options={{ headerShown: false }} />
               <Stack.Screen name="book/[tierId]/index" options={{ title: 'Pick a time' }} />
               <Stack.Screen name="book/[tierId]/review" options={{ title: 'Review' }} />
               <Stack.Screen name="booking/[id]" options={{ title: 'Booking' }} />

@@ -79,7 +79,8 @@ export default function BookingScreen() {
       </Screen>
     );
   }
-  if (query.isError) {
+  // A refresh that fails keeps what is already on screen; the error state is for a load that has nothing to show.
+  if (query.isError && query.data === undefined) {
     return (
       <Screen>
         <ErrorState title="Could not load this booking" onRetry={onHoldExpired} />

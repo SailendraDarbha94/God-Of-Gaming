@@ -1,5 +1,6 @@
 /** features/auth/PhoneForm.tsx and features/auth/OtpForm.tsx: the two steps of the sign-in sheet. */
 import { INDIA_DIAL_CODE, normaliseIndianMobileInput } from '@app/features/auth/phone';
+import { formatPhoneForDisplay } from '@app/lib/format';
 import { Notice } from '@board/components/shared';
 import { box, colors, radii, row, spacing, touchTarget, type Frame } from '@board/dsl';
 import { Button, Text, type Link } from '@board/ui';
@@ -100,7 +101,7 @@ export function OtpForm({
   return box(
     { name: 'OtpForm', gap: spacing.md },
     Text('Enter the code', { variant: 'heading' }),
-    Text(`Sent by SMS to ${phone}.`, { tone: 'muted' }),
+    Text(`Sent by SMS to ${formatPhoneForDisplay(phone.replace(/^\+/, ''))}.`, { tone: 'muted' }),
     // TextInput: the box is styles.input; a single-line input centres its text in its minHeight.
     box(
       {

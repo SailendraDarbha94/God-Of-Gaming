@@ -238,7 +238,7 @@ export function screens(s: Scenario): BoardScreen[] {
       key: 'explore-error',
       name: 'Explore · could not load',
       route: ROUTE,
-      note: 'The app opened and the cafes could not be fetched (no connection, say). The areas failed with them, so their row has only "All areas". "Try again" asks for the cafes once more and the placeholders come back.',
+      note: 'The app opened and the cafes could not be fetched (no connection, say). The areas failed with them, so their row has only "All areas". "Try again" asks for the areas and the cafes once more, and the placeholders come back.',
       tabs: { active: 'explore' },
       content: List(
         Header({ areas: [], filter: NO_FILTER, change: noFrame }),

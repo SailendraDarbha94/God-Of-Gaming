@@ -19,7 +19,11 @@ export function PhoneForm({ pending, error, onSubmit }: PhoneFormProps) {
   const [input, setInput] = useState('');
   const [invalid, setInvalid] = useState(false);
 
+  // The keyboard's done key reaches this too, and it is not disabled while a request runs.
   const submit = () => {
+    if (pending) {
+      return;
+    }
     const phone = toIndianMobileE164(input);
     if (phone === null) {
       setInvalid(true);

@@ -2,7 +2,7 @@
 
 21 November 2026. Code: `main` at `5e328b9`. Scope: `apps/player`.
 
-The Figma board of the player app (`scripts/figma-board`) was made by translating every component and route of the app, line by line, into a drawing. Reading the code that closely turned up things that look unintended, inconsistent or unfinished. This is the list. **Nothing here has been fixed, and nothing was run on a device**: the app had not yet had its first run on a simulator when this was written.
+The Figma board of the player app (`scripts/figma-board`) was made by translating every component and route of the app, line by line, into a drawing. Reading the code that closely turned up things that look unintended, inconsistent or unfinished. This is the list. Nine entries were fixed on 22 November 2026 and say so; the rest are open. **Nothing was run on a device**, the fixes included: the app had not yet had its first run on a simulator when this was written.
 
 Every entry was checked twice after it was first noted: one reader went back to the code and tried to refute it, and another looked for what the spec, the ADRs and the code comments say about it. Of 105 notes, 8 turned out to be about the drawing and are left out, none was refuted, and 13 had a detail corrected. The rest are merged where several screens showed the same thing, which leaves 69 entries, plus 14 that need no action.
 
@@ -17,10 +17,10 @@ Every entry was checked twice after it was first noted: one reader went back to 
 
 - **9. A cafe opened from a link at a cold start has no way back** (high, needs a device)
 - **35. On the live database the hold screen may stay on "ON HOLD, 0:00"** (medium, needs a device)
-- **1. Buttons sit at the left under centred text in every empty and error state** (medium)
+- **1. Buttons sit at the left under centred text in every empty and error state** (medium, fixed 22 November)
 - **50. Privacy, Terms and Website can open localhost in a release build** (medium)
-- **10. A failed refresh replaces a loaded cafe with the error screen** (medium)
-- **44. A failed refresh replaces the loaded bookings with the error screen** (medium)
+- **10. A failed refresh replaces a loaded cafe with the error screen** (medium, fixed 22 November)
+- **44. A failed refresh replaces the loaded bookings with the error screen** (medium, fixed 22 November)
 - **38. An ended confirmed booking still says "You are booked" and offers Cancel** (medium)
 - **43. A finished session keeps its CONFIRMED badge** (medium)
 - **36. A refused Confirm shows two red notices at once** (medium)
@@ -30,7 +30,7 @@ Every entry was checked twice after it was first noted: one reader went back to 
 - **57. "Resend code" gives no confirmation** (medium)
 - **45. The other cards' cancel buttons stay live during a cancel** (medium)
 - **51. A failed sign-out shows nothing** (medium)
-- **2. "Try again" on Explore reloads the cafes but not the areas** (medium)
+- **2. "Try again" on Explore reloads the cafes but not the areas** (medium, fixed 22 November)
 - **39. Back after holding returns to Pick a time** (medium)
 
 In all: 1 high, 16 medium, 52 low.
@@ -44,6 +44,7 @@ Medium · layout
 The shared empty-state block centres its title and message, but its button keeps the shared button's own alignment to the start, so the button sits at the left of the block under centred text (40 pt in from the screen edge on a padded screen). It shows wherever an empty or error state has a button, which is 18 of the states on the board: Explore (could not load), a cafe (could not load, not listed), Pick a time (four states), Review (three), a booking (four), the Bookings tab (signed out, empty, could not load) and Not found.
 
 - Where: src/components/EmptyState.tsx:26,33-44; src/components/Button.tsx:54-61,75-87; src/components/ErrorState.tsx:16-21; app/(tabs)/index.tsx:58
+- **Fixed on 22 November 2026:** the empty-state block now centres its button (`src/components/EmptyState.tsx`, `styles.action`).
 
 ## Explore (`app/(tabs)/index.tsx`)
 
@@ -54,6 +55,7 @@ Medium · state handling
 The "Try again" button on the Explore error state reloads only the cafes, not the areas. If both failed on a cold start, tapping it can bring the cafes back while the area row still shows only "All areas", so the player cannot filter by area until they pull to refresh or leave the app and come back to it (the Explore tab stays mounted for the whole session, so nothing else reloads the areas).
 
 - Where: app/(tabs)/index.tsx:23-32,58; src/providers/QueryProvider.tsx:9-25; app/(tabs)/_layout.tsx:8-28; node_modules/@tanstack/query-core/build/modern/query.js:245-250; node_modules/@tanstack/query-core/build/modern/queryObserver.js:491-497
+- **Fixed on 22 November 2026:** "Try again" reloads the areas and the cafes (`app/(tabs)/index.tsx`, `retry`).
 
 ### 3. The area chips have no loading or error state
 
@@ -122,6 +124,7 @@ Medium · state handling
 The cafe screen checks for an error before it looks at the data it already has. When a cafe is on screen and a later refresh fails (for example the player returns to the app after more than five minutes with a bad connection), the whole page is replaced by "Could not load this cafe". Tapping "Try again" then shows no sign of working until the request and its one automatic retry finish, because the loading skeleton only comes back when there is no earlier data. This needs the live backend; the sample data never fails.
 
 - Where: app/cafe/[slug].tsx:49-71; src/features/catalog/queries.ts:20,45-51; src/providers/QueryProvider.tsx:11,17-25; src/components/ErrorState.tsx:10-22; node_modules/@tanstack/query-core/build/modern/query.js:504-534,566-576 (v5.105.3); packages/data/src/catalog/supabase-catalog.ts:99-109; packages/data/src/fixtures/settle.ts
+- **Fixed on 22 November 2026:** the error screen now shows only when there is nothing loaded to show, here and on Pick a time and Review, which read the same cafe. A refresh that fails keeps the cafe on screen; it is still not announced (entry 4 describes the same silence on Explore).
 
 ### 11. Nothing shows that the photo gallery swipes
 
@@ -157,6 +160,7 @@ The redirect for a cafe link hides its header, but the redirect for the bare caf
 
 - Where: app/_layout.tsx:35-54; app/cafes/index.tsx:9-11; app/cafes/[slug].tsx:10-16; app.config.ts:63-76; node_modules/expo-router/build/link/Redirect.js:15-31
 - On a device: With the app already open on Explore, open gog://cafes (on Android also https://<host>/cafes/ with a trailing slash) and watch the transition: does a header reading "cafes/index" with a back arrow show before Explore appears? Repeat from a force-quit app to see whether the splash covers it.
+- **Fixed on 22 November 2026:** `cafes/index` is registered without a header, like `cafes/[slug]` (`app/_layout.tsx`).
 
 ### 15. An empty tier reads "0 stations" and "Not bookable"
 
@@ -218,6 +222,7 @@ The start-time grid lays out three cells per row and lets every cell grow to fil
 
 - Where: src/features/booking/SlotGrid.tsx:66-82; src/features/booking/SlotGridSkeleton.tsx:25-33; src/components/Screen.tsx:42-45; app/book/[tierId]/index.tsx:126-153; packages/domain/src/hours.ts:91-110; packages/data/src/fixtures/bengaluru.ts:117-122
 - On a device: Open pick-a-time for a day whose number of starts is not a multiple of three and compare the width of the last row's cells with the rows above.
+- **Fixed on 22 November 2026:** the grid and its placeholder complete the last row with empty cells, so every start keeps the width of a full row's (`emptyCellsInLastRow` in `src/features/booking/slots.ts`, with a test).
 
 ### 22. Changing the day drops the chosen start without a word
 
@@ -418,6 +423,7 @@ Medium · state handling
 If a background reload of the bookings fails (for example on returning to the app with a bad connection), the whole list is replaced by the full-screen 'Could not load your bookings' message even though the bookings loaded earlier are still held in memory. Tapping 'Try again' then shows no spinner or skeleton: the screen stays on the error for the whole retry (two attempts about a second apart) and only changes if the reload succeeds.
 
 - Where: app/(tabs)/bookings.tsx:44-66; src/features/booking/queries.ts:48-54; src/providers/QueryProvider.tsx:9-21; node_modules/@tanstack/query-core/build/modern/query.js:504-508,522-534,566-576
+- **Fixed on 22 November 2026:** the error screen now shows only when there is nothing loaded to show, here and on a booking's own screen. A refresh that fails keeps the list on screen; it is still not announced.
 
 ### 45. The other cards' cancel buttons stay live during a cancel
 
@@ -537,6 +543,7 @@ Low · behaviour
 The code field caps the raw text at six characters before non-digits are stripped, the very thing the phone field deliberately avoids. A code pasted with a space, dash or leading space ('123 456', '123-456', ' 123456') is cut to its first six characters and ends up as five digits, leaving Verify greyed out until the player types the missing digit. SMS autofill, which delivers digits only, is not affected.
 
 - Where: src/features/auth/OtpForm.tsx:19,45-47,52; src/features/auth/PhoneForm.tsx:43-44; node_modules/react-native/React/Fabric/Mounting/ComponentViews/TextInput/RCTTextInputComponentView.mm:469-486; node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactTextInputManager.kt:626-647; supabase/config.toml:266
+- **Fixed on 22 November 2026:** the six-character cap on the raw text is gone; the cap applies to the digits (`src/features/auth/OtpForm.tsx`).
 
 ### 59. "Change number" empties the field
 
@@ -554,6 +561,7 @@ While a send or verify is running, the on-screen buttons are disabled but the te
 
 - Where: src/features/auth/PhoneForm.tsx:22-30,40-57,61; src/features/auth/OtpForm.tsx:32-36,42-57,59; app/auth/sign-in.tsx:32-59; src/components/Screen.tsx:28; app.config (supportsTablet: false, line 54); node_modules/react-native/ReactAndroid/src/main/java/com/facebook/react/views/textinput/ReactEditText.kt:1009-1010; supabase/config.toml:267-268
 - On a device: On an Android phone with the default keyboard: enter a valid number, tap Send code, and while the spinner shows press the keyboard's tick/done key (the keyboard stays up after the button tap). Check whether a second request goes out: two SMS, or the 'Could not send the code...' notice appearing on the code step. Repeat on the code step with Verify. On an iPhone, confirm the pads show no return key.
+- **Fixed on 22 November 2026:** both forms ignore a submit while a request is running (`PhoneForm.tsx`, `OtpForm.tsx`). The fields themselves stay editable, as the entry on that says.
 
 ### 61. Two error notices can stack on the phone step
 
@@ -594,6 +602,7 @@ Low · copy
 The code step shows the number exactly as it is sent to the sign-in service, as one unbroken run: 'Sent by SMS to +919876543210.' There is no space after +91 or inside the ten digits, which makes a mistyped digit harder to spot, the stated reason for showing it.
 
 - Where: src/features/auth/OtpForm.tsx:10-11,41; src/features/auth/phone.ts:29-32; app/auth/sign-in.tsx:37,74
+- **Fixed on 22 November 2026:** the code step shows the number grouped, as the Profile tab does: "+91 98765 43210" (`src/features/auth/OtpForm.tsx`).
 
 ### 66. The typed number loses the spacing its placeholder shows
 

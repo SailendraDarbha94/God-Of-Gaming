@@ -41,5 +41,7 @@ const styles = StyleSheet.create({
   },
   action: {
     marginTop: spacing.md,
+    // Button aligns itself to the start unless told otherwise; here it sits under centred text.
+    alignSelf: 'center',
   },
 });

@@ -42,6 +42,20 @@ export interface BookingDraft {
 
 const PICKER_DAYS = 14;
 
+/**
+ * Cells per row of the start grid. Each cell is 31% wide with an 8 pt gap, so three fit on any
+ * phone and a fourth never does.
+ */
+export const SLOT_GRID_COLUMNS = 3;
+
+/**
+ * How many empty cells complete the grid's last row. The cells grow to fill their row, so without
+ * these a last row of one or two starts would stretch across it.
+ */
+export function emptyCellsInLastRow(cellCount: number): number {
+  return (SLOT_GRID_COLUMNS - (cellCount % SLOT_GRID_COLUMNS)) % SLOT_GRID_COLUMNS;
+}
+
 function requestFor(draft: BookingDraft, startsAt: IsoInstant): BookingRequest {
   return {
     cafeId: draft.cafeId,

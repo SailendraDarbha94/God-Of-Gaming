@@ -9,7 +9,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { Text } from '../../components/Text';
 import { colors, radii, spacing } from '../../lib/theme';
-import type { SlotOption } from './slots';
+import { emptyCellsInLastRow, type SlotOption } from './slots';
 
 export interface SlotGridProps {
   /** The opening day being shown; slots after midnight carry the next calendar date. */
@@ -58,6 +58,9 @@ export function SlotGrid({ day, slots, value, onChange }: SlotGridProps) {
           </Pressable>
         );
       })}
+      {Array.from({ length: emptyCellsInLastRow(slots.length) }, (_, index) => (
+        <View key={`empty-${index}`} style={styles.empty} />
+      ))}
     </View>
   );
 }
@@ -79,6 +82,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
     alignItems: 'center',
     gap: spacing.xs,
+  },
+  // Takes a cell's place in the last row and draws nothing.
+  empty: {
+    width: '31%',
+    flexGrow: 1,
   },
   selected: {
     backgroundColor: colors.accent,

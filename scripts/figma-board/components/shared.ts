@@ -39,9 +39,14 @@ export function EmptyState({ title, message, actionLabel, action }: EmptyStatePr
     },
     Text(title, { variant: 'subheading', align: 'center' }),
     message === undefined ? null : Text(message, { tone: 'muted', align: 'center' }),
-    // Button keeps its own alignSelf: 'flex-start', so it sits at the left edge under the centred text.
+    // styles.action centres the button, over Button's own alignSelf: 'flex-start'.
     actionLabel !== undefined && action !== undefined
-      ? Button({ label: actionLabel, variant: 'secondary', style: { mt: spacing.md }, ...action })
+      ? Button({
+          label: actionLabel,
+          variant: 'secondary',
+          style: { mt: spacing.md, self: 'center' },
+          ...action,
+        })
       : null,
   );
 }

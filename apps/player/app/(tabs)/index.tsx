@@ -27,7 +27,9 @@ export default function ExploreScreen() {
     });
   };
 
+  // The area chips come from their own query, and an outage at launch fails both.
   const retry = () => {
+    void areas.refetch();
     void cafes.refetch();
   };
 

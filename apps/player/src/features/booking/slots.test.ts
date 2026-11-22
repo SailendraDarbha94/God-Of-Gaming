@@ -1,7 +1,13 @@
 import type { OpeningHours, Weekday } from '@gog/domain';
 import { describe, expect, it } from 'vitest';
 
-import { dayOptions, toSlotOptions, upcomingStarts, type BookingDraft } from './slots';
+import {
+  dayOptions,
+  emptyCellsInLastRow,
+  toSlotOptions,
+  upcomingStarts,
+  type BookingDraft,
+} from './slots';
 
 const CAFE_ID = '00000000-0000-4000-8000-000000000301';
 const TIER_ID = '00000000-0000-4000-8000-000000000311';
@@ -119,5 +125,19 @@ describe('toSlotOptions', () => {
     expect(toSlotOptions([{ startsAt: farStart, freeSeats: 12 }], draft(), SAT_2100)).toEqual([
       { startsAt: farStart, freeSeats: 12, selectable: false },
     ]);
+  });
+});
+
+describe('emptyCellsInLastRow', () => {
+  it('completes a last row of one or two starts', () => {
+    expect(emptyCellsInLastRow(1)).toBe(2);
+    expect(emptyCellsInLastRow(14)).toBe(1);
+    expect(emptyCellsInLastRow(23)).toBe(1);
+  });
+
+  it('adds nothing to full rows or to an empty grid', () => {
+    expect(emptyCellsInLastRow(0)).toBe(0);
+    expect(emptyCellsInLastRow(3)).toBe(0);
+    expect(emptyCellsInLastRow(24)).toBe(0);
   });
 });

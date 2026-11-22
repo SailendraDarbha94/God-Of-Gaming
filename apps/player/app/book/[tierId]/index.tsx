@@ -58,7 +58,8 @@ export default function BookStepScreen() {
       </Screen>
     );
   }
-  if (cafe.isError) {
+  // A refresh that fails keeps what is already on screen; the error state is for a load that has nothing to show.
+  if (cafe.isError && cafe.data === undefined) {
     return (
       <Screen>
         <ErrorState

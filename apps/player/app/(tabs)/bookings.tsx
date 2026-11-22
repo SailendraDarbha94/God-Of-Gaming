@@ -52,7 +52,8 @@ export default function BookingsScreen() {
     );
   }
 
-  if (bookings.isError) {
+  // A refresh that fails keeps what is already on screen; the error state is for a load that has nothing to show.
+  if (bookings.isError && bookings.data === undefined) {
     return (
       <Screen>
         <ErrorState
